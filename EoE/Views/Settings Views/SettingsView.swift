@@ -9,17 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    init() {
-        // Changes to Navigation Bar
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
-        // Changes to List
-        UITableView.appearance().backgroundColor = UIColor.clear
-        UITableView.appearance().separatorColor = UIColor.gray
-    }
-    
-    @State private var notificationsEnabled: Bool = false
-
+    @EnvironmentObject var userData: UserData
     
     var body: some View {
         NavigationView {
@@ -31,26 +21,34 @@ struct SettingsView: View {
                     List {
                         
                         Section(header: Text("Allergens").bold()) {
-                            HStack {
-                                Text("Select Allergens")
-                                    .foregroundColor(.white)
-                                    .bold()
-                                Spacer()
-                                Button(action: {}) {
-                                    Image(systemName: "chevron.right")
-                                        .renderingMode(.template)
-                                        .foregroundColor(.gray)
+                            NavigationLink(destination: AllergenSelectionView()) {
+                                HStack {
+                                    Text("Select Allergens")
+                                        .foregroundColor(.white)
+                                        .bold()
+                                    Spacer()
                                 }
                             }
                         }
                         .listRowBackground(Color("black3"))
                         
                         Section(header: Text("Notifications").bold()) {
-                            Toggle(isOn: $notificationsEnabled) {
+                            Toggle(isOn: $userData.notificationsEnabled) {
                                 Text("Enable Notifications")
                                     .foregroundColor(.white)
                                     .bold()
                             }
+                        }
+                        .listRowBackground(Color("black3"))
+                        
+                        Section(header: Text("Appearance").bold()) {
+                            
+                            Toggle(isOn: $userData.darkMode) {
+                                Text("Dark Mode")
+                                    .foregroundColor(.white)
+                                    .bold()
+                            }
+                            
                         }
                         .listRowBackground(Color("black3"))
                         
@@ -83,10 +81,21 @@ struct SettingsView: View {
             .navigationTitle(Text("Settings"))
         }
     }
+    
+    init() {
+        // Changes to Navigation Bar
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
+        // Changes to List
+        UITableView.appearance().backgroundColor = UIColor.clear
+        UITableView.appearance().separatorColor = UIColor.gray
+    }
+    
 }
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()
+            .environmentObject(UserData())
     }
 }

@@ -23,7 +23,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
-        let contentView = ContentView().environment(\.managedObjectContext, context)
+        
+        // Set up environment objects
+        // NOTE: - Make sure this only runs once on the first run of the app
+        
+        let userData = UserData()
+        for allergen in AllergenTypes.allCases {
+            userData.allAllergens.append(Allergen(name: allergen.description, type: allergen, isSelected: false))
+        }
+        
+        // Done setting up environment objects
+        
+        
+        let contentView = ContentView()
+                            .environment(\.managedObjectContext, context)
+                            .environmentObject(userData)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

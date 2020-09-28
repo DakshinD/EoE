@@ -9,9 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    init() {
-        UITabBar.appearance().barTintColor = UIColor.black
-    }
+    @EnvironmentObject var userData: UserData
     
     var body: some View {
         TabView {
@@ -43,6 +41,10 @@ struct ContentView: View {
         }
         .accentColor(Color("darkPurple"))
         
+    }
+    
+    init() {
+        UITabBar.appearance().barTintColor = UIColor.black
     }
     
 }
