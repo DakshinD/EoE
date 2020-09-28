@@ -39,6 +39,48 @@ enum AllergenTypes: CaseIterable {
         }
     }
     
+    var symbol: String {
+        switch self {
+        case .dairy:
+            return "D"
+        case .eggs:
+            return "E"
+        case .fish:
+            return "F"
+        case .treenuts:
+            return "T"
+        case .peanuts:
+            return "P"
+        case .wheat:
+            return "W"
+        case .soy:
+            return "So"
+        case .shellfish:
+            return "Sh"
+        }
+    }
+    
+    var color: Color {
+        switch self {
+        case .dairy:
+            return Color.blue
+        case .eggs:
+            return Color.yellow
+        case .fish:
+            return Color.green
+        case .treenuts:
+            return Color.init(red: 186/255, green: 126/255, blue: 61/255, opacity: 1.0) // Brown
+        case .peanuts:
+            return Color.red
+        case .wheat:
+            return Color.init(red: 178/255, green: 113/255, blue: 199/255, opacity: 1.0) // Purple
+        case .soy:
+            return Color.pink
+        case .shellfish:
+            return Color.orange
+        }
+    }
+    
     var items: [String] {
         switch self {
         case .dairy:

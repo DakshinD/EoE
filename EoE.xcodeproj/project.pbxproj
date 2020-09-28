@@ -39,6 +39,9 @@
 		E3AE807525216B510059F3E5 /* AnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE807425216B510059F3E5 /* AnalysisView.swift */; };
 		E3AE8081252223F70059F3E5 /* AllergenSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE8080252223F70059F3E5 /* AllergenSelectionView.swift */; };
 		E3AE808F252227C70059F3E5 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE808E252227C70059F3E5 /* UserData.swift */; };
+		E3AE80942522766D0059F3E5 /* Scan.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE80932522766D0059F3E5 /* Scan.swift */; };
+		E3AE809A252298AD0059F3E5 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE8099252298AC0059F3E5 /* SearchBar.swift */; };
+		E3AE80A225229D0E0059F3E5 /* ScanRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE80A125229D0E0059F3E5 /* ScanRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +100,9 @@
 		E3AE807425216B510059F3E5 /* AnalysisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisView.swift; sourceTree = "<group>"; };
 		E3AE8080252223F70059F3E5 /* AllergenSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllergenSelectionView.swift; sourceTree = "<group>"; };
 		E3AE808E252227C70059F3E5 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		E3AE80932522766D0059F3E5 /* Scan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scan.swift; sourceTree = "<group>"; };
+		E3AE8099252298AC0059F3E5 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		E3AE80A125229D0E0059F3E5 /* ScanRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +211,7 @@
 				E3AE7FF3252162E20059F3E5 /* Product */,
 				E3AE7FF2252162D80059F3E5 /* Data */,
 				E3AE8017252164C20059F3E5 /* Allergen.swift */,
+				E3AE80932522766D0059F3E5 /* Scan.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -297,6 +304,7 @@
 		E3AE8042252166A10059F3E5 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				E3AE80982522989F0059F3E5 /* Search Bar */,
 				E3AE8043252166AD0059F3E5 /* Scanner Bottom Bars */,
 			);
 			path = SubViews;
@@ -340,6 +348,7 @@
 			isa = PBXGroup;
 			children = (
 				E3AE806C25216B230059F3E5 /* ScanView.swift */,
+				E3AE80A125229D0E0059F3E5 /* ScanRow.swift */,
 			);
 			path = "Scan Views";
 			sourceTree = "<group>";
@@ -350,6 +359,14 @@
 				E3AE806425216B130059F3E5 /* FoodDiaryView.swift */,
 			);
 			path = "Food Diary Views";
+			sourceTree = "<group>";
+		};
+		E3AE80982522989F0059F3E5 /* Search Bar */ = {
+			isa = PBXGroup;
+			children = (
+				E3AE8099252298AC0059F3E5 /* SearchBar.swift */,
+			);
+			path = "Search Bar";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -500,14 +517,17 @@
 				E3AE8018252164C20059F3E5 /* Allergen.swift in Sources */,
 				E3AE805B252168770059F3E5 /* Extensions.swift in Sources */,
 				E3AE7FBD252162900059F3E5 /* SceneDelegate.swift in Sources */,
+				E3AE809A252298AD0059F3E5 /* SearchBar.swift in Sources */,
 				E3AE80282521658C0059F3E5 /* BarcodeScannerViewRepresentable.swift in Sources */,
 				E3AE806D25216B230059F3E5 /* ScanView.swift in Sources */,
 				E3AE8013252164A30059F3E5 /* ScanningProcess.swift in Sources */,
 				E3AE808F252227C70059F3E5 /* UserData.swift in Sources */,
 				E3AE7FFF2521640C0059F3E5 /* ProductSearch.swift in Sources */,
 				E3AE8053252167B90059F3E5 /* ImagePicker.swift in Sources */,
+				E3AE80A225229D0E0059F3E5 /* ScanRow.swift in Sources */,
 				E3AE803E2521667E0059F3E5 /* CameraController.swift in Sources */,
 				E3AE7FBF252162900059F3E5 /* ContentView.swift in Sources */,
+				E3AE80942522766D0059F3E5 /* Scan.swift in Sources */,
 				E3AE806025216B010059F3E5 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

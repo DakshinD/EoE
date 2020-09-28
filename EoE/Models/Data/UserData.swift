@@ -29,6 +29,8 @@ class UserData: ObservableObject {
     @Published var selectedAllergens: [Allergen] = [Allergen]()
     
     @Published var allAllergens: [Allergen] = [Allergen]()
+    
+    @Published var pastScans: [Scan] = [Scan]()
 }
 
 extension Published {

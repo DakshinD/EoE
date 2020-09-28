@@ -8,13 +8,53 @@
 import SwiftUI
 
 struct ScanView: View {
+    
+    @EnvironmentObject var userData: UserData
+    @State private var searchText: String = ""
+    
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            ZStack {
+                
+                Color.black
+                    .edgesIgnoringSafeArea(.all)
+                
+                VStack {
+                    
+                    SearchBar(text: $searchText)
+                        .padding()
+                    
+                    List {
+                        
+                        ForEach(userData.pastScans.filter({ searchText.isEmpty ? true : $0.productName.lowercased().contains(searchText.lowercased()) })) { scan in
+                            ScanRow(scan: scan)
+                        }
+                        .listRowBackground(Color("black3"))
+                            
+                    }
+                    .listStyle(InsetGroupedListStyle())
+                    .animation(.default)
+                    
+                    Spacer()
+                }
+                .background(Color.black)
+            }
+            .navigationTitle("Scan")
+        }
     }
+    
+    init() {
+        // Changes to Navigation Bar
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
+    }
+    
 }
 
 struct ScanView_Previews: PreviewProvider {
     static var previews: some View {
         ScanView()
+            .environmentObject(UserData())
     }
 }

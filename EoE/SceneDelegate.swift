@@ -32,6 +32,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             userData.allAllergens.append(Allergen(name: allergen.description, type: allergen, isSelected: false))
         }
         
+        let names: [String] = ["Popcorn", "Sausage", "Pasta", "Pizza", "Fried Rice"]
+        
+        for i in 0...4 {
+            userData.pastScans.append(Scan(dateScanned: Date(), productName: names[i], ingredients: "Ingredients.....", foundAllergens: [Allergen(name: AllergenTypes.allCases.randomElement()!.description, type: AllergenTypes.allCases.randomElement()!, isSelected: true), Allergen(name: AllergenTypes.allCases.randomElement()!.description, type: AllergenTypes.allCases.randomElement()!, isSelected: true)]))
+        }
+        
         // Done setting up environment objects
         
         
