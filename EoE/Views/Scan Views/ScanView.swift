@@ -22,8 +22,30 @@ struct ScanView: View {
                 
                 VStack {
                     
-                    SearchBar(text: $searchText)
-                        .padding()
+                    HStack {
+                        
+                        SearchBar(text: $searchText)
+                        
+                        HStack {
+                            Button(action: {
+                                // Open ingredients list scanner
+                            }) {
+                                Image(systemName: "doc.text.viewfinder")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 30, height: 30)
+                            }
+                            Button(action: {
+                                // Open barcode scanner
+                            }) {
+                                Image(systemName: "barcode.viewfinder")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 30, height: 30)
+                            }
+                        }
+                    }
+                    .padding()
                     
                     List {
                         
