@@ -34,8 +34,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let names: [String] = ["Popcorn", "Sausage", "Pasta", "Pizza", "Fried Rice"]
         
-        for i in 0...4 {
-            userData.pastScans.append(Scan(dateScanned: Date(), productName: names[i], ingredients: "Ingredients.....", foundAllergens: [Allergen(name: AllergenTypes.allCases.randomElement()!.description, type: AllergenTypes.allCases.randomElement()!, isSelected: true), Allergen(name: AllergenTypes.allCases.randomElement()!.description, type: AllergenTypes.allCases.randomElement()!, isSelected: true)]))
+        for _ in 0...10 {
+            userData.pastScans.append(Scan(dateScanned: Date(), productName: names.randomElement()!, ingredients: "Ingredients.....", foundAllergens: [Allergen(name: AllergenTypes.allCases.randomElement()!.description, type: AllergenTypes.allCases.randomElement()!, isSelected: true), Allergen(name: AllergenTypes.allCases.randomElement()!.description, type: AllergenTypes.allCases.randomElement()!, isSelected: true)]))
         }
         
         // Done setting up environment objects

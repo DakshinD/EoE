@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     
     @EnvironmentObject var userData: UserData
+    @State private var buttonShown: Bool = false
     
     var body: some View {
         TabView {
@@ -19,7 +20,32 @@ struct ContentView: View {
                     Image(systemName: "barcode.viewfinder")
                     Text("Scan")
                 }
-            
+                .overlay(
+                    GeometryReader { geo in
+                            ZStack {
+                                ZStack {
+                                    Button(action: {
+                                        withAnimation {
+                                            buttonShown.toggle()
+                                        }
+                                    }) {
+                                            FloatingScanButton()
+                                    }
+                                    
+                                    if buttonShown {
+                                        BarcodeScanButton()
+                                        IngredientsScanButton()
+                                    }
+                                    
+                                }
+                            }
+                            .padding(.trailing, 25)
+                            .padding(.bottom, 35)
+                            .frame(width: geo.size.width, height: geo.size.height, alignment: .bottomTrailing)
+                    }
+                        
+                )
+    
             FoodDiaryView()
                 .tabItem {
                     Image(systemName: "book.fill")
@@ -52,5 +78,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(UserData())
     }
 }

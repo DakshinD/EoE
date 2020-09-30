@@ -42,6 +42,9 @@
 		E3AE80942522766D0059F3E5 /* Scan.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE80932522766D0059F3E5 /* Scan.swift */; };
 		E3AE809A252298AD0059F3E5 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE8099252298AC0059F3E5 /* SearchBar.swift */; };
 		E3AE80A225229D0E0059F3E5 /* ScanRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE80A125229D0E0059F3E5 /* ScanRow.swift */; };
+		E3E56FBF252410BD005F8D32 /* FloatingScanButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E56FBE252410BD005F8D32 /* FloatingScanButton.swift */; };
+		E3E56FC725241259005F8D32 /* BarcodeScanButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E56FC625241259005F8D32 /* BarcodeScanButton.swift */; };
+		E3E56FCC25241294005F8D32 /* IngredientsScanButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E56FCB25241294005F8D32 /* IngredientsScanButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +106,9 @@
 		E3AE80932522766D0059F3E5 /* Scan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scan.swift; sourceTree = "<group>"; };
 		E3AE8099252298AC0059F3E5 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		E3AE80A125229D0E0059F3E5 /* ScanRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanRow.swift; sourceTree = "<group>"; };
+		E3E56FBE252410BD005F8D32 /* FloatingScanButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingScanButton.swift; sourceTree = "<group>"; };
+		E3E56FC625241259005F8D32 /* BarcodeScanButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScanButton.swift; sourceTree = "<group>"; };
+		E3E56FCB25241294005F8D32 /* IngredientsScanButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsScanButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -304,6 +310,7 @@
 		E3AE8042252166A10059F3E5 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				E3E56FBD252410A4005F8D32 /* Floating Buttons */,
 				E3AE80982522989F0059F3E5 /* Search Bar */,
 				E3AE8043252166AD0059F3E5 /* Scanner Bottom Bars */,
 			);
@@ -367,6 +374,16 @@
 				E3AE8099252298AC0059F3E5 /* SearchBar.swift */,
 			);
 			path = "Search Bar";
+			sourceTree = "<group>";
+		};
+		E3E56FBD252410A4005F8D32 /* Floating Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				E3E56FBE252410BD005F8D32 /* FloatingScanButton.swift */,
+				E3E56FC625241259005F8D32 /* BarcodeScanButton.swift */,
+				E3E56FCB25241294005F8D32 /* IngredientsScanButton.swift */,
+			);
+			path = "Floating Buttons";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -502,9 +519,11 @@
 				E3AE8023252165350059F3E5 /* BarcodeScannerView.swift in Sources */,
 				E3AE7FBB252162900059F3E5 /* AppDelegate.swift in Sources */,
 				E3AE804D2521675F0059F3E5 /* CameraBottomBar.swift in Sources */,
+				E3E56FC725241259005F8D32 /* BarcodeScanButton.swift in Sources */,
 				E3AE7FC2252162900059F3E5 /* EoE.xcdatamodeld in Sources */,
 				E3AE8034252166460059F3E5 /* CameraView.swift in Sources */,
 				E3AE801D252164ED0059F3E5 /* AllergenDetection.swift in Sources */,
+				E3E56FCC25241294005F8D32 /* IngredientsScanButton.swift in Sources */,
 				E3AE802E252165C30059F3E5 /* ImageProcessor.swift in Sources */,
 				E3AE8004252164220059F3E5 /* ProductResult.swift in Sources */,
 				E3AE8009252164480059F3E5 /* NetworkManager.swift in Sources */,
@@ -521,6 +540,7 @@
 				E3AE80282521658C0059F3E5 /* BarcodeScannerViewRepresentable.swift in Sources */,
 				E3AE806D25216B230059F3E5 /* ScanView.swift in Sources */,
 				E3AE8013252164A30059F3E5 /* ScanningProcess.swift in Sources */,
+				E3E56FBF252410BD005F8D32 /* FloatingScanButton.swift in Sources */,
 				E3AE808F252227C70059F3E5 /* UserData.swift in Sources */,
 				E3AE7FFF2521640C0059F3E5 /* ProductSearch.swift in Sources */,
 				E3AE8053252167B90059F3E5 /* ImagePicker.swift in Sources */,
