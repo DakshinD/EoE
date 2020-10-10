@@ -10,10 +10,10 @@ import UIKit
 
 struct ImagePicker: UIViewControllerRepresentable {
     
-    @Binding var selectedImage: UIImage?
+    @EnvironmentObject var scanningProcess: ScanningProcess
     @Environment(\.presentationMode) private var presentationMode
     
-    var sourceType: UIImagePickerController.SourceType = .photoLibrary
+    var sourceType: UIImagePickerController.SourceType = .camera
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
         let imagePicker = UIImagePickerController()
@@ -36,10 +36,10 @@ struct ImagePicker: UIViewControllerRepresentable {
         
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
             if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-                parent.selectedImage = image
+                parent.scanningProcess.imageTaken = image
             }
             else if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-                parent.selectedImage = image
+                parent.scanningProcess.imageTaken = image
             }
             parent.presentationMode.wrappedValue.dismiss()
         }

@@ -27,3 +27,23 @@ struct Blur: UIViewRepresentable {
         uiView.effect = UIBlurEffect(style: style)
     }
 }
+//NOTE: - String Formatter
+
+extension String {
+    
+    func capitalizingFirstLetter() -> String {
+        return prefix(1).capitalized + dropFirst()
+    }
+    
+    mutating func capitalizeFirstLetter() {
+        self = self.capitalizingFirstLetter()
+    }
+}
+
+//NOTE: - Decimal Truncation
+
+extension Float {
+    func truncate(places: Int) -> Float {
+        return Float(floor(pow(10.0, Float(places)) * self)/pow(10.0, Float(places)))
+    }
+}

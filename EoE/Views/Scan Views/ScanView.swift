@@ -6,63 +6,105 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ScanView: View {
     
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
+    @FetchRequest(
+        entity: Scan.entity(),
+        sortDescriptors: []
+    ) var pastScans: FetchedResults<Scan>
+    
     @EnvironmentObject var userData: UserData
+    @EnvironmentObject var scanningProcess: ScanningProcess
+    
     @State private var searchText: String = ""
+    @State private var scannerChoiceSheetShowing: Bool = false
     
     
     var body: some View {
         NavigationView {
-            ZStack {
-                
-                Color.black
-                    .edgesIgnoringSafeArea(.all)
-                
-                VStack {
+            GeometryReader { geometry in
+                ZStack {
                     
-                    HStack {
-                        
-                        SearchBar(text: $searchText)
+                    Color.black
+                        .edgesIgnoringSafeArea(.all)
+                        .zIndex(0)
+                    
+                    VStack {
                         
                         HStack {
-                            Button(action: {
-                                // Open ingredients list scanner
-                            }) {
-                                Image(systemName: "doc.text.viewfinder")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 30, height: 30)
-                            }
-                            Button(action: {
-                                // Open barcode scanner
-                            }) {
-                                Image(systemName: "barcode.viewfinder")
+                            
+                            SearchBar(text: $searchText)
+                            
+                            HStack {
+                                Button(action: {
+                                    // Open ingredients list scanner
+                                    scanningProcess.cameraShowing.toggle()
+                                }) {
+                                    Image(systemName: "doc.text.viewfinder")
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: 30, height: 30)
+                                        .foregroundColor(Color("darkPurple"))
+                                }
+                                Button(action: {
+                                    // Open barcode scanner
+                                    scanningProcess.scanningState = ScanningState.cameraLoading
+                                    withAnimation {
+                                        scanningProcess.barcodeScannerShowing.toggle()
+                                    }
+                                }) {
+                                    Image(systemName: "barcode.viewfinder")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 30, height: 30)
+                                            .foregroundColor(Color("darkPurple"))
+                                }
                             }
-                        }
-                    }
-                    .padding()
-                    
-                    List {
-                        
-                        ForEach(userData.pastScans.filter({ searchText.isEmpty ? true : $0.productName.lowercased().contains(searchText.lowercased()) })) { scan in
-                            ScanRow(scan: scan)
-                        }
-                        .listRowBackground(Color("black3"))
                             
+                        }
+                        .padding()
+                        
+                        List {
+                            
+                            Section {
+                                ForEach(pastScans.filter({ searchText.isEmpty ? true : $0.wrappedProductName.lowercased().contains(searchText.lowercased()) }).sorted { $0.wrappedDate > $1.wrappedDate}, id: \.self) { scan in
+                                    NavigationLink(destination: ProductView(scan: scan)) {
+                                        ScanRow(scan: scan)
+                                    }
+                                }
+                            }
+                            .listRowBackground(Color("black3"))
+                        }
+                        .listStyle(InsetGroupedListStyle())
+                        .animation(.default)
+                        
+                        Spacer()
                     }
-                    .listStyle(InsetGroupedListStyle())
-                    .animation(.default)
+                    .background(Color.black)
+                    .zIndex(1)
                     
-                    Spacer()
+                    if scanningProcess.barcodeScannerShowing {
+                        VStack {
+                            Spacer()
+                            BarcodeScannerView()
+                                .frame(width: geometry.size.width-30, height: geometry.size.height-15)
+                                .clipShape(RoundedRectangle(cornerRadius: 15))
+                                .padding(.horizontal, 15)
+                                .padding(.bottom, 15)
+                        }
+                        .zIndex(2)
+                        .transition(.slide)
+                    }
+                   
                 }
-                .background(Color.black)
+                .navigationTitle("Scan")
+                NavigationLink(destination: ResultView().environmentObject(scanningProcess), isActive: $scanningProcess.resultViewShowing, label: {EmptyView()})
             }
-            .navigationTitle("Scan")
+            .sheet(isPresented: $scanningProcess.cameraShowing, onDismiss: checkImage, content: { ImagePicker() })
         }
     }
     
@@ -74,9 +116,34 @@ struct ScanView: View {
     
 }
 
+extension ScanView {
+    func checkImage() {
+        guard let image = scanningProcess.imageTaken else {
+            return
+        }
+        let imageProcessor = ImageProcessor(selectedAllergens: fetchAllergens(), image: $scanningProcess.imageTaken, foundAllergens: $scanningProcess.foundAllergens, resultViewShowing: $scanningProcess.resultViewShowing)
+        imageProcessor.processImage(image: image)
+    }
+    
+    func fetchAllergens() -> [Allergen] {
+        var foundAllergens: [Allergen] = [Allergen]()
+        let request: NSFetchRequest<Allergen> = Allergen.fetchRequest()
+        
+        do {
+            foundAllergens = try managedObjectContext.fetch(request)
+        } catch {
+            print("Fetch failed: Error \(error.localizedDescription)")
+        }
+        
+        return foundAllergens
+    }
+}
+
 struct ScanView_Previews: PreviewProvider {
     static var previews: some View {
         ScanView()
             .environmentObject(UserData())
+            .environmentObject(ScanningProcess())
+
     }
 }

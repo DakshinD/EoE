@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct IngredientsScanButton: View {
+    
+    @EnvironmentObject var scanningProcess: ScanningProcess
+
     var body: some View {
         Button(action: {
-            
+            print("Ingredients list button pressed")
+            scanningProcess.cameraShowing.toggle()
         }) {
             ZStack {
                 Circle()
@@ -26,8 +30,6 @@ struct IngredientsScanButton: View {
                     .frame(width: 25, height: 25)
             }
         }
-        .offset(x: -3, y: -72)
-        .animation(.default)
         .transition(AnyTransition.opacity.combined(with: .asymmetric(insertion: AnyTransition.move(edge: .bottom), removal: AnyTransition.move(edge: .bottom))))
     }
 }

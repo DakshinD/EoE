@@ -9,28 +9,24 @@ import SwiftUI
 
 struct BarcodeBottomBar: View {
     
+    @EnvironmentObject var scanningProcess: ScanningProcess
     @Binding var scanningState: ScanningState
 
     var body: some View {
-        GeometryReader { geometry in
-            VStack {
-                Spacer()
-                if self.scanningState != ScanningState.searching && self.scanningState != ScanningState.closed {
-                    DirectionText()
-                }
-                
-                HStack(alignment: .bottom) {
-                    EmptyView()
-                }
-                .frame(width: geometry.size.width, height: geometry.size.height/8)
-                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-                .background(Color.white.shadow(radius: 2))
-                .overlay(CancelButton(scanningState: self.$scanningState))
+        VStack(spacing: 30) {
+            Spacer()
+            
+            if scanningProcess.scanningState == ScanningState.cameraLoaded {
+                DirectionText()
             }
-            .edgesIgnoringSafeArea(.all)
+            
+            CancelButton(scanningState: $scanningState)
         }
+        .padding(.bottom, 50)
     }
 }
+
+
 
 struct DirectionText: View {
     @State private var flash: Bool = true
@@ -40,12 +36,11 @@ struct DirectionText: View {
     var body: some View {
         Text("Looking for barcode...")
             .padding()
-            .font(.custom("Poppins-SemiBold", size: 13))
+            .font(.system(size: 17, weight: .semibold, design: .rounded))
             .foregroundColor(.black)
             .background(RoundedRectangle(cornerRadius: 5)
                 .fill(Color.white.opacity(0.8)))
             .opacity(flash ? 1.0 : 0.0)
-            .offset(y: -58)
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now()+1.25) {
                     withAnimation(self.animation, {
@@ -59,28 +54,45 @@ struct DirectionText: View {
 
 struct CancelButton: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     @Binding var scanningState: ScanningState
+    @EnvironmentObject var scanningProcess: ScanningProcess
     
     var body: some View {
         Button(action: {
-            self.scanningState = .closed
-            self.presentationMode.wrappedValue.dismiss()
+            scanningState = .closing
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                scanningState = .closed
+                withAnimation {
+                    scanningProcess.barcodeScannerShowing.toggle()
+                }
+            }
+
         }) {
-            Image(systemName: "xmark")
-                .resizable()
-                .foregroundColor(.white)
-                .frame(width: 40, height: 40)
-                .padding(.all, 25)
-                .background(Color.red)
-                .clipShape(Circle())
+            ZStack {
+                Capsule()
+                    .foregroundColor(.red)
+                    .frame(width: 200, height: 50)
+                    .shadow(radius: 5)
+                
+                HStack {
+                    Image(systemName: "xmark.circle.fill")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(.white)
+                    Text("Cancel")
+                        .foregroundColor(.white)
+                        .font(.system(size: 20, weight: .semibold, design: .rounded))
+                        .padding(.leading, 2)
+                }
+                
+            }
         }
-        .offset(y: -50)
     }
 }
 
 struct BarcodeBottomBar_Previews: PreviewProvider {
     static var previews: some View {
-        //BarcodeBottomBar()
-        Text("")
+        BarcodeBottomBar(scanningState: .constant(ScanningState.cameraLoading))
     }
 }

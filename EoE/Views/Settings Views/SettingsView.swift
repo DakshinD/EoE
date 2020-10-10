@@ -25,7 +25,6 @@ struct SettingsView: View {
                                 HStack {
                                     Text("Select Allergens")
                                         .foregroundColor(.white)
-                                        .bold()
                                     Spacer()
                                 }
                             }
@@ -36,7 +35,6 @@ struct SettingsView: View {
                             Toggle(isOn: $userData.notificationsEnabled) {
                                 Text("Enable Notifications")
                                     .foregroundColor(.white)
-                                    .bold()
                             }
                         }
                         .listRowBackground(Color("black3"))
@@ -46,7 +44,6 @@ struct SettingsView: View {
                             Toggle(isOn: $userData.darkMode) {
                                 Text("Dark Mode")
                                     .foregroundColor(.white)
-                                    .bold()
                             }
                             
                         }
@@ -57,17 +54,14 @@ struct SettingsView: View {
                             Button(action: {}) {
                                 Text("Rate the App")
                                 .foregroundColor(.white)
-                                .bold()
                             }
                             
                             HStack {
                                 Text("App Version:")
                                     .foregroundColor(.white)
-                                    .bold()
                                 Spacer()
                                 Text("1.0.0") //UIApplication.appVersion ??
                                     .foregroundColor(.white)
-                                    .bold()
                             }
                             
                         }

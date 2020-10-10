@@ -7,6 +7,9 @@
 
 import UIKit
 import SwiftUI
+import CoreData
+
+let names: [String] = ["Popcorn", "Sausage", "Pasta", "Pizza", "Fried Rice"]
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -27,16 +30,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Set up environment objects
         // NOTE: - Make sure this only runs once on the first run of the app
         
+        
         let userData = UserData()
-        for allergen in AllergenTypes.allCases {
-            userData.allAllergens.append(Allergen(name: allergen.description, type: allergen, isSelected: false))
+        
+        if !userData.isNotFirstLaunch {
+            print("first launch")
+            for aller in AllergenTypes.allCases {
+                
+                // Create a new allergen
+                let allergen = Allergen(context: context)
+                allergen.name = aller.description
+                allergen.type = aller.rawValue
+                allergen.isSelected = false
+                                
+                do {
+                    try context.save()
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+            userData.isNotFirstLaunch = true
         }
         
-        let names: [String] = ["Popcorn", "Sausage", "Pasta", "Pizza", "Fried Rice"]
-        
-        for _ in 0...10 {
+        /*for _ in 0...10 {
             userData.pastScans.append(Scan(dateScanned: Date(), productName: names.randomElement()!, ingredients: "Ingredients.....", foundAllergens: [Allergen(name: AllergenTypes.allCases.randomElement()!.description, type: AllergenTypes.allCases.randomElement()!, isSelected: true), Allergen(name: AllergenTypes.allCases.randomElement()!.description, type: AllergenTypes.allCases.randomElement()!, isSelected: true)]))
-        }
+        }*/
         
         // Done setting up environment objects
         
@@ -44,6 +62,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let contentView = ContentView()
                             .environment(\.managedObjectContext, context)
                             .environmentObject(userData)
+                            .environmentObject(ScanningProcess())
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
@@ -53,6 +72,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.makeKeyAndVisible()
         }
     }
+
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

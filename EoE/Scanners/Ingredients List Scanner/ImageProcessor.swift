@@ -10,11 +10,13 @@ import Vision
 import VisionKit
 
 struct ImageProcessor {
+    
     var selectedAllergens: [Allergen]
-    /*@EnvironmentObject var progress: Progress
-    @EnvironmentObject var ingredients: Ingredients
-    @EnvironmentObject var showing: Showing
-    @EnvironmentObject var activeScreen: ActiveScreen*/
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
+    @Binding var image: UIImage?
+    @Binding var foundAllergens: [String]
+    @Binding var resultViewShowing: Bool
     
     func processImage(image: UIImage) {
         // Get image
@@ -56,10 +58,6 @@ struct ImageProcessor {
             return observation.topCandidates(1).first?.string
         }
         
-        let confidenceScores = observations.compactMap { observation in
-            return observation.topCandidates(1).first?.confidence
-        }
-        
         // Process the recognized strings.
         var recognizedText = ""
         for str in recognizedStrings {
@@ -67,17 +65,16 @@ struct ImageProcessor {
         }
         
         DispatchQueue.main.async {
-            /*self.ingredients.ingredientsText = recognizedText
-            let allergenDetector = AllergenDetection(selectedAllergens: self.selectedAllergens)
-            self.ingredients.identifiedAllergens = allergenDetector.detectAllergens(ingredientsText: self.ingredients.ingredientsText)
-            self.ingredients.ingredientsText = ""
-            self.showing.isDetailViewShowing = true
-            withAnimation {
-                self.showing.isLoading.toggle()
-            }
-            self.showing.image = nil
-            self.progress.confidence = averageScore
-            self.progress.currentProgress = 0.0*/
+            image = nil
+        // 1. Get identified allergens from AllergenDetector
+            let allergenDetector = AllergenDetection(managedObjectContext)
+            foundAllergens = [String]()
+            foundAllergens = allergenDetector.detectAllergensInIngredientsList(ingredients: recognizedText)
+        // 2. Close loading view + reset progress
+            
+        // 3. Manually push the detail view for the most recent scan to the users screen
+            resultViewShowing.toggle()
+             
         }
        
     }

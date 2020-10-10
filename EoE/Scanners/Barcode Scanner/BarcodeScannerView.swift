@@ -10,30 +10,26 @@ import AVFoundation
 
 struct BarcodeScannerView: View {
     
+    @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @Binding var scanningState: ScanningState
     @State private var position = AVCaptureDevice.Position.back
     
-    var selectedAllergens: [Allergen]
-    /*@EnvironmentObject var progress: Progress
-    @EnvironmentObject var ingredients: Ingredients
-    @EnvironmentObject var showing: Showing
-    @EnvironmentObject var activeScreen: ActiveScreen
-    @EnvironmentObject var errorsShown: Errors*/
+    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var scanningProcess: ScanningProcess
     
     
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                if self.scanningState == ScanningState.cameraLoading {
-                    //CameraLoadingView()
+                if scanningProcess.scanningState == ScanningState.cameraLoading {
+                    CameraLoadingAnimation(backgroundColor: Color("darkPurple"), imageColor: Color.black)
                 }
                 
-                if self.scanningState != ScanningState.closed {
-                    BarcodeScannerViewRepresentable(currentPosition: self.$position, scanningState: self.$scanningState, onBarcodeScanned: { barcode in
-                        guard self.scanningState != .searching else { return }
-                        self.scanningState = .searching
+                if scanningProcess.scanningState != ScanningState.closed {
+                    BarcodeScannerViewRepresentable(currentPosition: self.$position, scanningState: $scanningProcess.scanningState, onBarcodeScanned: { barcode in
+                        guard scanningProcess.scanningState != .searching else { return }
+                        scanningProcess.scanningState = .searching
                         
                         //let newBarcode = "850251004209"
                         let newBarcode = barcode.suffix(12)
@@ -41,34 +37,64 @@ struct BarcodeScannerView: View {
                         ProductSearch.searchProduct(withBarcode: String(newBarcode)){ (result) in
                             DispatchQueue.main.asyncAfter(deadline: .now()+1.5) {
                                 switch result {
-                                case .success(let ingredients):
+                                case .success(let result):
                                     DispatchQueue.main.async {
-                                        /*self.ingredients.ingredientsText = ingredients
-                                        let allergenDetector = AllergenDetection(selectedAllergens: self.selectedAllergens)
-                                        self.ingredients.identifiedAllergens = allergenDetector.detectAllergens(ingredientsText: self.ingredients.ingredientsText)
-                                        self.ingredients.ingredientsText = ""
-                                        self.showing.isDetailViewShowing = true
-                                        self.showing.image = nil*/
-                                        self.scanningState = .closed
+                                        
+                                        // 1. Get identified allergens from AllergenDetector
+                                        let allergenDetector = AllergenDetection(managedObjectContext)
+                                        
+                                        // 2. Create new Scan object and store in CoreData
+                                        let newScan = Scan(context: managedObjectContext)
+                                        newScan.dateScanned = Date()
+                                        newScan.productName = fixedDescriptionString(result.foods[0].description)
+                                        newScan.ingredients = result.foods[0].ingredients
+                                        let foundAllergens: [ScannedAllergen] = allergenDetector.detectAllergens(scan: newScan)
+                                        for allergen in foundAllergens {
+                                            newScan.addToFoundAllergens(allergen)
+                                        }
+                                        
+                                        // add nutritional info to the scan object
+                                        for nutrient in result.foods[0].foodNutrients {
+                                            let newNutrient = Nutrient(context: managedObjectContext)
+                                            newNutrient.nutrientName = nutrient.nutrientName
+                                            newNutrient.derivationDescription = nutrient.derivationDescription
+                                            newNutrient.value = nutrient.value
+                                            newNutrient.unitName = nutrient.unitName
+                                            newNutrient.scan = newScan
+                                            newScan.addToNutrients(newNutrient)
+                                        }
+                                        
+                                        // 3. Save context
+                                        do {
+                                           try managedObjectContext.save()
+                                        } catch {
+                                            print(error.localizedDescription)
+                                        }
+                                        
+                                        
+                                        // 4. Manually push the detail view for the most recent scan to the users screen
+                                        
+                                        //print(result.foods[0].description)
+                                        scanningProcess.scanningState = .closing
                                     }
                                 case .failure(.productNotFound):
                                     DispatchQueue.main.async {
                                         withAnimation {
-                                            self.scanningState = .failure
+                                            scanningProcess.scanningState = .failure
                                             //self.errorsShown.productNotFound.toggle()
                                         }
                                     }
                                 case .failure(.missingInfo):
                                     DispatchQueue.main.async {
                                         withAnimation {
-                                            self.scanningState = .failure
+                                            scanningProcess.scanningState = .failure
                                             //self.errorsShown.missingData.toggle()
                                         }
                                     }
                                 case .failure(.noData):
                                     DispatchQueue.main.async {
                                         withAnimation {
-                                            self.scanningState = .failure
+                                            scanningProcess.scanningState = .failure
                                             //self.errorsShown.dataNotFound.toggle()
                                         }
                                     }
@@ -78,21 +104,36 @@ struct BarcodeScannerView: View {
                             }
                         }
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                            self.presentationMode.wrappedValue.dismiss()
+                            scanningProcess.scanningState = .closed
+                            withAnimation {
+                                scanningProcess.barcodeScannerShowing.toggle()
+                            }
                         }
                     })
                     .edgesIgnoringSafeArea(.all)
                 }
                 
-                if self.scanningState == ScanningState.searching {
-                    //NetworkRequestLoadingView()
+                if scanningProcess.scanningState == ScanningState.searching || scanningProcess.scanningState == ScanningState.closing {
+                    CameraLoadingAnimation(backgroundColor: Color("darkPurple"), imageColor: Color.black)
                 }
                 
-                //BarcodeBottomBar(scanningState: self.$scanningState)
+
+                if scanningProcess.scanningState != ScanningState.closing && scanningProcess.scanningState != ScanningState.cameraLoading && scanningProcess.scanningState != ScanningState.closed {
+                    BarcodeBottomBar(scanningState: $scanningProcess.scanningState)
+                }
 
             }
 
         }
+    }
+    
+    func fixedDescriptionString(_ descr: String) -> String {
+        let delimiter = ","
+        let names = descr.components(separatedBy: delimiter)
+        var formattedName = names[0].lowercased()
+        formattedName.capitalizeFirstLetter()
+        return formattedName
+        
     }
 
 }

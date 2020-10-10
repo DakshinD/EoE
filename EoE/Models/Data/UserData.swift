@@ -9,10 +9,11 @@ import SwiftUI
 import Foundation
 import Combine
 
+
 class UserData: ObservableObject {
-    
-    @Published(key: "firstRun")
-    var firstRun: Bool = true
+        
+    @Published(key: "isNotFirstLaunch")
+    var isNotFirstLaunch: Bool = true
     
     @Published(key: "isOnboardingCompleted")
     var isOnboardingCompleted: Bool = false
@@ -25,12 +26,7 @@ class UserData: ObservableObject {
     
     @Published(key: "darkMode")
     var darkMode: Bool = false
-    
-    @Published var selectedAllergens: [Allergen] = [Allergen]()
-    
-    @Published var allAllergens: [Allergen] = [Allergen]()
-    
-    @Published var pastScans: [Scan] = [Scan]()
+
 }
 
 extension Published {

@@ -8,15 +8,23 @@
 import SwiftUI
 import Foundation
 
-struct Allergen: Hashable, Identifiable {
+/*struct Allergen: Hashable, Identifiable {
     let id = UUID()
     var name: String
     var type: AllergenTypes
     var isSelected: Bool
-}
+}*/
 
-enum AllergenTypes: CaseIterable {
-    case dairy, eggs, fish, treenuts, peanuts, wheat, soy, shellfish
+enum AllergenTypes: String, CaseIterable {
+    
+    case dairy = "dairy"
+    case eggs = "eggs"
+    case fish = "fish"
+    case treenuts = "treenuts"
+    case peanuts = "peanuts"
+    case wheat = "wheat"
+    case soy = "soy"
+    case shellfish = "shellfish"
     
     var description: String {
         switch self {
@@ -36,6 +44,27 @@ enum AllergenTypes: CaseIterable {
             return NSLocalizedString("Soy", comment: "food allergen")
         case .shellfish:
             return NSLocalizedString("Shellfish", comment: "food allergen")
+        }
+    }
+    
+    var emoji: String {
+        switch self {
+        case .dairy:
+            return "🥛"
+        case .eggs:
+            return "🥚"
+        case .fish:
+            return "🐟"
+        case .treenuts:
+            return "🌰"
+        case .peanuts:
+            return "🥜"
+        case .wheat:
+            return "🌾"
+        case .soy:
+            return "🌱"
+        case .shellfish:
+            return "🦐"
         }
     }
     

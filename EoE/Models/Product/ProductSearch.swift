@@ -9,7 +9,7 @@ import UIKit
 
 class ProductSearch: NSObject {
     
-     class func searchProduct(withBarcode barcode: String, _ completion: @escaping (Result<String, NetworkError>) -> Void) {
+    class func searchProduct(withBarcode barcode: String, _ completion: @escaping (Result<ProductData, NetworkError>) -> Void) {
         guard let url = URL(string: NetworkManager.APIURL.ingredientsRequest(for: barcode)) else {
             completion(.failure(.invalidURL))
             return
@@ -25,13 +25,13 @@ class ProductSearch: NSObject {
             
             do {
                 let decoder = JSONDecoder()
-                let result = try decoder.decode(ProductSearch.ProductData.self, from: data)
+                let result = try decoder.decode(ProductData.self, from: data)
                 if result.totalHits == 0 {
                     print("No matches")
                     completion(.failure(.productNotFound))
                     return
                 }
-                completion(.success(result.foods[0].ingredients))
+                completion(.success(result))
             } catch {
                 print("Error: \(error)")
                 completion(.failure(.missingInfo))

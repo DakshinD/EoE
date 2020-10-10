@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19G2021" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Allergen" representedClassName=".Allergen" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isSelected" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Nutrient" representedClassName=".Nutrient" syncable="YES">
+        <attribute name="derivationDescription" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="nutrientName" optional="YES" attributeType="String"/>
+        <attribute name="unitName" optional="YES" attributeType="String"/>
+        <attribute name="value" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="scan" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Scan" inverseName="nutrients" inverseEntity="Scan"/>
+    </entity>
+    <entity name="Scan" representedClassName=".Scan" syncable="YES">
+        <attribute name="dateScanned" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="ingredients" optional="YES" attributeType="String"/>
+        <attribute name="productName" optional="YES" attributeType="String"/>
+        <relationship name="foundAllergens" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ScannedAllergen" inverseName="scan" inverseEntity="ScannedAllergen"/>
+        <relationship name="nutrients" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Nutrient" inverseName="scan" inverseEntity="Nutrient"/>
+    </entity>
+    <entity name="ScannedAllergen" representedClassName=".ScannedAllergen" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String" customClassName="AllergenTypes"/>
+        <relationship name="scan" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Scan" inverseName="foundAllergens" inverseEntity="Scan"/>
+    </entity>
+    <elements>
+        <element name="Allergen" positionX="-45" positionY="63" width="128" height="103"/>
+        <element name="Nutrient" positionX="-63" positionY="54" width="128" height="133"/>
+        <element name="Scan" positionX="-54" positionY="18" width="128" height="133"/>
+        <element name="ScannedAllergen" positionX="-63" positionY="-18" width="128" height="103"/>
+    </elements>
+</model>

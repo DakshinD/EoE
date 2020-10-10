@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E329747A2526BA4600E451FA /* Allergen+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32974762526BA4600E451FA /* Allergen+CoreDataClass.swift */; };
+		E329747B2526BA4600E451FA /* Allergen+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32974772526BA4600E451FA /* Allergen+CoreDataProperties.swift */; };
+		E32974832526BA8100E451FA /* ScannedAllergen+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32974812526BA8100E451FA /* ScannedAllergen+CoreDataClass.swift */; };
+		E32974842526BA8100E451FA /* ScannedAllergen+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32974822526BA8100E451FA /* ScannedAllergen+CoreDataProperties.swift */; };
+		E32B91012524C70900615CB7 /* CameraLoadingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32B91002524C70900615CB7 /* CameraLoadingAnimation.swift */; };
+		E32B91092524DBC800615CB7 /* ProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32B91082524DBC800615CB7 /* ProductView.swift */; };
+		E3796B23252E76C600C21101 /* Nutrient+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3796B21252E76C600C21101 /* Nutrient+CoreDataClass.swift */; };
+		E3796B24252E76C600C21101 /* Nutrient+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3796B22252E76C600C21101 /* Nutrient+CoreDataProperties.swift */; };
+		E3796B2E252E776A00C21101 /* Scan+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3796B2C252E776A00C21101 /* Scan+CoreDataClass.swift */; };
+		E3796B2F252E776A00C21101 /* Scan+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3796B2D252E776A00C21101 /* Scan+CoreDataProperties.swift */; };
+		E3796B3A2530D7FD00C21101 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3796B392530D7FD00C21101 /* ResultView.swift */; };
 		E3AE7FBB252162900059F3E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE7FBA252162900059F3E5 /* AppDelegate.swift */; };
 		E3AE7FBD252162900059F3E5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE7FBC252162900059F3E5 /* SceneDelegate.swift */; };
 		E3AE7FBF252162900059F3E5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE7FBE252162900059F3E5 /* ContentView.swift */; };
@@ -39,7 +50,6 @@
 		E3AE807525216B510059F3E5 /* AnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE807425216B510059F3E5 /* AnalysisView.swift */; };
 		E3AE8081252223F70059F3E5 /* AllergenSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE8080252223F70059F3E5 /* AllergenSelectionView.swift */; };
 		E3AE808F252227C70059F3E5 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE808E252227C70059F3E5 /* UserData.swift */; };
-		E3AE80942522766D0059F3E5 /* Scan.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE80932522766D0059F3E5 /* Scan.swift */; };
 		E3AE809A252298AD0059F3E5 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE8099252298AC0059F3E5 /* SearchBar.swift */; };
 		E3AE80A225229D0E0059F3E5 /* ScanRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE80A125229D0E0059F3E5 /* ScanRow.swift */; };
 		E3E56FBF252410BD005F8D32 /* FloatingScanButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E56FBE252410BD005F8D32 /* FloatingScanButton.swift */; };
@@ -65,6 +75,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E32974762526BA4600E451FA /* Allergen+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Allergen+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E32974772526BA4600E451FA /* Allergen+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Allergen+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E32974812526BA8100E451FA /* ScannedAllergen+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScannedAllergen+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E32974822526BA8100E451FA /* ScannedAllergen+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScannedAllergen+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E32B91002524C70900615CB7 /* CameraLoadingAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraLoadingAnimation.swift; sourceTree = "<group>"; };
+		E32B91082524DBC800615CB7 /* ProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductView.swift; sourceTree = "<group>"; };
+		E3796B21252E76C600C21101 /* Nutrient+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Nutrient+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E3796B22252E76C600C21101 /* Nutrient+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Nutrient+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E3796B2C252E776A00C21101 /* Scan+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Scan+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E3796B2D252E776A00C21101 /* Scan+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Scan+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E3796B392530D7FD00C21101 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		E3AE7FB7252162900059F3E5 /* EoE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EoE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3AE7FBA252162900059F3E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3AE7FBC252162900059F3E5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -103,7 +124,6 @@
 		E3AE807425216B510059F3E5 /* AnalysisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisView.swift; sourceTree = "<group>"; };
 		E3AE8080252223F70059F3E5 /* AllergenSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllergenSelectionView.swift; sourceTree = "<group>"; };
 		E3AE808E252227C70059F3E5 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
-		E3AE80932522766D0059F3E5 /* Scan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scan.swift; sourceTree = "<group>"; };
 		E3AE8099252298AC0059F3E5 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		E3AE80A125229D0E0059F3E5 /* ScanRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanRow.swift; sourceTree = "<group>"; };
 		E3E56FBE252410BD005F8D32 /* FloatingScanButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingScanButton.swift; sourceTree = "<group>"; };
@@ -136,6 +156,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E329745D2526B0FA00E451FA /* Allergen */ = {
+			isa = PBXGroup;
+			children = (
+				E32974762526BA4600E451FA /* Allergen+CoreDataClass.swift */,
+				E32974772526BA4600E451FA /* Allergen+CoreDataProperties.swift */,
+			);
+			path = Allergen;
+			sourceTree = "<group>";
+		};
+		E329745E2526B10300E451FA /* Scan */ = {
+			isa = PBXGroup;
+			children = (
+				E3796B2C252E776A00C21101 /* Scan+CoreDataClass.swift */,
+				E3796B2D252E776A00C21101 /* Scan+CoreDataProperties.swift */,
+			);
+			path = Scan;
+			sourceTree = "<group>";
+		};
+		E32974652526B9CE00E451FA /* ScannedAllergen */ = {
+			isa = PBXGroup;
+			children = (
+				E32974812526BA8100E451FA /* ScannedAllergen+CoreDataClass.swift */,
+				E32974822526BA8100E451FA /* ScannedAllergen+CoreDataProperties.swift */,
+			);
+			path = ScannedAllergen;
+			sourceTree = "<group>";
+		};
+		E32B90FF2524C6F000615CB7 /* Loading Views */ = {
+			isa = PBXGroup;
+			children = (
+				E32B91002524C70900615CB7 /* CameraLoadingAnimation.swift */,
+			);
+			path = "Loading Views";
+			sourceTree = "<group>";
+		};
+		E3796B28252E76CF00C21101 /* Nutrient */ = {
+			isa = PBXGroup;
+			children = (
+				E3796B21252E76C600C21101 /* Nutrient+CoreDataClass.swift */,
+				E3796B22252E76C600C21101 /* Nutrient+CoreDataProperties.swift */,
+			);
+			path = Nutrient;
+			sourceTree = "<group>";
+		};
 		E3AE7FAE252162900059F3E5 = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				E3AE7FBC252162900059F3E5 /* SceneDelegate.swift */,
+				E3AE7FC0252162900059F3E5 /* EoE.xcdatamodeld */,
 				E3AE7FF1252162D00059F3E5 /* Models */,
 				E3AE7FF4252162FA0059F3E5 /* Networking */,
 				E3AE7FF5252163020059F3E5 /* Scanners */,
@@ -214,10 +279,13 @@
 		E3AE7FF1252162D00059F3E5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E3796B28252E76CF00C21101 /* Nutrient */,
+				E329745E2526B10300E451FA /* Scan */,
+				E329745D2526B0FA00E451FA /* Allergen */,
+				E32974652526B9CE00E451FA /* ScannedAllergen */,
 				E3AE7FF3252162E20059F3E5 /* Product */,
 				E3AE7FF2252162D80059F3E5 /* Data */,
 				E3AE8017252164C20059F3E5 /* Allergen.swift */,
-				E3AE80932522766D0059F3E5 /* Scan.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -275,7 +343,6 @@
 				E3AE7FC3252162970059F3E5 /* Assets.xcassets */,
 				E3AE7FC8252162970059F3E5 /* LaunchScreen.storyboard */,
 				E3AE7FCB252162970059F3E5 /* Info.plist */,
-				E3AE7FC0252162900059F3E5 /* EoE.xcdatamodeld */,
 			);
 			path = Supporting;
 			sourceTree = "<group>";
@@ -310,6 +377,7 @@
 		E3AE8042252166A10059F3E5 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				E32B90FF2524C6F000615CB7 /* Loading Views */,
 				E3E56FBD252410A4005F8D32 /* Floating Buttons */,
 				E3AE80982522989F0059F3E5 /* Search Bar */,
 				E3AE8043252166AD0059F3E5 /* Scanner Bottom Bars */,
@@ -356,6 +424,8 @@
 			children = (
 				E3AE806C25216B230059F3E5 /* ScanView.swift */,
 				E3AE80A125229D0E0059F3E5 /* ScanRow.swift */,
+				E32B91082524DBC800615CB7 /* ProductView.swift */,
+				E3796B392530D7FD00C21101 /* ResultView.swift */,
 			);
 			path = "Scan Views";
 			sourceTree = "<group>";
@@ -516,16 +586,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E32974842526BA8100E451FA /* ScannedAllergen+CoreDataProperties.swift in Sources */,
+				E3796B23252E76C600C21101 /* Nutrient+CoreDataClass.swift in Sources */,
 				E3AE8023252165350059F3E5 /* BarcodeScannerView.swift in Sources */,
 				E3AE7FBB252162900059F3E5 /* AppDelegate.swift in Sources */,
+				E3796B2F252E776A00C21101 /* Scan+CoreDataProperties.swift in Sources */,
+				E3796B24252E76C600C21101 /* Nutrient+CoreDataProperties.swift in Sources */,
 				E3AE804D2521675F0059F3E5 /* CameraBottomBar.swift in Sources */,
 				E3E56FC725241259005F8D32 /* BarcodeScanButton.swift in Sources */,
 				E3AE7FC2252162900059F3E5 /* EoE.xcdatamodeld in Sources */,
 				E3AE8034252166460059F3E5 /* CameraView.swift in Sources */,
 				E3AE801D252164ED0059F3E5 /* AllergenDetection.swift in Sources */,
+				E32974832526BA8100E451FA /* ScannedAllergen+CoreDataClass.swift in Sources */,
 				E3E56FCC25241294005F8D32 /* IngredientsScanButton.swift in Sources */,
 				E3AE802E252165C30059F3E5 /* ImageProcessor.swift in Sources */,
 				E3AE8004252164220059F3E5 /* ProductResult.swift in Sources */,
+				E3796B3A2530D7FD00C21101 /* ResultView.swift in Sources */,
 				E3AE8009252164480059F3E5 /* NetworkManager.swift in Sources */,
 				E3AE8081252223F70059F3E5 /* AllergenSelectionView.swift in Sources */,
 				E3AE800E252164810059F3E5 /* Errors.swift in Sources */,
@@ -533,6 +609,8 @@
 				E3AE8039252166670059F3E5 /* CameraRepresentable.swift in Sources */,
 				E3AE807525216B510059F3E5 /* AnalysisView.swift in Sources */,
 				E3AE806525216B130059F3E5 /* FoodDiaryView.swift in Sources */,
+				E329747A2526BA4600E451FA /* Allergen+CoreDataClass.swift in Sources */,
+				E329747B2526BA4600E451FA /* Allergen+CoreDataProperties.swift in Sources */,
 				E3AE8018252164C20059F3E5 /* Allergen.swift in Sources */,
 				E3AE805B252168770059F3E5 /* Extensions.swift in Sources */,
 				E3AE7FBD252162900059F3E5 /* SceneDelegate.swift in Sources */,
@@ -541,13 +619,15 @@
 				E3AE806D25216B230059F3E5 /* ScanView.swift in Sources */,
 				E3AE8013252164A30059F3E5 /* ScanningProcess.swift in Sources */,
 				E3E56FBF252410BD005F8D32 /* FloatingScanButton.swift in Sources */,
+				E32B91092524DBC800615CB7 /* ProductView.swift in Sources */,
 				E3AE808F252227C70059F3E5 /* UserData.swift in Sources */,
+				E3796B2E252E776A00C21101 /* Scan+CoreDataClass.swift in Sources */,
 				E3AE7FFF2521640C0059F3E5 /* ProductSearch.swift in Sources */,
 				E3AE8053252167B90059F3E5 /* ImagePicker.swift in Sources */,
 				E3AE80A225229D0E0059F3E5 /* ScanRow.swift in Sources */,
 				E3AE803E2521667E0059F3E5 /* CameraController.swift in Sources */,
+				E32B91012524C70900615CB7 /* CameraLoadingAnimation.swift in Sources */,
 				E3AE7FBF252162900059F3E5 /* ContentView.swift in Sources */,
-				E3AE80942522766D0059F3E5 /* Scan.swift in Sources */,
 				E3AE806025216B010059F3E5 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
