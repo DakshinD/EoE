@@ -25,17 +25,7 @@ struct ScanRow: View {
                 Spacer()
                 HStack {
                     ForEach(scan.foundAllergensArray, id: \.self) { allergen in
-                        ZStack {
-
-                            Circle()
-                                .frame(width: 25, height: 25)
-                                .foregroundColor(AllergenTypes(rawValue: allergen.type!)!.color)
-                            
-                            Text(AllergenTypes(rawValue: allergen.type!)!.symbol)
-                                .font(.system(size: 14))
-                                .foregroundColor(.white)
-                                .fontWeight(.heavy)
-                        }
+                        Text(AllergenTypes(rawValue: allergen.wrappedType)!.emoji)
                     }
                 }
                 

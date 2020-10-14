@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BEE0DCF525367C370020BE63 /* ImageScanningLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE0DCF425367C370020BE63 /* ImageScanningLoadingView.swift */; };
 		E329747A2526BA4600E451FA /* Allergen+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32974762526BA4600E451FA /* Allergen+CoreDataClass.swift */; };
 		E329747B2526BA4600E451FA /* Allergen+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32974772526BA4600E451FA /* Allergen+CoreDataProperties.swift */; };
 		E32974832526BA8100E451FA /* ScannedAllergen+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32974812526BA8100E451FA /* ScannedAllergen+CoreDataClass.swift */; };
@@ -75,6 +76,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BEE0DCF425367C370020BE63 /* ImageScanningLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScanningLoadingView.swift; sourceTree = "<group>"; };
 		E32974762526BA4600E451FA /* Allergen+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Allergen+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E32974772526BA4600E451FA /* Allergen+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Allergen+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E32974812526BA8100E451FA /* ScannedAllergen+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScannedAllergen+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				E32B91002524C70900615CB7 /* CameraLoadingAnimation.swift */,
+				BEE0DCF425367C370020BE63 /* ImageScanningLoadingView.swift */,
 			);
 			path = "Loading Views";
 			sourceTree = "<group>";
@@ -592,6 +595,7 @@
 				E3AE7FBB252162900059F3E5 /* AppDelegate.swift in Sources */,
 				E3796B2F252E776A00C21101 /* Scan+CoreDataProperties.swift in Sources */,
 				E3796B24252E76C600C21101 /* Nutrient+CoreDataProperties.swift in Sources */,
+				BEE0DCF525367C370020BE63 /* ImageScanningLoadingView.swift in Sources */,
 				E3AE804D2521675F0059F3E5 /* CameraBottomBar.swift in Sources */,
 				E3E56FC725241259005F8D32 /* BarcodeScanButton.swift in Sources */,
 				E3AE7FC2252162900059F3E5 /* EoE.xcdatamodeld in Sources */,

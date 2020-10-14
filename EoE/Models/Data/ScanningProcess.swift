@@ -24,6 +24,10 @@ class ScanningProcess: ObservableObject {
     @Published var barcodeScannerShowing: Bool = false
     @Published var cameraShowing: Bool = false
     
+    // To show loading view
+    @Published var progress: Float = 0.0
+    @Published var loadingViewShowing: Bool = false
+    
     // To show result view after scanning ingredients list
     @Published var resultViewShowing: Bool = false
     @Published var foundAllergens: [String] = [String]()

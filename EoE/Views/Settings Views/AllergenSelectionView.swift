@@ -60,12 +60,6 @@ struct AllergenSelectionView: View {
             .listStyle(InsetGroupedListStyle())
         }
         .navigationTitle("Allergen Selection")
-        .onAppear {
-            for allergen in allergens {
-                print(allergen.name)
-                print(allergen.type)
-            }
-        }
     }
     
     init() {

@@ -14,27 +14,32 @@ struct ResultView: View {
     var body: some View {
         VStack {
             List {
-                HStack {
-                    Text("Found Allergens")
-                        .foregroundColor(.white)
-                        .bold()
-                    Spacer()
-                }
-                .listRowBackground(Color("black3"))
+                Section(header: Text("Found Allergens")) {
+                    if scanningProcess.foundAllergens.isEmpty {
+                        HStack {
+                            Text("No Allergens Found!")
+                                .foregroundColor(.white)
+                            Spacer()
+                            Text("😁")
+                        }
+                    } else {
+                        ForEach(scanningProcess.foundAllergens, id: \.self) { allergen in
+                            HStack {
+                                // Check how to handle this optional
+                                Text(AllergenTypes(rawValue: allergen)!.description)
+                                    .foregroundColor(.white)
+                                Spacer()
+                                Text(AllergenTypes(rawValue: allergen)!.emoji)
+                            }
+                        }
 
-                ForEach(scanningProcess.foundAllergens, id: \.self) { allergen in
-                    HStack {
-                        // Check how to handle this optional
-                        Text(AllergenTypes(rawValue: allergen)!.description)
-                            .foregroundColor(.white)
-                        Spacer()
-                        Text(AllergenTypes(rawValue: allergen)!.emoji)
                     }
                 }
                 .listRowBackground(Color("black3"))
 
             }
             .listStyle(InsetGroupedListStyle())
+//            .padding(.top, 10)
         }
         .navigationTitle("Product Analysis")
     }

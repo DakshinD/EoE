@@ -8,15 +8,19 @@
 import SwiftUI
 import Vision
 import VisionKit
+import CoreData
 
 struct ImageProcessor {
     
     var selectedAllergens: [Allergen]
-    @Environment(\.managedObjectContext) var managedObjectContext
+    
+    var managedObjectContext: NSManagedObjectContext
     
     @Binding var image: UIImage?
     @Binding var foundAllergens: [String]
     @Binding var resultViewShowing: Bool
+    @Binding var progress: Float
+    @Binding var loadingViewShowing: Bool
     
     func processImage(image: UIImage) {
         // Get image
@@ -29,7 +33,7 @@ struct ImageProcessor {
         // Update progress of the text recognition
         request.progressHandler = {(request, completed, error) in
             DispatchQueue.main.async {
-                //self.progress.currentProgress = completed
+                progress = Float(completed)
             }
         }
         
@@ -64,19 +68,25 @@ struct ImageProcessor {
             recognizedText += str.uppercased() + " "
         }
         
-        DispatchQueue.main.async {
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.35) {
             image = nil
         // 1. Get identified allergens from AllergenDetector
             let allergenDetector = AllergenDetection(managedObjectContext)
             foundAllergens = [String]()
             foundAllergens = allergenDetector.detectAllergensInIngredientsList(ingredients: recognizedText)
-        // 2. Close loading view + reset progress
             
-        // 3. Manually push the detail view for the most recent scan to the users screen
+        // 2. Manually push the detail view for the most recent scan to the users screen
             resultViewShowing.toggle()
-             
+            
+        // 3. Reset all values + close loading view
+            progress = 0.0
+            withAnimation {
+                loadingViewShowing.toggle()
+            }
+            
+        
         }
-       
+
     }
     
 }

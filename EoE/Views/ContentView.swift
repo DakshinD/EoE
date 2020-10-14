@@ -29,52 +29,6 @@ struct ContentView: View {
                     Image(systemName: "barcode.viewfinder")
                     Text("Scan")
                 }
-                /*.overlay(
-                    GeometryReader { geo in
-                            ZStack {
-                                VStack(alignment: .trailing, spacing: 16) {
-                                    
-                                    if ingredientsButtonShown {
-                                        IngredientsScanButton()
-                                                .padding(.trailing, 7)
-                                    }
-                                    HStack(spacing: 17) {
-                                        
-                                        if barcodeButtonShown {
-                                            BarcodeScanButton()
-                                                .padding(.top, 3)
-                                        }
-                                        
-                                        if !barcodeButtonShown && !ingredientsButtonShown {
-                                            Button(action: {
-                                                withAnimation {
-                                                    barcodeButtonShown.toggle()
-                                                    ingredientsButtonShown.toggle()
-                                                }
-                                                print("button pressed")
-                                            }) {
-                                                FloatingScanButton()
-                                            }
-                                        } else {
-                                            Button(action: {
-                                                withAnimation {
-                                                    ingredientsButtonShown.toggle()
-                                                    barcodeButtonShown.toggle()
-                                                }
-                                                print("back button pressed")
-                                            }) {
-                                                    FloatingScanBackButton()
-                                            }
-                                        }
-                                    }
-                                    
-                                }
-                            }
-                            .padding(.trailing, 25)
-                            .padding(.bottom, 35)
-                            .frame(width: geo.size.width, height: geo.size.height, alignment: .bottomTrailing)
-                    }
-                )*/
     
             FoodDiaryView()
                 .tabItem {

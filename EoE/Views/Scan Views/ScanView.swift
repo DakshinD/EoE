@@ -50,6 +50,8 @@ struct ScanView: View {
                                         .frame(width: 30, height: 30)
                                         .foregroundColor(Color("darkPurple"))
                                 }
+                                .sheet(isPresented: $scanningProcess.cameraShowing, onDismiss: checkImage, content: { ImagePicker() })
+                                
                                 Button(action: {
                                     // Open barcode scanner
                                     scanningProcess.scanningState = ScanningState.cameraLoading
@@ -99,12 +101,18 @@ struct ScanView: View {
                         .zIndex(2)
                         .transition(.slide)
                     }
+                    
+                    if scanningProcess.loadingViewShowing {
+                        ImageScanningLoadingView(progress: $scanningProcess.progress)
+                            .zIndex(3)
+                            .transition(.opacity)
+                    }
                    
                 }
                 .navigationTitle("Scan")
                 NavigationLink(destination: ResultView().environmentObject(scanningProcess), isActive: $scanningProcess.resultViewShowing, label: {EmptyView()})
             }
-            .sheet(isPresented: $scanningProcess.cameraShowing, onDismiss: checkImage, content: { ImagePicker() })
+            
         }
     }
     
@@ -121,8 +129,12 @@ extension ScanView {
         guard let image = scanningProcess.imageTaken else {
             return
         }
-        let imageProcessor = ImageProcessor(selectedAllergens: fetchAllergens(), image: $scanningProcess.imageTaken, foundAllergens: $scanningProcess.foundAllergens, resultViewShowing: $scanningProcess.resultViewShowing)
+        let imageProcessor = ImageProcessor(selectedAllergens: fetchAllergens(), managedObjectContext: managedObjectContext, image: $scanningProcess.imageTaken, foundAllergens: $scanningProcess.foundAllergens, resultViewShowing: $scanningProcess.resultViewShowing, progress: $scanningProcess.progress, loadingViewShowing: $scanningProcess.loadingViewShowing)
         imageProcessor.processImage(image: image)
+        
+        withAnimation {
+            scanningProcess.loadingViewShowing.toggle()
+        }
     }
     
     func fetchAllergens() -> [Allergen] {
