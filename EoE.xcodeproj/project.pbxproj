@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE4E83592539E58F008D8D1E /* AddDiaryItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4E83582539E58F008D8D1E /* AddDiaryItemView.swift */; };
+		BE4E835F253A1194008D8D1E /* AlertControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4E835E253A1194008D8D1E /* AlertControl.swift */; };
+		BE89518E253B801A001B74FD /* DiaryItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE89518C253B801A001B74FD /* DiaryItem+CoreDataClass.swift */; };
+		BE89518F253B801A001B74FD /* DiaryItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE89518D253B801A001B74FD /* DiaryItem+CoreDataProperties.swift */; };
+		BE895198253B8ADC001B74FD /* DiaryItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE895197253B8ADC001B74FD /* DiaryItemList.swift */; };
+		BE8951A0253B8C7D001B74FD /* DiaryItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE89519F253B8C7D001B74FD /* DiaryItemRow.swift */; };
 		BEE0DCF525367C370020BE63 /* ImageScanningLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE0DCF425367C370020BE63 /* ImageScanningLoadingView.swift */; };
 		E329747A2526BA4600E451FA /* Allergen+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32974762526BA4600E451FA /* Allergen+CoreDataClass.swift */; };
 		E329747B2526BA4600E451FA /* Allergen+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32974772526BA4600E451FA /* Allergen+CoreDataProperties.swift */; };
@@ -76,6 +82,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BE4E83582539E58F008D8D1E /* AddDiaryItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDiaryItemView.swift; sourceTree = "<group>"; };
+		BE4E835E253A1194008D8D1E /* AlertControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertControl.swift; sourceTree = "<group>"; };
+		BE89518C253B801A001B74FD /* DiaryItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiaryItem+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BE89518D253B801A001B74FD /* DiaryItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiaryItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BE895197253B8ADC001B74FD /* DiaryItemList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryItemList.swift; sourceTree = "<group>"; };
+		BE89519F253B8C7D001B74FD /* DiaryItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryItemRow.swift; sourceTree = "<group>"; };
 		BEE0DCF425367C370020BE63 /* ImageScanningLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScanningLoadingView.swift; sourceTree = "<group>"; };
 		E32974762526BA4600E451FA /* Allergen+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Allergen+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E32974772526BA4600E451FA /* Allergen+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Allergen+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -158,6 +170,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BE4E835D253A118A008D8D1E /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				BE4E835E253A1194008D8D1E /* AlertControl.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		BE89518B253B8007001B74FD /* Diary Item */ = {
+			isa = PBXGroup;
+			children = (
+				BE89518C253B801A001B74FD /* DiaryItem+CoreDataClass.swift */,
+				BE89518D253B801A001B74FD /* DiaryItem+CoreDataProperties.swift */,
+			);
+			path = "Diary Item";
+			sourceTree = "<group>";
+		};
 		E329745D2526B0FA00E451FA /* Allergen */ = {
 			isa = PBXGroup;
 			children = (
@@ -282,6 +311,7 @@
 		E3AE7FF1252162D00059F3E5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BE89518B253B8007001B74FD /* Diary Item */,
 				E3796B28252E76CF00C21101 /* Nutrient */,
 				E329745E2526B10300E451FA /* Scan */,
 				E329745D2526B0FA00E451FA /* Allergen */,
@@ -380,6 +410,7 @@
 		E3AE8042252166A10059F3E5 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				BE4E835D253A118A008D8D1E /* Alert */,
 				E32B90FF2524C6F000615CB7 /* Loading Views */,
 				E3E56FBD252410A4005F8D32 /* Floating Buttons */,
 				E3AE80982522989F0059F3E5 /* Search Bar */,
@@ -437,6 +468,9 @@
 			isa = PBXGroup;
 			children = (
 				E3AE806425216B130059F3E5 /* FoodDiaryView.swift */,
+				BE4E83582539E58F008D8D1E /* AddDiaryItemView.swift */,
+				BE895197253B8ADC001B74FD /* DiaryItemList.swift */,
+				BE89519F253B8C7D001B74FD /* DiaryItemRow.swift */,
 			);
 			path = "Food Diary Views";
 			sourceTree = "<group>";
@@ -592,17 +626,21 @@
 				E32974842526BA8100E451FA /* ScannedAllergen+CoreDataProperties.swift in Sources */,
 				E3796B23252E76C600C21101 /* Nutrient+CoreDataClass.swift in Sources */,
 				E3AE8023252165350059F3E5 /* BarcodeScannerView.swift in Sources */,
+				BE89518E253B801A001B74FD /* DiaryItem+CoreDataClass.swift in Sources */,
 				E3AE7FBB252162900059F3E5 /* AppDelegate.swift in Sources */,
 				E3796B2F252E776A00C21101 /* Scan+CoreDataProperties.swift in Sources */,
 				E3796B24252E76C600C21101 /* Nutrient+CoreDataProperties.swift in Sources */,
 				BEE0DCF525367C370020BE63 /* ImageScanningLoadingView.swift in Sources */,
 				E3AE804D2521675F0059F3E5 /* CameraBottomBar.swift in Sources */,
+				BE4E835F253A1194008D8D1E /* AlertControl.swift in Sources */,
 				E3E56FC725241259005F8D32 /* BarcodeScanButton.swift in Sources */,
 				E3AE7FC2252162900059F3E5 /* EoE.xcdatamodeld in Sources */,
 				E3AE8034252166460059F3E5 /* CameraView.swift in Sources */,
 				E3AE801D252164ED0059F3E5 /* AllergenDetection.swift in Sources */,
+				BE895198253B8ADC001B74FD /* DiaryItemList.swift in Sources */,
 				E32974832526BA8100E451FA /* ScannedAllergen+CoreDataClass.swift in Sources */,
 				E3E56FCC25241294005F8D32 /* IngredientsScanButton.swift in Sources */,
+				BE89518F253B801A001B74FD /* DiaryItem+CoreDataProperties.swift in Sources */,
 				E3AE802E252165C30059F3E5 /* ImageProcessor.swift in Sources */,
 				E3AE8004252164220059F3E5 /* ProductResult.swift in Sources */,
 				E3796B3A2530D7FD00C21101 /* ResultView.swift in Sources */,
@@ -611,10 +649,12 @@
 				E3AE800E252164810059F3E5 /* Errors.swift in Sources */,
 				E3AE8045252166E80059F3E5 /* BarcodeBottomBar.swift in Sources */,
 				E3AE8039252166670059F3E5 /* CameraRepresentable.swift in Sources */,
+				BE4E83592539E58F008D8D1E /* AddDiaryItemView.swift in Sources */,
 				E3AE807525216B510059F3E5 /* AnalysisView.swift in Sources */,
 				E3AE806525216B130059F3E5 /* FoodDiaryView.swift in Sources */,
 				E329747A2526BA4600E451FA /* Allergen+CoreDataClass.swift in Sources */,
 				E329747B2526BA4600E451FA /* Allergen+CoreDataProperties.swift in Sources */,
+				BE8951A0253B8C7D001B74FD /* DiaryItemRow.swift in Sources */,
 				E3AE8018252164C20059F3E5 /* Allergen.swift in Sources */,
 				E3AE805B252168770059F3E5 /* Extensions.swift in Sources */,
 				E3AE7FBD252162900059F3E5 /* SceneDelegate.swift in Sources */,

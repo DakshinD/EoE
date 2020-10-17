@@ -81,21 +81,27 @@ struct BarcodeScannerView: View {
                                     DispatchQueue.main.async {
                                         withAnimation {
                                             scanningProcess.scanningState = .failure
-                                            //self.errorsShown.productNotFound.toggle()
+                                            withAnimation {
+                                                scanningProcess.productNotFoundErrorShowing.toggle()
+                                            }
                                         }
                                     }
                                 case .failure(.missingInfo):
                                     DispatchQueue.main.async {
                                         withAnimation {
                                             scanningProcess.scanningState = .failure
-                                            //self.errorsShown.missingData.toggle()
+                                            withAnimation {
+                                                scanningProcess.missingInfoErrorShowing.toggle()
+                                            }
                                         }
                                     }
                                 case .failure(.noData):
                                     DispatchQueue.main.async {
                                         withAnimation {
                                             scanningProcess.scanningState = .failure
-                                            //self.errorsShown.dataNotFound.toggle()
+                                            withAnimation {
+                                                scanningProcess.noDataErrorShowing.toggle()
+                                            }
                                         }
                                     }
                                 default:

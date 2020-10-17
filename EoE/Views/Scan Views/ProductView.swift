@@ -83,8 +83,6 @@ struct ProductView: View {
                         if showNutritionalInfo {
                             ForEach(scan.nutrientsArray, id: \.self) { nutrient in
                                 HStack {
-                                    Image(systemName: "info.circle")
-                                        .foregroundColor(.white)
                                     Text(fixedDescriptionString(nutrient.wrappedNutrientName))
                                         .foregroundColor(.white)
                                     Spacer()
@@ -95,14 +93,7 @@ struct ProductView: View {
                             .listRowBackground(Color("black3"))
                             .animation(.default)
                         }
-                        
-                        
-                        
-                       /* Section(header: Text("Nutritional Value per 100 g").bold()) {
-                        }
-                        .listRowBackground(Color("black3"))*/
 
-                        
                     }
                     .listStyle(InsetGroupedListStyle())
                 }

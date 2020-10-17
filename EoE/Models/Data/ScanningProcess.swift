@@ -32,4 +32,10 @@ class ScanningProcess: ObservableObject {
     @Published var resultViewShowing: Bool = false
     @Published var foundAllergens: [String] = [String]()
     @Published var imageTaken: UIImage? = nil
+    
+    // To show errors after scanning barcodes
+    @Published var productNotFoundErrorShowing: Bool = false
+    @Published var missingInfoErrorShowing: Bool = false
+    @Published var noDataErrorShowing: Bool = false
+    
 }
