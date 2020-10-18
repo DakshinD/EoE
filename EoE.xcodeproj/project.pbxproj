@@ -178,6 +178,13 @@
 			path = Alert;
 			sourceTree = "<group>";
 		};
+		BE587FEF253C96E0002704CA /* Diary Detail Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Diary Detail Views";
+			sourceTree = "<group>";
+		};
 		BE89518B253B8007001B74FD /* Diary Item */ = {
 			isa = PBXGroup;
 			children = (
@@ -471,6 +478,7 @@
 				BE4E83582539E58F008D8D1E /* AddDiaryItemView.swift */,
 				BE895197253B8ADC001B74FD /* DiaryItemList.swift */,
 				BE89519F253B8C7D001B74FD /* DiaryItemRow.swift */,
+				BE587FEF253C96E0002704CA /* Diary Detail Views */,
 			);
 			path = "Food Diary Views";
 			sourceTree = "<group>";

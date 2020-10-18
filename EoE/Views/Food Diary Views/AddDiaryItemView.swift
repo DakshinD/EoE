@@ -141,10 +141,7 @@ struct AddDiaryItemView: View {
             .navigationBarItems(leading: Button(action: {
                                         presentationMode.wrappedValue.dismiss()
                                     }) {
-                                        HStack {
-                                            Image(systemName: "chevron.left")
-                                            Text("Back")
-                                        }
+                Image(systemName: "xmark").padding()
                                     } )
         }
         .onTapGesture {

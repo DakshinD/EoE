@@ -21,17 +21,19 @@ struct FoodDiaryView: View {
                     .edgesIgnoringSafeArea(.all)
                 
                 List {
-
+                    
                     HStack {
-                        Text("Chosen Day: ")
+                        Image(systemName: "calendar")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(Color("darkPurple"))
+                        Text("Current Day:")
                             .foregroundColor(.white)
                         Spacer()
                         DatePicker("", selection: $currentDateChosen, displayedComponents: .date)
                     }
-                    .listRowBackground(Color("black3"))
                     
                     DiaryItemList(filter: currentDateChosen)
-                        
                 }
                 .padding(.top)
                 .listStyle(InsetGroupedListStyle())
@@ -51,8 +53,7 @@ struct FoodDiaryView: View {
                 }
                 .sheet(isPresented: $showingAddItemView) {
                     AddDiaryItemView(chosenDate: currentDateChosen)
-                }
-            )
+                })
         }
     }
     
