@@ -18,10 +18,15 @@ struct DiaryItemRow: View {
                 Text(item.wrappedTitle)
                     .foregroundColor(.white)
                     .font(.body)
-                Text(item.wrappedTime, style: .time)
-                    .foregroundColor(.gray)
-                    .font(.caption)
+                if item.type == "Meal"  {
+                    Text(item.wrappedMealType)
+                        .foregroundColor(.gray)
+                        .font(.caption)
+                }
             }
+            Spacer()
+            Text(item.wrappedTime, style: .time)
+                .font(.system(size: 15, weight: .light, design: .rounded))
         }
     }
     

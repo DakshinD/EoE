@@ -22,13 +22,30 @@ struct DiaryItemList: View {
                     Spacer()
                 }
             } else {
-                ForEach(fetchRequest.wrappedValue.sorted(by: { $0.wrappedTime < $1.wrappedTime }), id: \.self) { item in
-                    DiaryItemRow(item: item)
+                ForEach(fetchRequest.wrappedValue.sorted(by: { $0.wrappedTime < $1.wrappedTime }), id: \.id) { item in
+                    NavigationLink(destination: DetailView(item: item)) {
+                        DiaryItemRow(item: item)
+                    }
                 }
                 .onDelete(perform: deleteEntry)
             }
         }
         .listRowBackground(Color("black3"))
+    }
+    
+    func DetailView(item: DiaryItem) -> AnyView {
+        switch item.wrappedType {
+        case "Meal":
+            return AnyView(MealDetailView(itemID: item.id!))
+        case "Drink":
+            return AnyView(Text("Placeholder"))
+        case "Symptom":
+            return AnyView(Text("Placeholder"))
+        case "Medicine":
+            return AnyView(Text("Placeholder"))
+        default:
+            return AnyView(Text("Placeholder"))
+        }
     }
     
     func deleteEntry(at offsets: IndexSet) {

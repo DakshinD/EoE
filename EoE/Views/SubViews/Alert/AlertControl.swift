@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct AlertControlView: UIViewControllerRepresentable {
+    
+    var moc: NSManagedObjectContext
     
     @Binding var textString: String
     @Binding var showAlert: Bool
@@ -15,6 +18,8 @@ struct AlertControlView: UIViewControllerRepresentable {
     
     var title: String
     var message: String
+    
+    var item: DiaryItem?
     
     // Make sure that, this fuction returns UIViewController, instead of UIAlertController.
     // Because UIAlertController gets presented on UIViewController
@@ -55,7 +60,16 @@ struct AlertControlView: UIViewControllerRepresentable {
                     self.textString = text
                 }
                 
-                ingredients.append(textString)
+                if item != nil {
+                    item!.ingredients!.append(textString) // look at this optional
+                    do {
+                        try moc.save()
+                    } catch {
+                        print("Error adding item: \(error.localizedDescription)")
+                    }
+                } else {
+                    ingredients.append(textString)
+                }
                 
                 alert.dismiss(animated: true) {
                     self.showAlert = false

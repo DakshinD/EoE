@@ -24,6 +24,7 @@ extension DiaryItem {
     @NSManaged public var ingredients: [String]?
     @NSManaged public var symptomDescription: String?
     @NSManaged public var symptomType: String?
+    @NSManaged public var mealType: String?
     
     public var wrappedTitle: String {
         title ?? "???"
@@ -63,6 +64,10 @@ extension DiaryItem {
     
     public var wrappedSymptomType: String {
         symptomType ?? "Unkown symptom type"
+    }
+    
+    public var wrappedMealType: String {
+        mealType ?? "Unkown meal type"
     }
 
 }

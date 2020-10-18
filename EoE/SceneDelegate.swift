@@ -39,6 +39,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 
                 // Create a new allergen
                 let allergen = Allergen(context: context)
+                allergen.id = UUID()
                 allergen.name = aller.description
                 allergen.type = aller.rawValue
                 allergen.isSelected = false

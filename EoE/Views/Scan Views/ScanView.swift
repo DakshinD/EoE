@@ -73,7 +73,7 @@ struct ScanView: View {
                         List {
                             
                             Section {
-                                ForEach(pastScans.filter({ searchText.isEmpty ? true : $0.wrappedProductName.lowercased().contains(searchText.lowercased()) }).sorted { $0.wrappedDate > $1.wrappedDate}, id: \.self) { scan in
+                                ForEach(pastScans.filter({ searchText.isEmpty ? true : $0.wrappedProductName.lowercased().contains(searchText.lowercased()) }).sorted { $0.wrappedDate > $1.wrappedDate}, id: \.id) { scan in
                                     NavigationLink(destination: ProductView(scan: scan)) {
                                         ScanRow(scan: scan)
                                     }

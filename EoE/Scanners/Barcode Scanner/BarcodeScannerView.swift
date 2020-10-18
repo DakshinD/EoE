@@ -45,6 +45,7 @@ struct BarcodeScannerView: View {
                                         
                                         // 2. Create new Scan object and store in CoreData
                                         let newScan = Scan(context: managedObjectContext)
+                                        newScan.id = UUID()
                                         newScan.dateScanned = Date()
                                         newScan.productName = fixedDescriptionString(result.foods[0].description)
                                         newScan.ingredients = result.foods[0].ingredients
@@ -56,6 +57,7 @@ struct BarcodeScannerView: View {
                                         // add nutritional info to the scan object
                                         for nutrient in result.foods[0].foodNutrients {
                                             let newNutrient = Nutrient(context: managedObjectContext)
+                                            newNutrient.id = UUID()
                                             newNutrient.nutrientName = nutrient.nutrientName
                                             newNutrient.derivationDescription = nutrient.derivationDescription
                                             newNutrient.value = nutrient.value

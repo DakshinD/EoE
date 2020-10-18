@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BE4E83592539E58F008D8D1E /* AddDiaryItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4E83582539E58F008D8D1E /* AddDiaryItemView.swift */; };
 		BE4E835F253A1194008D8D1E /* AlertControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4E835E253A1194008D8D1E /* AlertControl.swift */; };
+		BE587FF4253CBBAA002704CA /* MealDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE587FF3253CBBAA002704CA /* MealDetailView.swift */; };
 		BE89518E253B801A001B74FD /* DiaryItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE89518C253B801A001B74FD /* DiaryItem+CoreDataClass.swift */; };
 		BE89518F253B801A001B74FD /* DiaryItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE89518D253B801A001B74FD /* DiaryItem+CoreDataProperties.swift */; };
 		BE895198253B8ADC001B74FD /* DiaryItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE895197253B8ADC001B74FD /* DiaryItemList.swift */; };
@@ -84,6 +85,7 @@
 /* Begin PBXFileReference section */
 		BE4E83582539E58F008D8D1E /* AddDiaryItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDiaryItemView.swift; sourceTree = "<group>"; };
 		BE4E835E253A1194008D8D1E /* AlertControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertControl.swift; sourceTree = "<group>"; };
+		BE587FF3253CBBAA002704CA /* MealDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetailView.swift; sourceTree = "<group>"; };
 		BE89518C253B801A001B74FD /* DiaryItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiaryItem+CoreDataClass.swift"; sourceTree = "<group>"; };
 		BE89518D253B801A001B74FD /* DiaryItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiaryItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BE895197253B8ADC001B74FD /* DiaryItemList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryItemList.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 		BE587FEF253C96E0002704CA /* Diary Detail Views */ = {
 			isa = PBXGroup;
 			children = (
+				BE587FF3253CBBAA002704CA /* MealDetailView.swift */,
 			);
 			path = "Diary Detail Views";
 			sourceTree = "<group>";
@@ -676,6 +679,7 @@
 				E3796B2E252E776A00C21101 /* Scan+CoreDataClass.swift in Sources */,
 				E3AE7FFF2521640C0059F3E5 /* ProductSearch.swift in Sources */,
 				E3AE8053252167B90059F3E5 /* ImagePicker.swift in Sources */,
+				BE587FF4253CBBAA002704CA /* MealDetailView.swift in Sources */,
 				E3AE80A225229D0E0059F3E5 /* ScanRow.swift in Sources */,
 				E3AE803E2521667E0059F3E5 /* CameraController.swift in Sources */,
 				E32B91012524C70900615CB7 /* CameraLoadingAnimation.swift in Sources */,

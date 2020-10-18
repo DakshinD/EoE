@@ -15,13 +15,15 @@ struct AddDiaryItemView: View {
     var dateChosen: Date
     
     @State private var name: String = ""
-    @State private var selectedChoice: Int = 2
+    @State private var selectedChoice: Int = 0
     @State private var timeChosen: Date = Date()
     var typeChoices: [String] = ["Meal", "Drink", "Symptom", "Medicine"]
     
     @State private var ingredients: [String] = []
     @State private var showAlert: Bool = false
     @State private var ingredientText: String = ""
+    @State private var selectedMealType: Int = 0
+    var mealChoices: [String] = ["Breakfast", "Lunch", "Dinner", "Snack", "Dessert"]
     
     @State private var symptomDescription: String = ""
     @State private var symptomTypeChosen: Int = 0
@@ -54,6 +56,15 @@ struct AddDiaryItemView: View {
                             }
                             .foregroundColor(.white)
                             
+                            if typeChoices[selectedChoice] == "Meal" {
+                                Picker("Meal Type", selection: $selectedMealType) {
+                                    ForEach(0 ..< mealChoices.count) {
+                                        Text(mealChoices[$0])
+                                    }
+                                }
+                                .foregroundColor(.white)
+                            }
+                            
                         }
                         .listRowBackground(Color("black3"))
                         
@@ -73,6 +84,7 @@ struct AddDiaryItemView: View {
                                                     .foregroundColor(Color("darkPurple"))
                                             }
                                         }) {
+                                // Ingredients table
                                 if ingredients.isEmpty {
                                     HStack {
                                         HStack {
@@ -134,7 +146,7 @@ struct AddDiaryItemView: View {
                 .ignoresSafeArea(.keyboard)
                 
                 if showAlert {
-                    AlertControlView(textString: $ingredientText, showAlert: $showAlert, ingredients: $ingredients, title: "Add Ingredient", message: "Make sure your spelling is consistent!")
+                    AlertControlView(moc: managedObjectContext, textString: $ingredientText, showAlert: $showAlert, ingredients: $ingredients, title: "Add Ingredient", message: "Make sure your spelling is consistent!")
                 }
             }
             .navigationTitle("Add Diary Item")
@@ -152,6 +164,7 @@ struct AddDiaryItemView: View {
     func saveDiaryItem() {
         let item = DiaryItem(context: managedObjectContext)
         
+        item.id = UUID()
         item.title = name
         item.time = timeChosen
         item.date = dateChosen
@@ -159,6 +172,7 @@ struct AddDiaryItemView: View {
         
         if item.wrappedType == "Meal" {
             item.ingredients = ingredients
+            item.mealType = mealChoices[selectedMealType]
         }
         
         if item.wrappedType == "Symptom" {
@@ -174,8 +188,8 @@ struct AddDiaryItemView: View {
     }
     
     func deleteIngredient(at offsets: IndexSet) {
-            ingredients.remove(atOffsets: offsets)
-        }
+        ingredients.remove(atOffsets: offsets)
+    }
     
     init(chosenDate: Date) {
         dateChosen = chosenDate
