@@ -29,7 +29,7 @@ struct ScanView: View {
             GeometryReader { geometry in
                 ZStack {
                     
-                    Color.black
+                   Color.black
                         .edgesIgnoringSafeArea(.all)
                         .zIndex(0)
                     
@@ -98,14 +98,14 @@ struct ScanView: View {
                                 .padding(.horizontal, 15)
                                 .padding(.bottom, 15)
                         }
-                        .zIndex(2)
                         .transition(.slide)
+                        .zIndex(2)
                     }
                     
                     if scanningProcess.loadingViewShowing {
                         ImageScanningLoadingView(progress: $scanningProcess.progress)
-                            .zIndex(3)
                             .transition(.opacity)
+                            .zIndex(3)
                     }
                    
                 }

@@ -38,13 +38,13 @@ struct DiaryItemList: View {
         case "Meal":
             return AnyView(MealDetailView(itemID: item.id!))
         case "Drink":
-            return AnyView(Text("Placeholder"))
+            return AnyView(DrinkDetailView(itemID: item.id!))
         case "Symptom":
-            return AnyView(Text("Placeholder"))
+            return AnyView(SymptomDetailView(itemID: item.id!, initalNotes: item.wrappedSymptomDescription))
         case "Medicine":
-            return AnyView(Text("Placeholder"))
+            return AnyView(MedicineDetailView(itemID: item.id!))
         default:
-            return AnyView(Text("Placeholder"))
+            return AnyView(Text("Something went wrong"))
         }
     }
     

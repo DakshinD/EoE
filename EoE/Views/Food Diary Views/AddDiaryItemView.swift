@@ -25,7 +25,7 @@ struct AddDiaryItemView: View {
     @State private var selectedMealType: Int = 0
     var mealChoices: [String] = ["Breakfast", "Lunch", "Dinner", "Snack", "Dessert"]
     
-    @State private var symptomDescription: String = ""
+    @State private var symptomDescription: String = "Notes"
     @State private var symptomTypeChosen: Int = 0
     var symptomTypes: [String] = ["Esophageal Flare-up", "Impaction", "Stomach ache"]
     
@@ -36,6 +36,9 @@ struct AddDiaryItemView: View {
                 
                 Color.black
                     .edgesIgnoringSafeArea(.all)
+                    .onTapGesture {
+                            self.endEditing(true)
+                    }
                 
                 VStack {
                     
@@ -45,13 +48,16 @@ struct AddDiaryItemView: View {
                             // Name
                             TextField("Name", text: $name)
                                 .foregroundColor(.white)
+                                .font(.body)
                             // Time
                             DatePicker("Time", selection: $timeChosen, displayedComponents: .hourAndMinute)
                                 .foregroundColor(.white)
+                                .font(.body)
                             // Type
                             Picker("Item Type", selection: $selectedChoice) {
                                 ForEach(0 ..< typeChoices.count) {
                                     Text(typeChoices[$0])
+                                        .font(.body)
                                 }
                             }
                             .foregroundColor(.white)
@@ -60,6 +66,7 @@ struct AddDiaryItemView: View {
                                 Picker("Meal Type", selection: $selectedMealType) {
                                     ForEach(0 ..< mealChoices.count) {
                                         Text(mealChoices[$0])
+                                            .font(.body)
                                     }
                                 }
                                 .foregroundColor(.white)
@@ -90,6 +97,7 @@ struct AddDiaryItemView: View {
                                         HStack {
                                             Text("Add some ingredients!")
                                                 .foregroundColor(.white)
+                                                .font(.body)
                                             Spacer()
                                         }
                                     }
@@ -98,6 +106,7 @@ struct AddDiaryItemView: View {
                                         HStack {
                                             Text(ingredient)
                                                 .foregroundColor(.white)
+                                                .font(.body)
                                             Spacer()
                                         }
                                     }
@@ -115,13 +124,35 @@ struct AddDiaryItemView: View {
                                 Picker("Type", selection: $symptomTypeChosen) {
                                     ForEach(0 ..< symptomTypes.count) {
                                         Text(symptomTypes[$0])
+                                            .font(.body)
                                     }
                                 }
                                 .foregroundColor(.white)
                                 
                                 // Description
-                                TextField("Symptom description", text: $symptomDescription)
-                                    .foregroundColor(.white)
+                                TextEditor(text: $symptomDescription)
+                                    // make the color of the placeholder gray
+                                    .foregroundColor(symptomDescription == "Notes" ? .gray : .white)
+                                    .font(.body)
+                                    .onAppear {
+                                        // remove the placeholder text when keyboard appears
+                                        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { (noti) in
+                                            withAnimation {
+                                                if symptomDescription == "Notes" {
+                                                    symptomDescription = ""
+                                                }
+                                            }
+                                        }
+                                        
+                                        // put back the placeholder text if the user dismisses the keyboard without adding any text
+                                        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { (noti) in
+                                            withAnimation {
+                                                if symptomDescription == "" {
+                                                    symptomDescription = "Notes"
+                                                }
+                                            }
+                                        }
+                                    }
                             }
                             .listRowBackground(Color("black3"))
                         }
@@ -156,9 +187,7 @@ struct AddDiaryItemView: View {
                 Image(systemName: "xmark").padding()
                                     } )
         }
-        .onTapGesture {
-                self.endEditing(true)
-        }
+
     }
     
     func saveDiaryItem() {

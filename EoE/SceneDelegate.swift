@@ -32,7 +32,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         
         let userData = UserData()
-        
+//        userData.isNotFirstLaunch = false
         if !userData.isNotFirstLaunch {
             print("first launch")
             for aller in AllergenTypes.allCases {

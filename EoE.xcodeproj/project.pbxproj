@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE1F7245253E53EF00858CA5 /* DrinkDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F7244253E53EF00858CA5 /* DrinkDetailView.swift */; };
+		BE1F724A253E556A00858CA5 /* MedicineDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F7249253E556A00858CA5 /* MedicineDetailView.swift */; };
+		BE1F724F253E562100858CA5 /* SymptomDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F724E253E562100858CA5 /* SymptomDetailView.swift */; };
+		BE1F7265253E57CF00858CA5 /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F7264253E57CF00858CA5 /* MultilineTextField.swift */; };
 		BE4E83592539E58F008D8D1E /* AddDiaryItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4E83582539E58F008D8D1E /* AddDiaryItemView.swift */; };
 		BE4E835F253A1194008D8D1E /* AlertControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4E835E253A1194008D8D1E /* AlertControl.swift */; };
 		BE587FF4253CBBAA002704CA /* MealDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE587FF3253CBBAA002704CA /* MealDetailView.swift */; };
@@ -83,6 +87,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BE1F7244253E53EF00858CA5 /* DrinkDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkDetailView.swift; sourceTree = "<group>"; };
+		BE1F7249253E556A00858CA5 /* MedicineDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineDetailView.swift; sourceTree = "<group>"; };
+		BE1F724E253E562100858CA5 /* SymptomDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomDetailView.swift; sourceTree = "<group>"; };
+		BE1F7264253E57CF00858CA5 /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
 		BE4E83582539E58F008D8D1E /* AddDiaryItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDiaryItemView.swift; sourceTree = "<group>"; };
 		BE4E835E253A1194008D8D1E /* AlertControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertControl.swift; sourceTree = "<group>"; };
 		BE587FF3253CBBAA002704CA /* MealDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetailView.swift; sourceTree = "<group>"; };
@@ -172,6 +180,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BE1F7253253E576900858CA5 /* Multiline TextField */ = {
+			isa = PBXGroup;
+			children = (
+				BE1F7264253E57CF00858CA5 /* MultilineTextField.swift */,
+			);
+			path = "Multiline TextField";
+			sourceTree = "<group>";
+		};
 		BE4E835D253A118A008D8D1E /* Alert */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +200,9 @@
 			isa = PBXGroup;
 			children = (
 				BE587FF3253CBBAA002704CA /* MealDetailView.swift */,
+				BE1F7244253E53EF00858CA5 /* DrinkDetailView.swift */,
+				BE1F7249253E556A00858CA5 /* MedicineDetailView.swift */,
+				BE1F724E253E562100858CA5 /* SymptomDetailView.swift */,
 			);
 			path = "Diary Detail Views";
 			sourceTree = "<group>";
@@ -420,6 +439,7 @@
 		E3AE8042252166A10059F3E5 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				BE1F7253253E576900858CA5 /* Multiline TextField */,
 				BE4E835D253A118A008D8D1E /* Alert */,
 				E32B90FF2524C6F000615CB7 /* Loading Views */,
 				E3E56FBD252410A4005F8D32 /* Floating Buttons */,
@@ -636,8 +656,10 @@
 			files = (
 				E32974842526BA8100E451FA /* ScannedAllergen+CoreDataProperties.swift in Sources */,
 				E3796B23252E76C600C21101 /* Nutrient+CoreDataClass.swift in Sources */,
+				BE1F7245253E53EF00858CA5 /* DrinkDetailView.swift in Sources */,
 				E3AE8023252165350059F3E5 /* BarcodeScannerView.swift in Sources */,
 				BE89518E253B801A001B74FD /* DiaryItem+CoreDataClass.swift in Sources */,
+				BE1F724F253E562100858CA5 /* SymptomDetailView.swift in Sources */,
 				E3AE7FBB252162900059F3E5 /* AppDelegate.swift in Sources */,
 				E3796B2F252E776A00C21101 /* Scan+CoreDataProperties.swift in Sources */,
 				E3796B24252E76C600C21101 /* Nutrient+CoreDataProperties.swift in Sources */,
@@ -663,6 +685,7 @@
 				BE4E83592539E58F008D8D1E /* AddDiaryItemView.swift in Sources */,
 				E3AE807525216B510059F3E5 /* AnalysisView.swift in Sources */,
 				E3AE806525216B130059F3E5 /* FoodDiaryView.swift in Sources */,
+				BE1F7265253E57CF00858CA5 /* MultilineTextField.swift in Sources */,
 				E329747A2526BA4600E451FA /* Allergen+CoreDataClass.swift in Sources */,
 				E329747B2526BA4600E451FA /* Allergen+CoreDataProperties.swift in Sources */,
 				BE8951A0253B8C7D001B74FD /* DiaryItemRow.swift in Sources */,
@@ -684,6 +707,7 @@
 				E3AE803E2521667E0059F3E5 /* CameraController.swift in Sources */,
 				E32B91012524C70900615CB7 /* CameraLoadingAnimation.swift in Sources */,
 				E3AE7FBF252162900059F3E5 /* ContentView.swift in Sources */,
+				BE1F724A253E556A00858CA5 /* MedicineDetailView.swift in Sources */,
 				E3AE806025216B010059F3E5 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

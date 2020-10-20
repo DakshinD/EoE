@@ -35,9 +35,9 @@ struct FoodDiaryView: View {
                     
                     DiaryItemList(filter: currentDateChosen)
                 }
-                .padding(.top)
                 .listStyle(InsetGroupedListStyle())
                 .animation(.default)
+                .padding(.top)
                 
                 
             }

@@ -44,6 +44,21 @@ struct DiaryItemRow: View {
             return ""
         }
     }
+    
+    func correctColor() -> Color {
+        switch item.type {
+        case "Meal":
+            return Color("darkPurple")
+        case "Drink":
+            return Color.blue
+        case "Symptom":
+            return Color.red
+        case "Medicine":
+            return Color.green
+        default:
+            return Color.orange
+        }
+    }
 }
 
 struct DiaryItemRow_Previews: PreviewProvider {
