@@ -11,6 +11,8 @@ struct FoodDiaryView: View {
     
     @Environment(\.managedObjectContext) var managedObjectContext
     
+    @EnvironmentObject var userData: UserData
+    
     @State var currentDateChosen: Date = Date()
     @State private var showingAddItemView: Bool = false
     
@@ -53,6 +55,7 @@ struct FoodDiaryView: View {
                 }
                 .sheet(isPresented: $showingAddItemView) {
                     AddDiaryItemView(chosenDate: currentDateChosen)
+                        .environmentObject(userData)
                 })
         }
     }

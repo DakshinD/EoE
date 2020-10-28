@@ -31,6 +31,24 @@ struct SettingsView: View {
                         }
                         .listRowBackground(Color("black3"))
                         
+                        Section(header: Text("Food Diary Options").bold()) {
+                            NavigationLink(destination: MedicineOptionView()) {
+                                HStack {
+                                    Text("Medications")
+                                        .foregroundColor(.white)
+                                    Spacer()
+                                }
+                            }
+                            NavigationLink(destination: SymptomOptionView()) {
+                                HStack {
+                                    Text("Symptoms")
+                                        .foregroundColor(.white)
+                                    Spacer()
+                                }
+                            }
+                        }
+                        .listRowBackground(Color("black3"))
+                        
                         Section(header: Text("Notifications").bold()) {
                             Toggle(isOn: $userData.notificationsEnabled) {
                                 Text("Enable Notifications")
@@ -49,19 +67,19 @@ struct SettingsView: View {
                         }
                         .listRowBackground(Color("black3"))
                         
-                        Section(header: Text("App").bold()) {
+                        Section(header: Text("App").bold(), footer:
+                                    HStack {
+                                        Spacer()
+                                        Text("EoE v1.0.0") //UIApplication.appVersion ??
+                                            .foregroundColor(.gray)
+                                            .font(.caption)
+                                        Spacer()
+                                    }
+                        ) {
                             
                             Button(action: {}) {
                                 Text("Rate the App")
                                 .foregroundColor(.white)
-                            }
-                            
-                            HStack {
-                                Text("App Version:")
-                                    .foregroundColor(.white)
-                                Spacer()
-                                Text("1.0.0") //UIApplication.appVersion ??
-                                    .foregroundColor(.white)
                             }
                             
                         }

@@ -32,7 +32,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         
         let userData = UserData()
-//        userData.isNotFirstLaunch = false
+        //userData.isNotFirstLaunch = false
         if !userData.isNotFirstLaunch {
             print("first launch")
             for aller in AllergenTypes.allCases {
@@ -50,12 +50,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     print(error.localizedDescription)
                 }
             }
+            
+            // setup medicine options
+            
+            // setup symptom options
+            
             userData.isNotFirstLaunch = true
         }
-        
-        /*for _ in 0...10 {
-            userData.pastScans.append(Scan(dateScanned: Date(), productName: names.randomElement()!, ingredients: "Ingredients.....", foundAllergens: [Allergen(name: AllergenTypes.allCases.randomElement()!.description, type: AllergenTypes.allCases.randomElement()!, isSelected: true), Allergen(name: AllergenTypes.allCases.randomElement()!.description, type: AllergenTypes.allCases.randomElement()!, isSelected: true)]))
-        }*/
         
         // Done setting up environment objects
         

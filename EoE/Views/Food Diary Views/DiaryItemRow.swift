@@ -10,18 +10,34 @@ import SwiftUI
 struct DiaryItemRow: View {
     
     var item: DiaryItem
-    
+        
     var body: some View {
         HStack(spacing: 15) {
             Text(correctEmoji())
             VStack(alignment: .leading) {
-                Text(item.wrappedTitle)
-                    .foregroundColor(.white)
-                    .font(.body)
+                
+                if item.type != "Symptom" && item.type != "Medicine" {
+                    Text(item.wrappedTitle)
+                        .foregroundColor(.white)
+                        .font(.body)
+                }
+                
                 if item.type == "Meal"  {
                     Text(item.wrappedMealType)
                         .foregroundColor(.gray)
                         .font(.caption)
+                }
+                
+                if item.type == "Symptom" {
+                    Text(item.wrappedSymptomType)
+                        .foregroundColor(.white)
+                        .font(.body)
+                }
+                
+                if item.type == "Medicine" {
+                    Text(item.wrappedMedicineType)
+                        .foregroundColor(.white)
+                        .font(.body)
                 }
             }
             Spacer()

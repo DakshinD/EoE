@@ -12,6 +12,8 @@ struct AddDiaryItemView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.presentationMode) var presentationMode
     
+    @EnvironmentObject var userData: UserData
+    
     var dateChosen: Date
     
     @State private var name: String = ""
@@ -28,6 +30,8 @@ struct AddDiaryItemView: View {
     @State private var symptomDescription: String = "Notes"
     @State private var symptomTypeChosen: Int = 0
     var symptomTypes: [String] = ["Esophageal Flare-up", "Impaction", "Stomach ache"]
+    
+    @State private var medicineTypeChosen: Int = 0
     
     
     var body: some View {
@@ -46,9 +50,11 @@ struct AddDiaryItemView: View {
                         
                         Section(header: Text("Item Details")) {
                             // Name
-                            TextField("Name", text: $name)
-                                .foregroundColor(.white)
-                                .font(.body)
+                            if selectedChoice != 2 && selectedChoice != 3 {
+                                TextField("Name", text: $name)
+                                    .foregroundColor(.white)
+                                    .font(.body)
+                            }
                             // Time
                             DatePicker("Time", selection: $timeChosen, displayedComponents: .hourAndMinute)
                                 .foregroundColor(.white)
@@ -122,8 +128,8 @@ struct AddDiaryItemView: View {
                             Section(header: Text("Symptom Details")) {
                                 // Symptom type
                                 Picker("Type", selection: $symptomTypeChosen) {
-                                    ForEach(0 ..< symptomTypes.count) {
-                                        Text(symptomTypes[$0])
+                                    ForEach(0 ..< userData.symptomOptions.count) {
+                                        Text(userData.symptomOptions[$0])
                                             .font(.body)
                                     }
                                 }
@@ -153,6 +159,41 @@ struct AddDiaryItemView: View {
                                             }
                                         }
                                     }
+                            }
+                            .listRowBackground(Color("black3"))
+                            
+                            Section {
+                                NavigationLink(destination: SymptomOptionView()) {
+                                    HStack {
+                                        Text("Add a new symptom")
+                                            .foregroundColor(.white)
+                                            .font(.body)
+                                    }
+                                }
+                            }
+                            .listRowBackground(Color("black3"))
+                        }
+                        
+                        if typeChoices[selectedChoice] == "Medicine" {
+                            Section(header: Text("Medicine Details")) {
+                                // Medicine Types
+                                Picker("Type", selection: $medicineTypeChosen) {
+                                    ForEach(0 ..< userData.medicineOptions.count) {
+                                        Text(userData.medicineOptions[$0])
+                                            .font(.body)
+                                    }
+                                }
+                                .foregroundColor(.white)
+                            }
+                            
+                            Section {
+                                NavigationLink(destination: MedicineOptionView()) {
+                                    HStack {
+                                        Text("Add a new medicine")
+                                            .foregroundColor(.white)
+                                            .font(.body)
+                                    }
+                                }
                             }
                             .listRowBackground(Color("black3"))
                         }
@@ -205,8 +246,12 @@ struct AddDiaryItemView: View {
         }
         
         if item.wrappedType == "Symptom" {
-            item.symptomType = symptomTypes[symptomTypeChosen]
+            item.symptomType = userData.symptomOptions[symptomTypeChosen]
             item.symptomDescription = symptomDescription
+        }
+        
+        if item.wrappedType == "Medicine" {
+            item.medicineType = userData.medicineOptions[medicineTypeChosen]
         }
         
         do {

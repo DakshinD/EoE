@@ -26,6 +26,14 @@ class UserData: ObservableObject {
     
     @Published(key: "darkMode")
     var darkMode: Bool = false
+    
+    // Food Diary Settings
+    
+    @Published(key: "symptomOptions")
+    var symptomOptions: [String] = ["Esophageal Flare-Up", "Impaction"]
+    
+    @Published(key: "medicineOptions")
+    var medicineOptions: [String] = ["Budesonide", "Flovent", "Nexium"]
 
 }
 
