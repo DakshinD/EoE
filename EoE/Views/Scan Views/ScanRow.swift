@@ -15,11 +15,11 @@ struct ScanRow: View {
             HStack {
                 VStack(alignment: .leading, spacing: 6) {
                     Text(scan.productName ?? "Unkown Product")
-                        .foregroundColor(.white)
+                        .foregroundColor(Color.text)
                         .bold()
                     Text(scan.dateScanned ?? Date(), style: .date) // Fix the optional value for this
                         .font(.caption)
-                        .foregroundColor(Color("gray1"))
+                        .foregroundColor(Color.gray) // previously gray1
                         .bold()
                 }
                 Spacer()
@@ -31,7 +31,6 @@ struct ScanRow: View {
                 
             }
             .padding()
-            //.background(Color("black3"))
     }
 }
 

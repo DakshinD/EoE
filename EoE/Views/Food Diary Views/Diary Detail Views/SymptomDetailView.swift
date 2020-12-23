@@ -18,48 +18,45 @@ struct SymptomDetailView: View {
     var body: some View {
         ZStack {
             
-            Color.black
+            Color.background
                 .edgesIgnoringSafeArea(.all)
             
             List {
                 Section(header: Text("Description")) {
                     HStack {
                         Image(systemName: "info.circle")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .foregroundColor(Color("darkPurple"))
+                            .imageScale(.large)
+                            .foregroundColor(Color.accent)
                         Text("Type")
                         Spacer()
                         Text(fetchRequest.wrappedValue[0].wrappedType)
                     }
-                    .foregroundColor(.white)
+                    .foregroundColor(Color.text)
                     HStack {
                         Image(systemName: "calendar")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .foregroundColor(Color("darkPurple"))
+                            .imageScale(.large)
+                            .foregroundColor(Color.accent)
                         Text("Date")
                         Spacer()
                         Text(fetchRequest.wrappedValue[0].wrappedDate, style: .date)
                     }
-                    .foregroundColor(.white)
+                    .foregroundColor(Color.text)
                     HStack {
                         Image(systemName: "clock")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .foregroundColor(Color("darkPurple"))
+                            .imageScale(.large)
+                            .foregroundColor(Color.accent)
                         Text("Time")
                         Spacer()
                         Text(fetchRequest.wrappedValue[0].wrappedTime, style: .time)
                     }
-                    .foregroundColor(.white)
+                    .foregroundColor(Color.text)
                 }
-                .listRowBackground(Color("black3"))
+                .listRowBackground(Color.secondary)
                 
                 Section(header: Text("Notes")) {
                     TextEditor(text: $notesText)
                         // make the color of the placeholder gray
-                        .foregroundColor(notesText == "Notes" ? .gray : .white)
+                        .foregroundColor(notesText == "Notes" ? .gray : Color.text)
                         .font(.body)
                         .onAppear {
                             // remove the placeholder text when keyboard appears
@@ -84,7 +81,7 @@ struct SymptomDetailView: View {
                             saveNotes()
                         })
                 }
-                .listRowBackground(Color("black3"))
+                .listRowBackground(Color.secondary)
             }
             .listStyle(InsetGroupedListStyle())
             .padding(.vertical)
@@ -111,9 +108,6 @@ struct SymptomDetailView: View {
             predicate: NSPredicate(format: "id == %@", itemID as CVarArg)
         )
         _notesText = State(initialValue: initalNotes)
-        // Changes to Navigation Bar
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
     }
     
 }

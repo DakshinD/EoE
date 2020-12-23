@@ -18,7 +18,7 @@ struct DiaryItemList: View {
             if fetchRequest.wrappedValue.isEmpty {
                 HStack {
                     Text("There are no diary entries for this day!")
-                        .foregroundColor(.white)
+                        .foregroundColor(Color.text)
                     Spacer()
                 }
             } else {
@@ -30,7 +30,7 @@ struct DiaryItemList: View {
                 .onDelete(perform: deleteEntry)
             }
         }
-        .listRowBackground(Color("black3"))
+        .listRowBackground(Color.secondary)
     }
     
     func DetailView(item: DiaryItem) -> AnyView {

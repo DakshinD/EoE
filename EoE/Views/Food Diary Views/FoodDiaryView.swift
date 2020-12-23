@@ -19,18 +19,19 @@ struct FoodDiaryView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Color.black
+                Color.background
                     .edgesIgnoringSafeArea(.all)
                 
                 List {
                     
                     HStack {
                         Image(systemName: "calendar")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .foregroundColor(Color("darkPurple"))
+                            //.resizable()
+                            .imageScale(.large)
+                            //.frame(width: 20, height: 20)
+                            .foregroundColor(Color.accent)
                         Text("Current Day:")
-                            .foregroundColor(.white)
+                            .foregroundColor(Color.text)
                         Spacer()
                         DatePicker("", selection: $currentDateChosen, displayedComponents: .date)
                     }
@@ -49,8 +50,9 @@ struct FoodDiaryView: View {
                     showingAddItemView.toggle()
                 }) {
                     Image(systemName: "plus")
-                        .resizable()
-                        .frame(width: 20, height: 20)
+                        .imageScale(.large)
+                        //.resizable()
+                        //.frame(width: 20, height: 20)
                         .padding()
                 }
                 .sheet(isPresented: $showingAddItemView) {
@@ -58,12 +60,6 @@ struct FoodDiaryView: View {
                         .environmentObject(userData)
                 })
         }
-    }
-    
-    init() {
-        // Changes to Navigation Bar
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
     }
     
     let dateFormatter: DateFormatter = {

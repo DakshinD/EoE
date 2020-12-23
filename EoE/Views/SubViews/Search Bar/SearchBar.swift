@@ -16,15 +16,15 @@ struct SearchBar: View {
     var body: some View {
         HStack {
             
-            TextField("Search ...", text: $text)
+            TextField("Search", text: $text)
                 .padding(7)
                 .padding(.horizontal, 25)
-                .background(Color(UIColor.systemGray5))
+                .background(Color.tertiary)
                 .cornerRadius(8)
                 .overlay(
                     HStack {
                         Image(systemName: "magnifyingglass")
-                            .foregroundColor(.gray)
+                            .foregroundColor(Color.gray)
                             .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                             .padding(.leading, 8)
                         
@@ -34,7 +34,7 @@ struct SearchBar: View {
                                 
                             }) {
                                 Image(systemName: "multiply.circle.fill")
-                                    .foregroundColor(.gray)
+                                    .foregroundColor(Color.gray)
                                     .padding(.trailing, 8)
                             }
                         }
@@ -54,7 +54,7 @@ struct SearchBar: View {
                     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                 }) {
                     Text("Cancel")
-                        .foregroundColor(Color("darkPurple"))
+                        .foregroundColor(Color.accent)
                 }
                 .padding(.trailing, 10)
                 .transition(.move(edge: .trailing))

@@ -23,7 +23,7 @@ struct BarcodeScannerView: View {
         GeometryReader { geometry in
             ZStack {
                 if scanningProcess.scanningState == ScanningState.cameraLoading {
-                    CameraLoadingAnimation(backgroundColor: Color("darkPurple"), imageColor: Color.black)
+                    CameraLoadingAnimation(backgroundColor: Color.accent, imageColor: Color.black)
                 }
                 
                 if scanningProcess.scanningState != ScanningState.closed {
@@ -122,7 +122,7 @@ struct BarcodeScannerView: View {
                 }
                 
                 if scanningProcess.scanningState == ScanningState.searching || scanningProcess.scanningState == ScanningState.closing {
-                    CameraLoadingAnimation(backgroundColor: Color("darkPurple"), imageColor: Color.black)
+                    CameraLoadingAnimation(backgroundColor: Color.accent, imageColor: Color.black)
                 }
                 
 

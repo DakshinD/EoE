@@ -38,7 +38,7 @@ struct AddDiaryItemView: View {
         NavigationView {
             ZStack {
                 
-                Color.black
+                Color.background
                     .edgesIgnoringSafeArea(.all)
                     .onTapGesture {
                             self.endEditing(true)
@@ -52,12 +52,13 @@ struct AddDiaryItemView: View {
                             // Name
                             if selectedChoice != 2 && selectedChoice != 3 {
                                 TextField("Name", text: $name)
-                                    .foregroundColor(.white)
+                                    .foregroundColor(Color.text)
                                     .font(.body)
                             }
                             // Time
                             DatePicker("Time", selection: $timeChosen, displayedComponents: .hourAndMinute)
-                                .foregroundColor(.white)
+                                .foregroundColor(Color.text)
+                                .accentColor(Color.accent)
                                 .font(.body)
                             // Type
                             Picker("Item Type", selection: $selectedChoice) {
@@ -66,7 +67,7 @@ struct AddDiaryItemView: View {
                                         .font(.body)
                                 }
                             }
-                            .foregroundColor(.white)
+                            .foregroundColor(Color.text)
                             
                             if typeChoices[selectedChoice] == "Meal" {
                                 Picker("Meal Type", selection: $selectedMealType) {
@@ -75,11 +76,11 @@ struct AddDiaryItemView: View {
                                             .font(.body)
                                     }
                                 }
-                                .foregroundColor(.white)
+                                .foregroundColor(Color.text)
                             }
                             
                         }
-                        .listRowBackground(Color("black3"))
+                        .listRowBackground(Color.secondary)
                         
                         if typeChoices[selectedChoice] == "Meal" {
                             // Ingredients
@@ -94,7 +95,7 @@ struct AddDiaryItemView: View {
                                                 Image(systemName: "plus")
                                                     .resizable()
                                                     .frame(width: 13, height: 13)
-                                                    .foregroundColor(Color("darkPurple"))
+                                                    .foregroundColor(Color.accent)
                                             }
                                         }) {
                                 // Ingredients table
@@ -102,7 +103,7 @@ struct AddDiaryItemView: View {
                                     HStack {
                                         HStack {
                                             Text("Add some ingredients!")
-                                                .foregroundColor(.white)
+                                                .foregroundColor(Color.text)
                                                 .font(.body)
                                             Spacer()
                                         }
@@ -111,7 +112,7 @@ struct AddDiaryItemView: View {
                                     ForEach(ingredients, id: \.self) { ingredient in
                                         HStack {
                                             Text(ingredient)
-                                                .foregroundColor(.white)
+                                                .foregroundColor(Color.text)
                                                 .font(.body)
                                             Spacer()
                                         }
@@ -120,7 +121,7 @@ struct AddDiaryItemView: View {
                                 }
                                 
                             }
-                            .listRowBackground(Color("black3"))
+                            .listRowBackground(Color.secondary)
                         }
                         
                         if typeChoices[selectedChoice] == "Symptom" {
@@ -133,12 +134,12 @@ struct AddDiaryItemView: View {
                                             .font(.body)
                                     }
                                 }
-                                .foregroundColor(.white)
+                                .foregroundColor(Color.text)
                                 
                                 // Description
                                 TextEditor(text: $symptomDescription)
                                     // make the color of the placeholder gray
-                                    .foregroundColor(symptomDescription == "Notes" ? .gray : .white)
+                                    .foregroundColor(symptomDescription == "Notes" ? .gray : Color.text)
                                     .font(.body)
                                     .onAppear {
                                         // remove the placeholder text when keyboard appears
@@ -160,18 +161,18 @@ struct AddDiaryItemView: View {
                                         }
                                     }
                             }
-                            .listRowBackground(Color("black3"))
+                            .listRowBackground(Color.secondary)
                             
                             Section {
                                 NavigationLink(destination: SymptomOptionView()) {
                                     HStack {
                                         Text("Add a new symptom")
-                                            .foregroundColor(.white)
+                                            .foregroundColor(Color.text)
                                             .font(.body)
                                     }
                                 }
                             }
-                            .listRowBackground(Color("black3"))
+                            .listRowBackground(Color.secondary)
                         }
                         
                         if typeChoices[selectedChoice] == "Medicine" {
@@ -183,19 +184,19 @@ struct AddDiaryItemView: View {
                                             .font(.body)
                                     }
                                 }
-                                .foregroundColor(.white)
+                                .foregroundColor(Color.text)
                             }
                             
                             Section {
                                 NavigationLink(destination: MedicineOptionView()) {
                                     HStack {
                                         Text("Add a new medicine")
-                                            .foregroundColor(.white)
+                                            .foregroundColor(Color.text)
                                             .font(.body)
                                     }
                                 }
                             }
-                            .listRowBackground(Color("black3"))
+                            .listRowBackground(Color.secondary)
                         }
                         
                     }
@@ -210,7 +211,7 @@ struct AddDiaryItemView: View {
                             .foregroundColor(.white)
                             .font(.system(size: 20, weight: .semibold, design: .rounded))
                     }
-                    .buttonStyle(PurpleStyle())
+                    .buttonStyle(CustomButton())
                     .frame(width: 300, height: 50)
                     .padding()
                                         
@@ -268,13 +269,13 @@ struct AddDiaryItemView: View {
     init(chosenDate: Date) {
         dateChosen = chosenDate
         // Changes to Navigation Bar
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
+        //UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        //UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
         // Changes to List
-        UITableView.appearance().backgroundColor = UIColor.black
-        UITableView.appearance().tintColor = UIColor(Color("darkPurple"))
-        UITableViewCell.appearance().backgroundColor = UIColor(Color("black3"))
-        UITableViewCell.appearance().tintColor = UIColor(Color("darkPurple"))
+        /*UITableView.appearance().backgroundColor = UIColor.black
+        UITableView.appearance().tintColor = UIColor(Color.accent)
+        UITableViewCell.appearance().backgroundColor = UIColor(Color.secondary)
+        UITableViewCell.appearance().tintColor = UIColor(Color.accent)*/
     }
 }
 

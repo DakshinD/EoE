@@ -14,6 +14,7 @@ struct ContentView: View {
     
     @EnvironmentObject var userData: UserData
     @EnvironmentObject var scanningProcess: ScanningProcess
+    @EnvironmentObject var stats: Statistics
 
     
     @State private var barcodeButtonShown: Bool = false
@@ -49,12 +50,9 @@ struct ContentView: View {
                 }
             
         }
-        .accentColor(Color("darkPurple"))
+        .accentColor(Color.accent)
+        .preferredColorScheme(userData.darkMode ? .dark : .light)
         
-    }
-    
-    init() {
-        UITabBar.appearance().barTintColor = UIColor.black
     }
     
 }

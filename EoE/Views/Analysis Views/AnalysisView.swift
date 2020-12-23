@@ -8,9 +8,31 @@
 import SwiftUI
 
 struct AnalysisView: View {
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        NavigationView {
+            
+            GeometryReader { geo in
+                
+                ZStack {
+                    
+                    Color.background
+                        .edgesIgnoringSafeArea(.all)
+                    
+                    VStack {
+                        
+                        Spacer()
+                    }
+                                        
+                }
+                .navigationTitle("Analytics")
+            }
+            
+        }
+        
     }
+
 }
 
 struct AnalysisView_Previews: PreviewProvider {

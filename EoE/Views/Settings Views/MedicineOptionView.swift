@@ -17,13 +17,13 @@ struct MedicineOptionView: View {
     var body: some View {
         ZStack {
             
-            Color.black
+            Color.background
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
                 
                 Text("Add your different medications beforehand for more efficient usage of the Food Diary")
-                    .foregroundColor(.white)
+                    .foregroundColor(Color.text)
                     .multilineTextAlignment(.leading)
                     .font(.system(size: 15, weight: .regular, design: .rounded))
                     .padding()
@@ -39,20 +39,20 @@ struct MedicineOptionView: View {
                                         Image(systemName: "plus")
                                             .resizable()
                                             .frame(width: 13, height: 13)
-                                            .foregroundColor(Color("darkPurple"))
+                                            .foregroundColor(Color.accent)
                                     }
                                 }
                     ) {
                         ForEach(userData.medicineOptions, id: \.self) { medication in
                             HStack {
                                 Text(medication)
-                                    .foregroundColor(.white)
+                                    .foregroundColor(Color.text)
                                 Spacer()
                             }
                         }
                         .onDelete(perform: deleteMedicine)
                     }
-                    .listRowBackground(Color("black3"))
+                    .listRowBackground(Color.secondary)
                 }
                 .listStyle(InsetGroupedListStyle())
                 
@@ -68,12 +68,6 @@ struct MedicineOptionView: View {
     
     func deleteMedicine(at offsets: IndexSet) {
         userData.medicineOptions.remove(atOffsets: offsets)
-    }
-    
-    init() {
-        // Changes to Navigation Bar
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
     }
     
 }

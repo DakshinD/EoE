@@ -23,43 +23,40 @@ struct MealDetailView: View {
     var body: some View {
         ZStack {
             
-            Color.black
+            Color.background
                 .edgesIgnoringSafeArea(.all)
             
             List {
                 Section(header: Text("Description")) {
                     HStack {
                         Image(systemName: "info.circle")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .foregroundColor(Color("darkPurple"))
+                            .imageScale(.large)
+                            .foregroundColor(Color.accent)
                         Text("Type")
                         Spacer()
                         Text(fetchRequest.wrappedValue[0].wrappedMealType)
                     }
-                    .foregroundColor(.white)
+                    .foregroundColor(Color.text)
                     HStack {
                         Image(systemName: "calendar")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .foregroundColor(Color("darkPurple"))
+                            .imageScale(.large)
+                            .foregroundColor(Color.accent)
                         Text("Date")
                         Spacer()
                         Text(fetchRequest.wrappedValue[0].wrappedDate, style: .date)
                     }
-                    .foregroundColor(.white)
+                    .foregroundColor(Color.text)
                     HStack {
                         Image(systemName: "clock")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .foregroundColor(Color("darkPurple"))
+                            .imageScale(.large)
+                            .foregroundColor(Color.accent)
                         Text("Time")
                         Spacer()
                         Text(fetchRequest.wrappedValue[0].wrappedTime, style: .time)
                     }
-                    .foregroundColor(.white)
+                    .foregroundColor(Color.text)
                 }
-                .listRowBackground(Color("black3"))
+                .listRowBackground(Color.secondary)
                 
                 Section(header: HStack {
                                 Text("Ingredients")
@@ -71,19 +68,19 @@ struct MealDetailView: View {
                                     Image(systemName: "plus")
                                         .resizable()
                                         .frame(width: 13, height: 13)
-                                        .foregroundColor(Color("darkPurple"))
+                                        .foregroundColor(Color.accent)
                                 }
                             }) {
                     ForEach(fetchRequest.wrappedValue[0].wrappedIngredients, id: \.self) { ingredient in
                         HStack {
                             Text(ingredient)
-                                .foregroundColor(.white)
+                                .foregroundColor(Color.text)
                             Spacer()
                         }
                     }
                     .onDelete(perform: deleteIngredient)
                 }
-                .listRowBackground(Color("black3"))
+                .listRowBackground(Color.secondary)
             }
             .listStyle(InsetGroupedListStyle())
             .padding(.vertical)
@@ -113,9 +110,6 @@ struct MealDetailView: View {
             sortDescriptors: [],
             predicate: NSPredicate(format: "id == %@", itemID as CVarArg)
         )
-        // Changes to Navigation Bar
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
     }
 }
 

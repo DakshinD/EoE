@@ -17,13 +17,13 @@ struct SymptomOptionView: View {
     var body: some View {
         ZStack {
             
-            Color.black
+            Color.background
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
                 
                 Text("Add your common symptoms beforehand for more efficient usage of the Food Diary")
-                    .foregroundColor(.white)
+                    .foregroundColor(Color.text)
                     .multilineTextAlignment(.leading)
                     .font(.system(size: 15, weight: .regular, design: .rounded))
                     .padding()
@@ -40,20 +40,20 @@ struct SymptomOptionView: View {
                                         Image(systemName: "plus")
                                             .resizable()
                                             .frame(width: 13, height: 13)
-                                            .foregroundColor(Color("darkPurple"))
+                                            .foregroundColor(Color.accent)
                                     }
                                 }
                     ) {
                         ForEach(userData.symptomOptions, id: \.self) { symptom in
                             HStack {
                                 Text(symptom)
-                                    .foregroundColor(.white)
+                                    .foregroundColor(Color.text)
                                 Spacer()
                             }
                         }
                         .onDelete(perform: deleteSymptom)
                     }
-                    .listRowBackground(Color("black3"))
+                    .listRowBackground(Color.secondary)
                 }
                 .listStyle(InsetGroupedListStyle())
                 
@@ -71,11 +71,6 @@ struct SymptomOptionView: View {
         userData.symptomOptions.remove(atOffsets: offsets)
     }
     
-    init() {
-        // Changes to Navigation Bar
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
-    }
 }
 
 struct SymptomOptionView_Previews: PreviewProvider {

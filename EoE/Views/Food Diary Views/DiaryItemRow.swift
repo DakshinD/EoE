@@ -18,7 +18,7 @@ struct DiaryItemRow: View {
                 
                 if item.type != "Symptom" && item.type != "Medicine" {
                     Text(item.wrappedTitle)
-                        .foregroundColor(.white)
+                        .foregroundColor(Color.text)
                         .font(.body)
                 }
                 
@@ -30,13 +30,13 @@ struct DiaryItemRow: View {
                 
                 if item.type == "Symptom" {
                     Text(item.wrappedSymptomType)
-                        .foregroundColor(.white)
+                        .foregroundColor(Color.text)
                         .font(.body)
                 }
                 
                 if item.type == "Medicine" {
                     Text(item.wrappedMedicineType)
-                        .foregroundColor(.white)
+                        .foregroundColor(Color.text)
                         .font(.body)
                 }
             }

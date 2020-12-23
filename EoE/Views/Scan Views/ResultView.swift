@@ -18,7 +18,7 @@ struct ResultView: View {
                     if scanningProcess.foundAllergens.isEmpty {
                         HStack {
                             Text("No Allergens Found!")
-                                .foregroundColor(.white)
+                                .foregroundColor(Color.text)
                             Spacer()
                             Text("😁")
                         }
@@ -27,7 +27,7 @@ struct ResultView: View {
                             HStack {
                                 // Check how to handle this optional
                                 Text(AllergenTypes(rawValue: allergen)!.description)
-                                    .foregroundColor(.white)
+                                    .foregroundColor(Color.text)
                                 Spacer()
                                 Text(AllergenTypes(rawValue: allergen)!.emoji)
                             }
@@ -35,11 +35,10 @@ struct ResultView: View {
 
                     }
                 }
-                .listRowBackground(Color("black3"))
+                .listRowBackground(Color.secondary)
 
             }
             .listStyle(InsetGroupedListStyle())
-//            .padding(.top, 10)
         }
         .navigationTitle("Product Analysis")
     }

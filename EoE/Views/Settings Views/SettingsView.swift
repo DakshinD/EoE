@@ -15,7 +15,7 @@ struct SettingsView: View {
         NavigationView {
             GeometryReader { geometry in
                 ZStack {
-                    Color.black
+                    Color.background
                         .edgesIgnoringSafeArea(.all)
                     
                     List {
@@ -23,49 +23,67 @@ struct SettingsView: View {
                         Section(header: Text("Allergens").bold()) {
                             NavigationLink(destination: AllergenSelectionView()) {
                                 HStack {
+                                    Image(systemName: "cross.case")
+                                        .imageScale(.large)
+                                        .foregroundColor(Color.accent)
                                     Text("Select Allergens")
-                                        .foregroundColor(.white)
+                                        .foregroundColor(Color.text)
                                     Spacer()
                                 }
                             }
                         }
-                        .listRowBackground(Color("black3"))
+                        .listRowBackground(Color.secondary)
                         
                         Section(header: Text("Food Diary Options").bold()) {
                             NavigationLink(destination: MedicineOptionView()) {
                                 HStack {
+                                    Image(systemName: "pills")
+                                        .imageScale(.large)
+                                        .foregroundColor(Color.accent)
                                     Text("Medications")
-                                        .foregroundColor(.white)
+                                        .foregroundColor(Color.text)
                                     Spacer()
                                 }
                             }
                             NavigationLink(destination: SymptomOptionView()) {
                                 HStack {
+                                    Image(systemName: "bolt.heart")
+                                        .imageScale(.large)
+                                        .foregroundColor(Color.accent)
+                                        
                                     Text("Symptoms")
-                                        .foregroundColor(.white)
+                                        .foregroundColor(Color.text)
                                     Spacer()
                                 }
                             }
                         }
-                        .listRowBackground(Color("black3"))
+                        .listRowBackground(Color.secondary)
                         
                         Section(header: Text("Notifications").bold()) {
                             Toggle(isOn: $userData.notificationsEnabled) {
-                                Text("Enable Notifications")
-                                    .foregroundColor(.white)
+                                HStack {
+                                    Image(systemName: "bell")
+                                        .imageScale(.large)
+                                        .foregroundColor(Color.accent)
+                                    Text("Enable Notifications")
+                                        .foregroundColor(Color.text)
+                                }
                             }
                         }
-                        .listRowBackground(Color("black3"))
+                        .listRowBackground(Color.secondary)
                         
                         Section(header: Text("Appearance").bold()) {
-                            
                             Toggle(isOn: $userData.darkMode) {
-                                Text("Dark Mode")
-                                    .foregroundColor(.white)
+                                HStack {
+                                    Image(systemName: "circle.lefthalf.fill")
+                                        .imageScale(.large)
+                                        .foregroundColor(Color.accent)
+                                    Text("Dark Mode")
+                                        .foregroundColor(Color.text)
+                                }
                             }
-                            
                         }
-                        .listRowBackground(Color("black3"))
+                        .listRowBackground(Color.secondary)
                         
                         Section(header: Text("App").bold(), footer:
                                     HStack {
@@ -77,13 +95,20 @@ struct SettingsView: View {
                                     }
                         ) {
                             
-                            Button(action: {}) {
-                                Text("Rate the App")
-                                .foregroundColor(.white)
+                            Button(action: {
+                                
+                            }) {
+                                HStack {
+                                    Image(systemName: "star")
+                                        .imageScale(.large)
+                                        .foregroundColor(Color.accent)
+                                    Text("Rate the App")
+                                        .foregroundColor(Color.text)
+                                }
                             }
                             
                         }
-                        .listRowBackground(Color("black3"))
+                        .listRowBackground(Color.secondary)
                         
                     }
                     .listStyle(InsetGroupedListStyle())
@@ -92,15 +117,6 @@ struct SettingsView: View {
             }
             .navigationTitle(Text("Settings"))
         }
-    }
-    
-    init() {
-        // Changes to Navigation Bar
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
-        // Changes to List
-        UITableView.appearance().backgroundColor = UIColor.clear
-        UITableView.appearance().separatorColor = UIColor.gray
     }
     
 }

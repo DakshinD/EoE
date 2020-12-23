@@ -32,7 +32,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         
         let userData = UserData()
-        //userData.isNotFirstLaunch = false
+//        userData.isNotFirstLaunch = false
         if !userData.isNotFirstLaunch {
             print("first launch")
             for aller in AllergenTypes.allCases {
@@ -65,6 +65,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                             .environment(\.managedObjectContext, context)
                             .environmentObject(userData)
                             .environmentObject(ScanningProcess())
+                            .environmentObject(Statistics())
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

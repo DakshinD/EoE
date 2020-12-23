@@ -29,7 +29,7 @@ struct ScanView: View {
             GeometryReader { geometry in
                 ZStack {
                     
-                   Color.black
+                   Color.background
                         .edgesIgnoringSafeArea(.all)
                         .zIndex(0)
                     
@@ -48,7 +48,7 @@ struct ScanView: View {
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: 30, height: 30)
-                                        .foregroundColor(Color("darkPurple"))
+                                        .foregroundColor(Color.accent)
                                 }
                                 .sheet(isPresented: $scanningProcess.cameraShowing, onDismiss: checkImage, content: { ImagePicker() })
                                 
@@ -63,7 +63,7 @@ struct ScanView: View {
                                             .resizable()
                                             .scaledToFit()
                                             .frame(width: 30, height: 30)
-                                            .foregroundColor(Color("darkPurple"))
+                                        .foregroundColor(Color.accent)
                                 }
                             }
                             
@@ -79,14 +79,13 @@ struct ScanView: View {
                                     }
                                 }
                             }
-                            .listRowBackground(Color("black3"))
+                            .listRowBackground(Color.secondary)
                         }
                         .listStyle(InsetGroupedListStyle())
                         .animation(.default)
                         
                         Spacer()
                     }
-                    .background(Color.black)
                     .zIndex(1)
                     
                     if scanningProcess.barcodeScannerShowing {
@@ -123,12 +122,6 @@ struct ScanView: View {
             }
             
         }
-    }
-    
-    init() {
-        // Changes to Navigation Bar
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
     }
     
 }

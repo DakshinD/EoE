@@ -16,7 +16,7 @@ struct ImageScanningLoadingView: View {
             
             ZStack {
                 
-                Color.black
+                Color.background
                     .opacity(0.5)
                     .edgesIgnoringSafeArea(.all)
                 
@@ -25,13 +25,13 @@ struct ImageScanningLoadingView: View {
                         Circle()
                             .stroke(lineWidth: 15)
                             .opacity(0.8)
-                            .foregroundColor(Color("lightPurple"))
+                            .foregroundColor(Color.accentSecondary)
                             .frame(width: 130, height: 130)
                         
                         Circle()
                             .trim(from: 0.0, to: CGFloat(min(progress, 1.0)))
                             .stroke(style: StrokeStyle(lineWidth: 15, lineCap: .round, lineJoin: .round))
-                            .foregroundColor(Color("darkPurple"))
+                            .foregroundColor(Color.accent)
                             .rotationEffect(Angle(degrees: 270.0))
                             .animation(.linear)
                             .frame(width: 130, height: 130)
@@ -39,18 +39,18 @@ struct ImageScanningLoadingView: View {
                         Text(String(format: "%.0f %%", min(self.progress, 1.0)*100.0))
                             .font(.system(size: 35, weight: .semibold, design: .rounded))
                             .bold()
-                            .foregroundColor(.white)
+                            .foregroundColor(Color.text)
                     }
                     
                     Text("Processing image...")
-                        .foregroundColor(.white)
+                        .foregroundColor(Color.text)
                         .font(.system(size: 15, weight: .semibold, design: .rounded))
                         .padding()
 
                 }
                 .padding(.top, 25)
                 .frame(width: 170, height: 215)
-                .background(Color("black3"))
+                .background(Color.background)
                 .cornerRadius(15)
 
             }

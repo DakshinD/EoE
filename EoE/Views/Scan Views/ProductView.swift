@@ -17,7 +17,7 @@ struct ProductView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                Color.black
+                Color.background
                     .edgesIgnoringSafeArea(.all)
                 
                 VStack {
@@ -25,15 +25,15 @@ struct ProductView: View {
                         
                         Section(header: Text("Description").bold()) {
                             Text(scan.wrappedProductName)
-                                .foregroundColor(.white)
+                                .foregroundColor(Color.text)
                         }
-                        .listRowBackground(Color("black3"))
+                        .listRowBackground(Color.secondary)
                         
                         Section(header: Text("Date Scanned").bold()) {
                             Text(scan.wrappedDate, style: .date)
-                                .foregroundColor(.white)
+                                .foregroundColor(Color.text)
                         }
-                        .listRowBackground(Color("black3"))
+                        .listRowBackground(Color.secondary)
                         
                         Section(header: Text("Allergens Found").bold()) {
                             if !scan.foundAllergensArray.isEmpty {
@@ -44,23 +44,24 @@ struct ProductView: View {
                                         Spacer()
                                         Text(AllergenTypes(rawValue: allergen.wrappedType)!.emoji)
                                     }
+                                    .foregroundColor(Color.text)
                                 }
                             } else {
                                 HStack {
                                     Text("No Allergens Found!")
-                                        .foregroundColor(.white)
+                                        .foregroundColor(Color.text)
                                     Spacer()
                                     Text("😁")
                                 }
                             }
                         }
-                        .listRowBackground(Color("black3"))
+                        .listRowBackground(Color.secondary)
                         
                         Section(header: Text("Ingredients").bold()) {
                             Text(formattedIngredients(scan.wrappedIngredients))
-                                .foregroundColor(.white)
+                                .foregroundColor(Color.text)
                         }
-                        .listRowBackground(Color("black3"))
+                        .listRowBackground(Color.secondary)
                         
                         Button(action: {
                             withAnimation {
@@ -69,28 +70,29 @@ struct ProductView: View {
                         }) {
                             HStack {
                                 Text("Nutritional Value per 100 g")
-                                    .foregroundColor(.white)
+                                    .foregroundColor(Color.text)
                                     .bold()
                                 Spacer()
                                 Image(systemName: "chevron.up.circle")
-                                    .foregroundColor(.white)
+                                    .foregroundColor(Color.text)
                                     .rotationEffect(Angle(degrees: showNutritionalInfo ? 180 : 0))
                                     .animation(.default)
                             }
                             .padding(.vertical, 10)
                         }
+                        .listRowBackground(Color.secondary)
                         
                         if showNutritionalInfo {
                             ForEach(scan.nutrientsArray, id: \.self) { nutrient in
                                 HStack {
                                     Text(fixedDescriptionString(nutrient.wrappedNutrientName))
-                                        .foregroundColor(.white)
+                                        .foregroundColor(Color.text)
                                     Spacer()
                                     Text("\(nutrient.value.truncate(places: 2)) " + nutrient.wrappedUnitName.lowercased())
-                                        .foregroundColor(.white)
+                                        .foregroundColor(Color.text)
                                 }
                             }
-                            .listRowBackground(Color("black3"))
+                            .listRowBackground(Color.secondary)
                             .animation(.default)
                         }
 
@@ -123,9 +125,6 @@ struct ProductView: View {
     init(scan: Scan) {
         // Initializing variables
         self.scan = scan
-        // Changes to Navigation Bar
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
     }
 }
 

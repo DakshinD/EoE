@@ -22,7 +22,7 @@ struct AllergenSelectionView: View {
     
     var body: some View {
         ZStack {
-            Color.black
+            Color.background
                 .edgesIgnoringSafeArea(.all)
             
             List {
@@ -31,7 +31,7 @@ struct AllergenSelectionView: View {
                     ForEach(allergens, id: \.self) { allergen in
                         HStack {
                             Text(allergen.name ?? "Unkown Allergen")
-                                .foregroundColor(.white)
+                                .foregroundColor(Color.text)
                             Spacer()
                             Button(action: {
                                 withAnimation {
@@ -48,27 +48,18 @@ struct AllergenSelectionView: View {
                             }) {
                                 Image(systemName: allergen.isSelected ? "checkmark.circle.fill" : "circle")
                                     .renderingMode(.template)
-                                    .foregroundColor(allergen.isSelected ? Color("darkPurple") : .white)
+                                    .foregroundColor(allergen.isSelected ? Color.accent : Color.text)
                                     .animation(.spring())
                             }
                         }
                     }
                 }
-                .listRowBackground(Color("black3"))
+                .listRowBackground(Color.secondary)
                 
             }
             .listStyle(InsetGroupedListStyle())
         }
         .navigationTitle("Allergen Selection")
-    }
-    
-    init() {
-        // Changes to Navigation Bar
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
-        // Changes to List
-        UITableView.appearance().backgroundColor = UIColor.clear
-        UITableView.appearance().separatorColor = UIColor.gray
     }
     
 }
