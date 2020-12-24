@@ -13,6 +13,12 @@ struct DrinkDetailView: View {
     
     var fetchRequest: FetchRequest<DiaryItem>
     
+    @State private var temp: [String] = [String]() // find another way to do this
+    @State private var temp2: [String] = [String]() // ^
+    
+    @State private var showAlert: Bool = false
+    @State private var ingredientText: String = ""
+    
     var body: some View {
         ZStack {
             
@@ -50,12 +56,52 @@ struct DrinkDetailView: View {
                     .foregroundColor(Color.text)
                 }
                 .listRowBackground(Color.secondary)
+                
+                Section(header: HStack {
+                                Text("Ingredients")
+                                Spacer()
+                                Button(action: {
+                                    ingredientText = ""
+                                    showAlert.toggle()
+                                }) {
+                                    Image(systemName: "plus")
+                                        .resizable()
+                                        .frame(width: 13, height: 13)
+                                        .foregroundColor(Color.accent)
+                                }
+                            }) {
+                    ForEach(fetchRequest.wrappedValue[0].wrappedIngredients, id: \.self) { ingredient in
+                        HStack {
+                            Text(ingredient)
+                                .foregroundColor(Color.text)
+                            Spacer()
+                        }
+                    }
+                    .onDelete(perform: deleteIngredient)
+                }
+                .listRowBackground(Color.secondary)
             }
             .listStyle(InsetGroupedListStyle())
             .padding(.vertical)
+            
+            if showAlert {
+                AlertControlView(moc: managedObjectContext, textString: $ingredientText, showAlert: $showAlert, ingredients: $temp, drinkIngredients: $temp2, title: "Add Ingredient", message: "Make sure your spelling is consistent!", isDrink: true, item: fetchRequest.wrappedValue[0])
+            }
+            
         }
         .navigationTitle(fetchRequest.wrappedValue[0].wrappedTitle)
     }
+    
+    func deleteIngredient(at offsets: IndexSet) {
+       managedObjectContext.performAndWait {
+           fetchRequest.wrappedValue[0].ingredients!.remove(atOffsets: offsets) // this could fail if trying to delete
+           do {
+               try managedObjectContext.save()
+           } catch {
+               print("Error: \(error.localizedDescription)")
+           }
+       }
+   }
     
     init(itemID: UUID) {
         fetchRequest = FetchRequest(

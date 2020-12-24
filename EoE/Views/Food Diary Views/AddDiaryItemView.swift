@@ -13,24 +13,33 @@ struct AddDiaryItemView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @EnvironmentObject var userData: UserData
+    @EnvironmentObject var stats: Statistics
     
     var dateChosen: Date
     
+    // Generic Details
     @State private var name: String = ""
     @State private var selectedChoice: Int = 0
     @State private var timeChosen: Date = Date()
     var typeChoices: [String] = ["Meal", "Drink", "Symptom", "Medicine"]
     
+    // Meal Specific Details
     @State private var ingredients: [String] = []
     @State private var showAlert: Bool = false
     @State private var ingredientText: String = ""
     @State private var selectedMealType: Int = 0
     var mealChoices: [String] = ["Breakfast", "Lunch", "Dinner", "Snack", "Dessert"]
     
+    // Drink Specific Details
+    @State private var drinkIngredients: [String] = []
+    @State private var showDrinkAlert: Bool = false
+    
+    // Symptom Specific Details
     @State private var symptomDescription: String = "Notes"
     @State private var symptomTypeChosen: Int = 0
     var symptomTypes: [String] = ["Esophageal Flare-up", "Impaction", "Stomach ache"]
     
+    // Medicine Specific Details
     @State private var medicineTypeChosen: Int = 0
     
     
@@ -118,6 +127,46 @@ struct AddDiaryItemView: View {
                                         }
                                     }
                                     .onDelete(perform: deleteIngredient)
+                                }
+                                
+                            }
+                            .listRowBackground(Color.secondary)
+                        }
+                        
+                        if typeChoices[selectedChoice] == "Drink" {
+                            Section(header: HStack {
+                                            Text("Ingredients")
+                                            Spacer()
+                                            Button(action: {
+                                                ingredientText = ""
+                                                showDrinkAlert.toggle()
+                                            }) {
+                                                Image(systemName: "plus")
+                                                    .resizable()
+                                                    .frame(width: 13, height: 13)
+                                                    .foregroundColor(Color.accent)
+                                            }
+                                        }) {
+                                // Ingredients table
+                                if drinkIngredients.isEmpty {
+                                    HStack {
+                                        HStack {
+                                            Text("Add some ingredients!")
+                                                .foregroundColor(Color.text)
+                                                .font(.body)
+                                            Spacer()
+                                        }
+                                    }
+                                } else {
+                                    ForEach(drinkIngredients, id: \.self) { ingredient in
+                                        HStack {
+                                            Text(ingredient)
+                                                .foregroundColor(Color.text)
+                                                .font(.body)
+                                            Spacer()
+                                        }
+                                    }
+                                    .onDelete(perform: deleteDrinkIngredient)
                                 }
                                 
                             }
@@ -219,14 +268,21 @@ struct AddDiaryItemView: View {
                 .ignoresSafeArea(.keyboard)
                 
                 if showAlert {
-                    AlertControlView(moc: managedObjectContext, textString: $ingredientText, showAlert: $showAlert, ingredients: $ingredients, title: "Add Ingredient", message: "Make sure your spelling is consistent!")
+                    AlertControlView(moc: managedObjectContext, textString: $ingredientText, showAlert: $showAlert, ingredients: $ingredients, drinkIngredients: $drinkIngredients, title: "Add Ingredient", message: "Make sure your spelling is consistent!", isDrink: false)
+                }
+                
+                if showDrinkAlert {
+                    AlertControlView(moc: managedObjectContext, textString: $ingredientText, showAlert: $showDrinkAlert, ingredients: $ingredients, drinkIngredients: $drinkIngredients, title: "Add Ingredient", message: "Make sure your spelling is consistent!", isDrink: true)
                 }
             }
             .navigationTitle("Add Diary Item")
-            .navigationBarItems(leading: Button(action: {
+            .navigationBarItems(leading:
+                                    Button(action: {
                                         presentationMode.wrappedValue.dismiss()
                                     }) {
-                Image(systemName: "xmark").padding()
+                                        Image(systemName: "xmark")
+                                            .padding()
+                                            .foregroundColor(Color.accent)
                                     } )
         }
 
@@ -246,6 +302,10 @@ struct AddDiaryItemView: View {
             item.mealType = mealChoices[selectedMealType]
         }
         
+        if item.wrappedType == "Drink" {
+            item.ingredients = drinkIngredients
+        }
+        
         if item.wrappedType == "Symptom" {
             item.symptomType = userData.symptomOptions[symptomTypeChosen]
             item.symptomDescription = symptomDescription
@@ -260,22 +320,20 @@ struct AddDiaryItemView: View {
         } catch {
             print("Error: \(error)")
         }
+        
+        stats.generateStats()
     }
     
     func deleteIngredient(at offsets: IndexSet) {
         ingredients.remove(atOffsets: offsets)
     }
     
+    func deleteDrinkIngredient(at offsets: IndexSet) {
+        drinkIngredients.remove(atOffsets: offsets)
+    }
+    
     init(chosenDate: Date) {
         dateChosen = chosenDate
-        // Changes to Navigation Bar
-        //UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        //UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
-        // Changes to List
-        /*UITableView.appearance().backgroundColor = UIColor.black
-        UITableView.appearance().tintColor = UIColor(Color.accent)
-        UITableViewCell.appearance().backgroundColor = UIColor(Color.secondary)
-        UITableViewCell.appearance().tintColor = UIColor(Color.accent)*/
     }
 }
 

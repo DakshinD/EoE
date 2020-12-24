@@ -15,9 +15,11 @@ struct AlertControlView: UIViewControllerRepresentable {
     @Binding var textString: String
     @Binding var showAlert: Bool
     @Binding var ingredients: [String]
+    @Binding var drinkIngredients: [String]
     
     var title: String
     var message: String
+    var isDrink: Bool // differentiate between meal and drink when making diary entry
     
     var item: DiaryItem?
     
@@ -68,7 +70,11 @@ struct AlertControlView: UIViewControllerRepresentable {
                         print("Error adding item: \(error.localizedDescription)")
                     }
                 } else {
-                    ingredients.append(textString)
+                    if isDrink {
+                        drinkIngredients.append(textString)
+                    } else {
+                        ingredients.append(textString)
+                    }
                 }
                 
                 alert.dismiss(animated: true) {

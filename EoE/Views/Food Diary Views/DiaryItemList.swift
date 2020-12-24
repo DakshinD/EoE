@@ -22,7 +22,7 @@ struct DiaryItemList: View {
                     Spacer()
                 }
             } else {
-                ForEach(fetchRequest.wrappedValue.sorted(by: { $0.wrappedTime < $1.wrappedTime }), id: \.id) { item in
+                ForEach(fetchRequest.wrappedValue.sorted(by: { $0.wrappedTime < $1.wrappedTime })) { item in //, id: \.id
                     NavigationLink(destination: DetailView(item: item)) {
                         DiaryItemRow(item: item)
                     }
@@ -63,7 +63,9 @@ struct DiaryItemList: View {
     init(filter: Date) {
         fetchRequest = FetchRequest(
             entity: DiaryItem.entity(),
-            sortDescriptors: [],
+            sortDescriptors: [
+                NSSortDescriptor(key: "time", ascending: true)
+            ],
             predicate: filter.makeDayPredicate()
         )
     }

@@ -15,6 +15,7 @@ struct MealDetailView: View {
     
     
     @State private var temp: [String] = [String]() // find another way to do this
+    @State private var temp2: [String] = [String]() // ^
     
     @State private var showAlert: Bool = false
     @State private var ingredientText: String = ""
@@ -86,7 +87,7 @@ struct MealDetailView: View {
             .padding(.vertical)
             
             if showAlert {
-                AlertControlView(moc: managedObjectContext, textString: $ingredientText, showAlert: $showAlert, ingredients: $temp, title: "Add Ingredient", message: "Make sure your spelling is consistent!", item: fetchRequest.wrappedValue[0])
+                AlertControlView(moc: managedObjectContext, textString: $ingredientText, showAlert: $showAlert, ingredients: $temp, drinkIngredients: $temp2, title: "Add Ingredient", message: "Make sure your spelling is consistent!", isDrink: false, item: fetchRequest.wrappedValue[0])
             }
         }
         .navigationTitle(fetchRequest.wrappedValue[0].wrappedTitle)
