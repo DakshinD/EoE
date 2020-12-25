@@ -31,7 +31,7 @@ class Statistics: ObservableObject {
     
     func resetAllData() {
         // reset numOfSymptom
-        for (symptom, _) in numOfSymptom {
+        for symptom in userData.symptomOptions {
             numOfSymptom.updateValue(0, forKey: symptom)
         }
         // reset numOfFood
@@ -39,10 +39,8 @@ class Statistics: ObservableObject {
             numOfFood.updateValue(0, forKey: food)
         }
         // reset triggers
-        for(symptom, foods) in triggers {
-            for(food, _) in foods {
-                triggers[symptom]?.updateValue(0, forKey: food) // check this optional
-            }
+        for symptom in userData.symptomOptions {
+            triggers.updateValue([String : Int](), forKey: symptom)
         }
     }
     
@@ -51,7 +49,6 @@ class Statistics: ObservableObject {
         resetAllData()
         
         items = getAllItems() // re-fetch diary items
-        print(items.count)
         
         getTriggers()
         
@@ -60,10 +57,17 @@ class Statistics: ObservableObject {
     
     func getTriggers() {
         var sortedItems: [DiaryItem] = items.filter { $0.type != "Medicine" }
-        sortedItems.sort(by: { $0.wrappedTime < $1.wrappedTime }) // getting sorted wrong
-        for item in sortedItems {
+        sortedItems.sort(by: {
+            if $0.wrappedDate == $1.wrappedDate {
+                return $0.wrappedTime < $1.wrappedTime
+            } else {
+                return $0.wrappedDate < $1.wrappedDate
+            }
+        })
+        
+        /*for item in sortedItems {
             item.wrappedType == "Symptom" ? print(item.wrappedSymptomType) : print(item.wrappedTitle)
-        }
+        }*/
         
         // Check with food item comes before a symptom
         // Fill out triggers dictionary for that symptom with
@@ -77,10 +81,19 @@ class Statistics: ObservableObject {
                     // 1. 0 ingredients - title is what counts
                     // 2. >0 ingredients - individual ingredients are what count
                     if triggerFood.wrappedIngredients.count == 0 {
-                        triggers[item.wrappedTitle]?[triggerFood.wrappedTitle, default: 0] +=  1 // check optional
+                        if triggers[item.wrappedSymptomType]?[triggerFood.wrappedTitle] == nil {
+                            triggers[item.wrappedSymptomType]?.updateValue(1, forKey: triggerFood.wrappedTitle)
+                        } else {
+                            triggers[item.wrappedSymptomType]?[triggerFood.wrappedTitle]! += 1
+                        }
                     } else {
                         for triggerIngredient in triggerFood.wrappedIngredients {
-                            triggers[item.wrappedTitle]?[triggerIngredient, default: 0] += 1 // check optional
+                            if triggers[item.wrappedSymptomType]?[triggerIngredient] == nil {
+                                triggers[item.wrappedSymptomType]?.updateValue(1, forKey: triggerIngredient)
+                                //print(triggers[item.wrappedSymptomType]![triggerIngredient]!)
+                            } else {
+                                triggers[item.wrappedSymptomType]?[triggerIngredient]! += 1
+                            }
                         }
                     }
                 }
@@ -96,7 +109,7 @@ class Statistics: ObservableObject {
                 numOfFood[item.wrappedTitle, default: 0] += 1
             }
             if item.type == "Symptom" {
-                numOfSymptom[item.wrappedTitle, default: 0] += 1
+                numOfSymptom[item.wrappedSymptomType, default: 0] += 1
             }
         }
     }

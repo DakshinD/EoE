@@ -19,6 +19,8 @@
 		BE89518F253B801A001B74FD /* DiaryItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE89518D253B801A001B74FD /* DiaryItem+CoreDataProperties.swift */; };
 		BE895198253B8ADC001B74FD /* DiaryItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE895197253B8ADC001B74FD /* DiaryItemList.swift */; };
 		BE8951A0253B8C7D001B74FD /* DiaryItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE89519F253B8C7D001B74FD /* DiaryItemRow.swift */; };
+		BE9978F825955676009B6EFE /* SymptomAnalysisDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9978F725955676009B6EFE /* SymptomAnalysisDetailView.swift */; };
+		BE99790025956BED009B6EFE /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9978FF25956BED009B6EFE /* BarChartView.swift */; };
 		BEBC11CB2575E8610061C88B /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBC11CA2575E8610061C88B /* Statistics.swift */; };
 		BEBDA26C2593CF48003EF5A4 /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDA26B2593CF48003EF5A4 /* ColorManager.swift */; };
 		BEE0DCF525367C370020BE63 /* ImageScanningLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE0DCF425367C370020BE63 /* ImageScanningLoadingView.swift */; };
@@ -104,6 +106,8 @@
 		BE89518D253B801A001B74FD /* DiaryItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiaryItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BE895197253B8ADC001B74FD /* DiaryItemList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryItemList.swift; sourceTree = "<group>"; };
 		BE89519F253B8C7D001B74FD /* DiaryItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryItemRow.swift; sourceTree = "<group>"; };
+		BE9978F725955676009B6EFE /* SymptomAnalysisDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomAnalysisDetailView.swift; sourceTree = "<group>"; };
+		BE9978FF25956BED009B6EFE /* BarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartView.swift; sourceTree = "<group>"; };
 		BEBC11CA2575E8610061C88B /* Statistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistics.swift; sourceTree = "<group>"; };
 		BEBDA26B2593CF48003EF5A4 /* ColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
 		BEE0DCF425367C370020BE63 /* ImageScanningLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScanningLoadingView.swift; sourceTree = "<group>"; };
@@ -225,6 +229,15 @@
 				BE89518D253B801A001B74FD /* DiaryItem+CoreDataProperties.swift */,
 			);
 			path = "Diary Item";
+			sourceTree = "<group>";
+		};
+		BE9978F625955659009B6EFE /* Analysis Detail Views */ = {
+			isa = PBXGroup;
+			children = (
+				BE9978F725955676009B6EFE /* SymptomAnalysisDetailView.swift */,
+				BE9978FF25956BED009B6EFE /* BarChartView.swift */,
+			);
+			path = "Analysis Detail Views";
 			sourceTree = "<group>";
 		};
 		E329745D2526B0FA00E451FA /* Allergen */ = {
@@ -494,6 +507,7 @@
 			isa = PBXGroup;
 			children = (
 				E3AE807425216B510059F3E5 /* AnalysisView.swift */,
+				BE9978F625955659009B6EFE /* Analysis Detail Views */,
 			);
 			path = "Analysis Views";
 			sourceTree = "<group>";
@@ -674,6 +688,7 @@
 				BE1F7245253E53EF00858CA5 /* DrinkDetailView.swift in Sources */,
 				E3AE8023252165350059F3E5 /* BarcodeScannerView.swift in Sources */,
 				BE89518E253B801A001B74FD /* DiaryItem+CoreDataClass.swift in Sources */,
+				BE99790025956BED009B6EFE /* BarChartView.swift in Sources */,
 				BE1F724F253E562100858CA5 /* SymptomDetailView.swift in Sources */,
 				E3AE7FBB252162900059F3E5 /* AppDelegate.swift in Sources */,
 				E3796B2F252E776A00C21101 /* Scan+CoreDataProperties.swift in Sources */,
@@ -686,6 +701,7 @@
 				BEBDA26C2593CF48003EF5A4 /* ColorManager.swift in Sources */,
 				E3AE8034252166460059F3E5 /* CameraView.swift in Sources */,
 				E3AE801D252164ED0059F3E5 /* AllergenDetection.swift in Sources */,
+				BE9978F825955676009B6EFE /* SymptomAnalysisDetailView.swift in Sources */,
 				BE895198253B8ADC001B74FD /* DiaryItemList.swift in Sources */,
 				E32974832526BA8100E451FA /* ScannedAllergen+CoreDataClass.swift in Sources */,
 				E3E56FCC25241294005F8D32 /* IngredientsScanButton.swift in Sources */,

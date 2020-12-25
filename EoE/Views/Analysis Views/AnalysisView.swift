@@ -25,11 +25,45 @@ struct AnalysisView: View {
                     
                         VStack {
                             
+                            VStack {
+                                HStack {
+                                    Text("Symptom Frequency")
+                                        .foregroundColor(.text)
+                                        .bold()
+                                        .font(.title2)
+                                    Spacer()
+                                }
+                                .padding()
+                                
+                                BarChartView()
+                                    .frame(width: abs(geo.size.width-30))
+                                /*ZStack {
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .fill(Color.secondary)
+                                        .frame(width: abs(geo.size.width-30), height: 150)
+                                    Text("Chart")
+                                        .foregroundColor(.text)
+                                        .font(.body)
+                                }*/
+                                
+                            }
+                            .padding(.vertical)
+                            
                             List {
                                 
                                 Section(header: Text("Most Frequent Symptom")) {
-                                    Text(getMostFrequentSymptom())
+                                    Text(mostFrequentSymptom)
                                         .foregroundColor(Color.text)
+                                }
+                                
+                                Section(header: Text("All Symptoms")) {
+                                    ForEach(userData.symptomOptions, id: \.self) { symptom in
+                                        NavigationLink(destination: SymptomAnalysisDetailView(symptomType: symptom)) {
+                                            Text(symptom)
+                                                .foregroundColor(.text)
+                                                .font(.body)
+                                        }
+                                    }
                                 }
                                                         
                             }
@@ -41,14 +75,20 @@ struct AnalysisView: View {
                                         
                 }
                 .navigationTitle("Analytics")
-                
+                .navigationBarItems(trailing:
+                    Button(action: {
+                        stats.generateStats()
+                    }) {
+                        Image(systemName: "arrow.clockwise")
+                            .foregroundColor(.accent)
+                            .imageScale(.medium)
+                    })
             }
         }
         
     }
     
-    func getMostFrequentSymptom() -> String {
-        print("here")
+    var mostFrequentSymptom: String {
         var symptom: String = "a"
         var count: Int = 0
         for (symp, cnt) in stats.numOfSymptom {
@@ -57,7 +97,6 @@ struct AnalysisView: View {
                 count = cnt
             }
         }
-        print(symptom)
         return symptom
     }
 
