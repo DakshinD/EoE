@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import Foundation
 
 class Statistics: ObservableObject {
     
@@ -15,6 +16,13 @@ class Statistics: ObservableObject {
     var userData: UserData
     
     var items: [DiaryItem] = [DiaryItem]()
+    
+    init(moc: NSManagedObjectContext, user: UserData) {
+        self.moc = moc
+        self.userData = user
+        self.items = getAllItems()
+        generateStats()
+    }
     
     //---------------------------------
     
@@ -26,8 +34,6 @@ class Statistics: ObservableObject {
     
     @Published(key: "triggers")
     var triggers: [String : [String : Int]] = [String:[String:Int]]() // [Symptom : [Food : Num of Occurences]]
-    
-    //----------------------------------
     
     func resetAllData() {
         // reset numOfSymptom
@@ -44,6 +50,8 @@ class Statistics: ObservableObject {
         }
     }
     
+    //----------------------------------
+    
     func generateStats() {
         //reset all values in dictionaries
         resetAllData()
@@ -53,6 +61,22 @@ class Statistics: ObservableObject {
         getTriggers()
         
         countNumOfItems()
+    }
+    
+    func getSymptomsForWeek() -> [String : Int] {
+        // fill dictionary with weeks first
+        var numSymptoms: [String : Int] = [String:Int]()
+        for day in Calendar.autoupdatingCurrent.shortWeekdaySymbols {
+            numSymptoms.updateValue(0, forKey: day)
+        }
+        // get symptom items from this week
+        let itemsFromCurrentWeek: [DiaryItem] = getThisWeeksItems()
+        let weekSymptoms: [DiaryItem] = itemsFromCurrentWeek.filter { $0.wrappedType == "Symptom" }
+        for symptom in weekSymptoms {
+            let weekday = Calendar.current.shortWeekdaySymbols[(Calendar.current.component(.weekday, from: symptom.wrappedDate))-1]
+            numSymptoms[weekday]! += 1 // optional check
+        }
+        return numSymptoms
     }
     
     func getTriggers() {
@@ -114,13 +138,6 @@ class Statistics: ObservableObject {
         }
     }
     
-    init(moc: NSManagedObjectContext, user: UserData) {
-        self.moc = moc
-        self.userData = user
-        self.items = getAllItems()
-        generateStats()
-    }
-    
     func getAllItems() -> [DiaryItem] {
         let fetchRequest: NSFetchRequest<DiaryItem> = DiaryItem.fetchRequest()
         do {
@@ -132,6 +149,23 @@ class Statistics: ObservableObject {
         }
         return [DiaryItem]()
     }
+    
+    func getThisWeeksItems() -> [DiaryItem] {
+        let fetchRequest: NSFetchRequest<DiaryItem> = DiaryItem.fetchRequest()
+        fetchRequest.predicate = Date().makeWeekPredicate()
+        do {
+            let items = try moc.fetch(fetchRequest)
+            return items
+        }
+        catch let error as NSError {
+            print("Error getting DiaryItems: \(error.localizedDescription), \(error.userInfo)")
+        }
+        return [DiaryItem]()
+    }
+    
+    
+    
+    
     
     
 }

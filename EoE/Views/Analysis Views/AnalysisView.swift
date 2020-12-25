@@ -23,56 +23,35 @@ struct AnalysisView: View {
                     Color.background
                         .edgesIgnoringSafeArea(.all)
                     
-                        VStack {
+                    VStack {
+                                                
+                        List {
                             
-                            VStack {
-                                HStack {
-                                    Text("Symptom Frequency")
-                                        .foregroundColor(.text)
-                                        .bold()
-                                        .font(.title2)
-                                    Spacer()
-                                }
-                                .padding()
-                                
-                                BarChartView()
-                                    .frame(width: abs(geo.size.width-30))
-                                /*ZStack {
-                                    RoundedRectangle(cornerRadius: 15)
-                                        .fill(Color.secondary)
-                                        .frame(width: abs(geo.size.width-30), height: 150)
-                                    Text("Chart")
-                                        .foregroundColor(.text)
-                                        .font(.body)
-                                }*/
-                                
+                            BarChartView(symptomsPerDay: stats.getSymptomsForWeek())
+                                .frame(height: 230)
+                            
+                            Section(header: Text("Most Frequent Symptom")) {
+                                Text(mostFrequentSymptom)
+                                    .foregroundColor(Color.text)
                             }
-                            .padding(.vertical)
                             
-                            List {
-                                
-                                Section(header: Text("Most Frequent Symptom")) {
-                                    Text(mostFrequentSymptom)
-                                        .foregroundColor(Color.text)
-                                }
-                                
-                                Section(header: Text("All Symptoms")) {
-                                    ForEach(userData.symptomOptions, id: \.self) { symptom in
-                                        NavigationLink(destination: SymptomAnalysisDetailView(symptomType: symptom)) {
-                                            Text(symptom)
-                                                .foregroundColor(.text)
-                                                .font(.body)
-                                        }
+                            Section(header: Text("All Symptoms")) {
+                                ForEach(userData.symptomOptions, id: \.self) { symptom in
+                                    NavigationLink(destination: SymptomAnalysisDetailView(symptomType: symptom)) {
+                                        Text(symptom)
+                                            .foregroundColor(.text)
+                                            .font(.body)
                                     }
                                 }
-                                                        
                             }
-                            .listStyle(InsetGroupedListStyle())
-                            
-                            Spacer()
                                                     
                         }
-                                        
+                        .listStyle(InsetGroupedListStyle())
+                        
+                        Spacer()
+                                                
+                    }
+                    .padding(.top)
                 }
                 .navigationTitle("Analytics")
                 .navigationBarItems(trailing:

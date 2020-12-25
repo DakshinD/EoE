@@ -75,6 +75,18 @@ extension Date {
         return calendar.component(component, from: self)
     }
     
+    var startOfWeek: Date? {
+            let gregorian = Calendar(identifier: .gregorian)
+            guard let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)) else { return nil }
+            return gregorian.date(byAdding: .day, value: 0, to: sunday)
+        }
+
+        var endOfWeek: Date? {
+            let gregorian = Calendar(identifier: .gregorian)
+            guard let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)) else { return nil }
+            return gregorian.date(byAdding: .day, value: 7, to: sunday)
+        }
+    
     func makeDayPredicate() -> NSPredicate {
         let calendar = Calendar.current
         var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: self)
@@ -86,6 +98,15 @@ extension Date {
         components.minute = 59
         components.second = 59
         let endDate = calendar.date(from: components)
+        let fromPredicate = NSPredicate(format: "date >= %@", startDate! as NSDate)
+        let toPredicate = NSPredicate(format: "date < %@", endDate! as NSDate)
+        let datePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromPredicate, toPredicate])
+        return datePredicate
+    }
+    
+    func makeWeekPredicate() -> NSPredicate {
+        let startDate = Date().startOfWeek
+        let endDate = Date().endOfWeek
         let fromPredicate = NSPredicate(format: "date >= %@", startDate! as NSDate)
         let toPredicate = NSPredicate(format: "date < %@", endDate! as NSDate)
         let datePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromPredicate, toPredicate])

@@ -10,7 +10,10 @@ import Foundation
 
 struct BarChartView: View {
     
-    var symptomsPerDay: [String : Int] = ["Sun":2, "Mon":4, "Tue":1, "Wed":2, "Thu":3, "Fri":2, "Sat":5]
+    //var test: [String : Int] = ["Sun":2, "Mon":4, "Tue":1, "Wed":2, "Thu":3, "Fri":2, "Sat":5]
+    var symptomsPerDay: [String : Int]
+    
+    // add selection option?
     
     var body: some View {
         
@@ -18,35 +21,45 @@ struct BarChartView: View {
             
             ZStack {
                 
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(Color.secondary)
-                    .frame(height: 210)
-                
-                HStack {
-                    ForEach(Calendar.autoupdatingCurrent.shortWeekdaySymbols, id: \.self) { day in
-                        VStack {
-                            
-                            Spacer()
-                            
-                            Text("\(symptomsPerDay[day]!)")
-                                .foregroundColor(Color.text)
-                                .font(.system(size: 15, weight: .semibold, design: .rounded))
-                            
-                            Capsule()
-                                .fill(LinearGradient(gradient: Gradient(colors: [Color.accent, Color.accentSecondary]), startPoint: .top, endPoint: .bottom))
-                                .frame(width: 25, height: CGFloat((190/(symptomsPerDay.values.max()!+2)))*CGFloat(symptomsPerDay[day]!))
-                            
-                            Text(day)
-                                .foregroundColor(Color.text)
-                                .font(.system(size: 15, weight: .semibold, design: .rounded))
-                        }
-                        .padding(.vertical)
+                VStack {
+                    
+                    HStack {
+                        Text("Symptom Frequency")
+                            .foregroundColor(.text)
+                            .bold()
+                            .font(.title2)
+                        Spacer()
                     }
+                    .padding(.vertical)
+                    
+                    HStack(alignment: .bottom) {
+                        ForEach(Calendar.autoupdatingCurrent.shortWeekdaySymbols, id: \.self) { day in
+                            VStack {
+                                
+                                Spacer()
+                                                                
+                                Text("\(symptomsPerDay[day]!)")
+                                    .foregroundColor(Color.text)
+                                    .font(.system(size: 15, weight: .semibold, design: .rounded))
+                                
+                                Capsule()
+                                    .fill(LinearGradient(gradient: Gradient(colors: [Color.accent, Color.accentSecondary]), startPoint: .top, endPoint: .bottom))
+                                    .frame(width: 25, height: CGFloat((160/(symptomsPerDay.values.max()!+2)))*CGFloat(symptomsPerDay[day]!))
+                                    .padding(.horizontal, 7)
+                                // adapt this for smaller screen sizes
+                                
+                                Text(day)
+                                    .foregroundColor(Color.text)
+                                    .font(.system(size: 15, weight: .semibold, design: .rounded))
+                            }
+                            .padding(.bottom)
+
+                        }
+                    }
+                    
                 }
-                
             }
-            .frame(height: 210)
-            
+            .frame(height: 230)
         }
         
     }
@@ -54,6 +67,7 @@ struct BarChartView: View {
 
 struct BarChartView_Previews: PreviewProvider {
     static var previews: some View {
-        BarChartView()
+        EmptyView()
+        //BarChartView()
     }
 }
