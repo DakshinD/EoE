@@ -79,13 +79,32 @@ extension Date {
             let gregorian = Calendar(identifier: .gregorian)
             guard let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)) else { return nil }
             return gregorian.date(byAdding: .day, value: 0, to: sunday)
-        }
+    }
+    
+    var startOfMonth: Date {
+        let calendar = Calendar(identifier: .gregorian)
+        let components = calendar.dateComponents([.year, .month], from: self)
 
-        var endOfWeek: Date? {
-            let gregorian = Calendar(identifier: .gregorian)
-            guard let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)) else { return nil }
-            return gregorian.date(byAdding: .day, value: 7, to: sunday)
-        }
+        return  calendar.date(from: components)!
+    }
+
+    var endOfWeek: Date? {
+        let gregorian = Calendar(identifier: .gregorian)
+        guard let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)) else { return nil }
+        return gregorian.date(byAdding: .day, value: 7, to: sunday)
+    }
+    
+    var endOfMonth: Date {
+        var components = DateComponents()
+        components.month = 1
+        components.second = -1
+        return Calendar(identifier: .gregorian).date(byAdding: components, to: startOfMonth)!
+    }
+    
+    var daysOfWeek: [Date]? {
+        guard let startOfWeek = self.startOfWeek else { return nil }
+        return (0...6).compactMap{ Calendar.current.date(byAdding: .day, value: $0, to: startOfWeek)}
+    }
     
     func makeDayPredicate() -> NSPredicate {
         let calendar = Calendar.current
@@ -109,6 +128,15 @@ extension Date {
         let endDate = Date().endOfWeek
         let fromPredicate = NSPredicate(format: "date >= %@", startDate! as NSDate)
         let toPredicate = NSPredicate(format: "date < %@", endDate! as NSDate)
+        let datePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromPredicate, toPredicate])
+        return datePredicate
+    }
+    
+    func makeMonthPredicate() -> NSPredicate {
+        let startDate = Date().startOfMonth
+        let endDate = Date().endOfMonth
+        let fromPredicate = NSPredicate(format: "date >= %@", startDate as NSDate)
+        let toPredicate = NSPredicate(format: "date < %@", endDate as NSDate)
         let datePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromPredicate, toPredicate])
         return datePredicate
     }

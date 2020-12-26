@@ -12,9 +12,13 @@ struct FoodDiaryView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     
     @EnvironmentObject var userData: UserData
+    @EnvironmentObject var stats: Statistics
     
     @State var currentDateChosen: Date = Date()
     @State private var showingAddItemView: Bool = false
+    @State private var modeChosen: Int = 0
+    
+    var modes: [String] = ["Day", "Week"]
     
     var body: some View {
         NavigationView {
@@ -22,24 +26,36 @@ struct FoodDiaryView: View {
                 Color.background
                     .edgesIgnoringSafeArea(.all)
                 
-                List {
+                VStack {
                     
-                    HStack {
-                        Image(systemName: "calendar")
-                            //.resizable()
-                            .imageScale(.large)
-                            //.frame(width: 20, height: 20)
-                            .foregroundColor(Color.accent)
-                        Text("Current Day:")
-                            .foregroundColor(Color.text)
-                        Spacer()
-                        DatePicker("", selection: $currentDateChosen, displayedComponents: .date)
+                    Picker(selection: $modeChosen, label: Text("Diary Entries")) {
+                        ForEach(0..<modes.count) { index in
+                            Text(modes[index]).tag(index)
+                        }
                     }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .padding()
                     
-                    DiaryItemList(filter: currentDateChosen)
+                    List {
+                        if modeChosen == 0 {
+                            HStack {
+                                Image(systemName: "calendar")
+                                    .imageScale(.large)
+                                    .foregroundColor(Color.accent)
+                                Text("Current Day:")
+                                    .foregroundColor(Color.text)
+                                Spacer()
+                                DatePicker("", selection: $currentDateChosen, displayedComponents: .date)
+                            }
+                            .animation(.default)
+                        }
+                        
+                        getListView(mode: modeChosen)
+                        
+                    }
+                    .listStyle(InsetGroupedListStyle())
+                    .animation(.default)
                 }
-                .listStyle(InsetGroupedListStyle())
-                .animation(.default)
                 .padding(.top)
                 
                 
@@ -51,8 +67,6 @@ struct FoodDiaryView: View {
                 }) {
                     Image(systemName: "plus")
                         .imageScale(.large)
-                        //.resizable()
-                        //.frame(width: 20, height: 20)
                         .padding()
                 }
                 .sheet(isPresented: $showingAddItemView) {
@@ -67,6 +81,28 @@ struct FoodDiaryView: View {
         df.dateStyle = .medium
         return df
     }()
+    
+    func getListView(mode: Int) -> AnyView {
+        switch mode {
+        case 0:
+            return AnyView(DiaryItemDayList(chosenPredicate: getPredicate(filter: currentDateChosen, mode: mode)))
+        case 1:
+            return AnyView(DiaryItemWeekList(dayToItems: stats.sortItemsByDay()))
+        default:
+            return AnyView(Text("Something went wrong"))
+        }
+    }
+    
+    func getPredicate(filter: Date, mode: Int) -> NSPredicate {
+        switch mode {
+        case 0:
+            return filter.makeDayPredicate()
+        case 1:
+            return filter.makeWeekPredicate()
+        default:
+            return filter.makeDayPredicate()
+        }
+    }
     
 }
 

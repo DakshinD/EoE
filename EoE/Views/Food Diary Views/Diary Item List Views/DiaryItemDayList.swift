@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-struct DiaryItemList: View {
+struct DiaryItemDayList: View {
     
     @Environment(\.managedObjectContext) var managedObjectContext
-    
+        
     var fetchRequest: FetchRequest<DiaryItem>
     
     var body: some View {
@@ -60,20 +60,20 @@ struct DiaryItemList: View {
         }
     }
     
-    init(filter: Date) {
+    init(chosenPredicate: NSPredicate) {
         fetchRequest = FetchRequest(
             entity: DiaryItem.entity(),
             sortDescriptors: [
                 NSSortDescriptor(key: "time", ascending: true)
             ],
-            predicate: filter.makeDayPredicate()
+            predicate: chosenPredicate
         )
     }
 }
 
-struct DiaryItemList_Previews: PreviewProvider {
+struct DiaryItemDayList_Previews: PreviewProvider {
     static var previews: some View {
         EmptyView()
-        //DiaryItemList()
+        //DiaryItemDayList()
     }
 }

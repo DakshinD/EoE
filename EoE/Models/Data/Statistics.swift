@@ -140,6 +140,10 @@ class Statistics: ObservableObject {
     
     func getAllItems() -> [DiaryItem] {
         let fetchRequest: NSFetchRequest<DiaryItem> = DiaryItem.fetchRequest()
+        fetchRequest.sortDescriptors = [
+            NSSortDescriptor(key: "date", ascending: true),
+            NSSortDescriptor(key: "time", ascending: true)
+        ]
         do {
             let items = try moc.fetch(fetchRequest)
             return items
@@ -153,6 +157,10 @@ class Statistics: ObservableObject {
     func getThisWeeksItems() -> [DiaryItem] {
         let fetchRequest: NSFetchRequest<DiaryItem> = DiaryItem.fetchRequest()
         fetchRequest.predicate = Date().makeWeekPredicate()
+        fetchRequest.sortDescriptors = [
+            NSSortDescriptor(key: "date", ascending: true),
+            NSSortDescriptor(key: "time", ascending: true)
+        ]
         do {
             let items = try moc.fetch(fetchRequest)
             return items
@@ -161,6 +169,40 @@ class Statistics: ObservableObject {
             print("Error getting DiaryItems: \(error.localizedDescription), \(error.userInfo)")
         }
         return [DiaryItem]()
+    }
+    
+    func getThisMonthsItems() -> [DiaryItem] {
+        let fetchRequest: NSFetchRequest<DiaryItem> = DiaryItem.fetchRequest()
+        fetchRequest.predicate = Date().makeMonthPredicate()
+        fetchRequest.sortDescriptors = [
+            NSSortDescriptor(key: "date", ascending: true),
+            NSSortDescriptor(key: "time", ascending: true)
+        ]
+        do {
+            let items = try moc.fetch(fetchRequest)
+            return items
+        }
+        catch let error as NSError {
+            print("Error getting DiaryItems: \(error.localizedDescription), \(error.userInfo)")
+        }
+        return [DiaryItem]()
+    }
+    
+    // Food Diary Methods
+    
+    func sortItemsByDay() -> [Date:[DiaryItem]] { // for week food diary
+        let items: [DiaryItem] = getThisWeeksItems()
+        var dayToItems: [Date:[DiaryItem]] = [Date:[DiaryItem]]()
+        for item in items {
+            let currentDate = Calendar.current.date(from: Calendar.current.dateComponents([.day, .year, .month], from: item.wrappedDate))
+            if dayToItems[currentDate!] == nil {
+                dayToItems[currentDate!] = []
+            }
+            //print(currentDate!)
+            dayToItems[currentDate!]?.append(item)
+            //print(dayToItems[currentDate!]?.count)
+        }
+        return dayToItems
     }
     
     
