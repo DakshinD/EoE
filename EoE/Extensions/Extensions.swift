@@ -38,6 +38,38 @@ extension String {
     mutating func capitalizeFirstLetter() {
         self = self.capitalizingFirstLetter()
     }
+    
+    mutating func trim() {
+        self = self.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+    
+    mutating func deletingPrefix(_ prefix: String) {
+        guard self.hasPrefix(prefix) else { return }
+        self = String(self.dropFirst(prefix.count))
+    }
+    
+    mutating func turnIntoIngredient() {
+        self.trim()
+        self.deletingPrefix("INGREDIENTS")
+        self.deletingPrefix("Ingredients")
+        self.deletingPrefix("ingredients")
+        self.deletingPrefix(":")
+        self.deletingPrefix("and")
+        self.trim()
+    }
+    
+    func splitIntoIngredients() -> [String] {
+        var str = self.capitalized
+        str.deletingPrefix("INGREDIENTS")
+        str.deletingPrefix(":")
+        str.trim()
+        // remove "Inrgredients:" at the beginning
+        var ingredients: [String] = str.components(separatedBy: CharacterSet(charactersIn: ",."))
+        for i in 0..<ingredients.count {
+            ingredients[i].turnIntoIngredient()
+        }
+        return ingredients
+    }
 }
 
 //NOTE: - Decimal Truncation

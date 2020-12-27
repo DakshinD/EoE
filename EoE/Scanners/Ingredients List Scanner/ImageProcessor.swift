@@ -68,6 +68,8 @@ struct ImageProcessor {
             recognizedText += str.uppercased() + " "
         }
         
+        print(recognizedText)
+                
         DispatchQueue.main.asyncAfter(deadline: .now()+0.35) {
             image = nil
         // 1. Get identified allergens from AllergenDetector

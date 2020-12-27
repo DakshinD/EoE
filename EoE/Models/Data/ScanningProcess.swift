@@ -23,6 +23,7 @@ class ScanningProcess: ObservableObject {
     // To show the scanners
     @Published var barcodeScannerShowing: Bool = false
     @Published var cameraShowing: Bool = false
+    @Published var croppingShowing: Bool = false
     
     // To show loading view
     @Published var progress: Float = 0.0

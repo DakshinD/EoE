@@ -51,6 +51,7 @@ struct ScanView: View {
                                         .foregroundColor(Color.accent)
                                 }
                                 .sheet(isPresented: $scanningProcess.cameraShowing, onDismiss: checkImage, content: { ImagePicker() })
+
                                 
                                 Button(action: {
                                     // Open barcode scanner
@@ -65,6 +66,9 @@ struct ScanView: View {
                                             .frame(width: 30, height: 30)
                                         .foregroundColor(Color.accent)
                                 }
+                                .sheet(isPresented: $scanningProcess.croppingShowing, content: {
+                                    ImageCropper(image: $scanningProcess.imageTaken, visible: $scanningProcess.croppingShowing, done: processImage)
+                                })
                             }
                             
                         }
@@ -128,9 +132,17 @@ struct ScanView: View {
 
 extension ScanView {
     func checkImage() {
-        guard let image = scanningProcess.imageTaken else {
+        guard scanningProcess.imageTaken != nil else {
             return
         }
+        // show cropping view
+        withAnimation {
+            scanningProcess.croppingShowing.toggle()
+        }
+    }
+    
+    func processImage(image: UIImage) {
+        
         let imageProcessor = ImageProcessor(selectedAllergens: fetchAllergens(), managedObjectContext: managedObjectContext, image: $scanningProcess.imageTaken, foundAllergens: $scanningProcess.foundAllergens, resultViewShowing: $scanningProcess.resultViewShowing, progress: $scanningProcess.progress, loadingViewShowing: $scanningProcess.loadingViewShowing)
         imageProcessor.processImage(image: image)
         
