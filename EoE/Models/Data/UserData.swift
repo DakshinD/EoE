@@ -21,9 +21,6 @@ class UserData: ObservableObject {
     @Published(key: "isSetupCompleted")
     var isSetupCompleted: Bool = false
     
-    @Published(key: "notificationsEnabled")
-    var notificationsEnabled: Bool = false
-    
     @Published(key: "darkMode")
     var darkMode: Bool = false
     
@@ -34,6 +31,20 @@ class UserData: ObservableObject {
     
     @Published(key: "medicineOptions")
     var medicineOptions: [String] = ["Budesonide", "Flovent", "Nexium"]
+    
+    // Notification Settings
+    
+    @Published(key: "notificationsEnabled")
+    var notificationsEnabled: Bool = false
+    
+    @Published(key: "breakfastNotification")
+    var breakfastNotification: Date = Calendar(identifier: .gregorian).date(from: DateComponents(hour: 8, minute: 0, second: 0))!
+    
+    @Published(key: "lunchNotification")
+    var lunchNotification: Date = Calendar(identifier: .gregorian).date(from: DateComponents(hour: 12, minute: 0, second: 0))!
+    
+    @Published(key: "dinnerNotification")
+    var dinnerNotification: Date = Calendar(identifier: .gregorian).date(from: DateComponents(hour: 18, minute: 0, second: 0))!
 
 }
 

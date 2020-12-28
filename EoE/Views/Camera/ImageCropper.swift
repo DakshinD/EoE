@@ -27,9 +27,6 @@ struct ImageCropper: UIViewControllerRepresentable{
             self.parent.visible = false
         }
       }
-//      withAnimation{
-//        parent.visible = false
-//      }
       parent.done(image)
     }
     
