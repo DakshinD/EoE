@@ -67,6 +67,8 @@ struct ImageProcessor {
         for str in recognizedStrings {
             recognizedText += str.uppercased() + " "
         }
+        
+        print(recognizedText.splitIntoIngredients())
                         
         DispatchQueue.main.asyncAfter(deadline: .now()+0.35) {
             image = nil
@@ -79,11 +81,10 @@ struct ImageProcessor {
             resultViewShowing.toggle()
             
         // 3. Reset all values + close loading view
-            progress = 0.0
             withAnimation {
                 loadingViewShowing.toggle()
             }
-            
+            progress = 0.0
         
         }
 

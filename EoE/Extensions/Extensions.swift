@@ -48,25 +48,24 @@ extension String {
         self = String(self.dropFirst(prefix.count))
     }
     
-    mutating func turnIntoIngredient() {
-        self.trim()
-        self.deletingPrefix("INGREDIENTS")
-        self.deletingPrefix("Ingredients")
-        self.deletingPrefix("ingredients")
-        self.deletingPrefix(":")
-        self.deletingPrefix("and")
-        self.trim()
+    mutating func removeParens() {
+        self = self.trimmingCharacters(in: CharacterSet(charactersIn: "()"))
     }
     
     func splitIntoIngredients() -> [String] {
         var str = self.capitalized
-        str.deletingPrefix("INGREDIENTS")
-        str.deletingPrefix(":")
+        
+        var idx = str.firstIndex(of: ":")
+        idx = str.index(after: idx ?? str.startIndex)
+        str = String(str.suffix(from: idx ?? str.startIndex))
         str.trim()
-        // remove "Inrgredients:" at the beginning
         var ingredients: [String] = str.components(separatedBy: CharacterSet(charactersIn: ",."))
         for i in 0..<ingredients.count {
-            ingredients[i].turnIntoIngredient()
+            ingredients[i].trim()
+            ingredients[i].removeParens()
+            if ingredients[i].isEmpty {
+                ingredients.remove(at: i)
+            }
         }
         return ingredients
     }
