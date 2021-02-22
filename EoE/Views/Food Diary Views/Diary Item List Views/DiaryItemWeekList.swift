@@ -16,23 +16,26 @@ struct DiaryItemWeekList: View {
     var dayToItems: [Date:[DiaryItem]]
     
     var body: some View {
-        if dayToItems.isEmpty {
-            HStack {
-                Text("There are no diary entries for this week!")
-                    .foregroundColor(Color.text)
-                Spacer()
-            }
-        } else {
-            
-            ForEach(Array(dayToItems.keys.sorted(by: >)), id: \.self) { day in
-                Section(header: Text("\(Calendar.current.weekdaySymbols[Calendar.current.component(.weekday, from: day) - 1])")) { // weekday of date
-                    ForEach(dayToItems[day]!, id: \.id) { item in // optional
-                        DiaryItemRow(item: item)
-                    }
+        Section(header: Text("Diary")) {
+            if dayToItems.isEmpty {
+                HStack {
+                    Text("There are no diary entries for this week!")
+                        .foregroundColor(Color.text)
+                    Spacer()
                 }
-                .listRowBackground(Color.secondary)
+            } else {
+                
+                ForEach(Array(dayToItems.keys.sorted(by: >)), id: \.self) { day in
+                    Section(header: Text("\(Calendar.current.weekdaySymbols[Calendar.current.component(.weekday, from: day) - 1])")) { // weekday of date
+                        ForEach(dayToItems[day]!, id: \.id) { item in // optional
+                            DiaryItemRow(item: item)
+                        }
+                    }
+                    
+                }
             }
         }
+        .listRowBackground(Color.secondary)
     }
     
     func DetailView(item: DiaryItem) -> AnyView {

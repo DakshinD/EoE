@@ -22,6 +22,7 @@
 		BE895198253B8ADC001B74FD /* DiaryItemDayList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE895197253B8ADC001B74FD /* DiaryItemDayList.swift */; };
 		BE8951A0253B8C7D001B74FD /* DiaryItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE89519F253B8C7D001B74FD /* DiaryItemRow.swift */; };
 		BE8D895125E441CC0022A107 /* NotificationsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8D895025E441CC0022A107 /* NotificationsDetailView.swift */; };
+		BE8D895625E447310022A107 /* DiaryItemSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8D895525E447310022A107 /* DiaryItemSearchView.swift */; };
 		BE9978F825955676009B6EFE /* SymptomAnalysisDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9978F725955676009B6EFE /* SymptomAnalysisDetailView.swift */; };
 		BE99790025956BED009B6EFE /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9978FF25956BED009B6EFE /* BarChartView.swift */; };
 		BE99DCCC25981B9000B2B0DA /* ImageCropper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE99DCCB25981B9000B2B0DA /* ImageCropper.swift */; };
@@ -122,6 +123,7 @@
 		BE895197253B8ADC001B74FD /* DiaryItemDayList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryItemDayList.swift; sourceTree = "<group>"; };
 		BE89519F253B8C7D001B74FD /* DiaryItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryItemRow.swift; sourceTree = "<group>"; };
 		BE8D895025E441CC0022A107 /* NotificationsDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsDetailView.swift; sourceTree = "<group>"; };
+		BE8D895525E447310022A107 /* DiaryItemSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryItemSearchView.swift; sourceTree = "<group>"; };
 		BE9978F725955676009B6EFE /* SymptomAnalysisDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomAnalysisDetailView.swift; sourceTree = "<group>"; };
 		BE9978FF25956BED009B6EFE /* BarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartView.swift; sourceTree = "<group>"; };
 		BE99DCCB25981B9000B2B0DA /* ImageCropper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropper.swift; sourceTree = "<group>"; };
@@ -596,6 +598,7 @@
 			children = (
 				E3AE806425216B130059F3E5 /* FoodDiaryView.swift */,
 				BE4E83582539E58F008D8D1E /* AddDiaryItemView.swift */,
+				BE8D895525E447310022A107 /* DiaryItemSearchView.swift */,
 				BE89519F253B8C7D001B74FD /* DiaryItemRow.swift */,
 				BE9A98B52596B5C300C46DE1 /* Diary Item List Views */,
 				BE587FEF253C96E0002704CA /* Diary Detail Views */,
@@ -869,6 +872,7 @@
 				E3AE7FBB252162900059F3E5 /* AppDelegate.swift in Sources */,
 				E3796B2F252E776A00C21101 /* Scan+CoreDataProperties.swift in Sources */,
 				E3796B24252E76C600C21101 /* Nutrient+CoreDataProperties.swift in Sources */,
+				BE8D895625E447310022A107 /* DiaryItemSearchView.swift in Sources */,
 				BEE0DCF525367C370020BE63 /* ImageScanningLoadingView.swift in Sources */,
 				E3AE804D2521675F0059F3E5 /* CameraBottomBar.swift in Sources */,
 				BE4E835F253A1194008D8D1E /* AlertControl.swift in Sources */,

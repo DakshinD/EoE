@@ -17,6 +17,10 @@ struct AddDiaryItemView: View {
     
     var dateChosen: Date
     
+    // Searching
+    @State private var searchSheet: Bool = false
+    @State private var pastItemChosen: DiaryItem? = nil
+    
     // Generic Details
     @State private var name: String = ""
     @State private var selectedChoice: Int = 0
@@ -37,7 +41,6 @@ struct AddDiaryItemView: View {
     // Symptom Specific Details
     @State private var symptomDescription: String = "Notes"
     @State private var symptomTypeChosen: Int = 0
-    var symptomTypes: [String] = ["Esophageal Flare-up", "Impaction", "Stomach ache"]
     
     // Medicine Specific Details
     @State private var medicineTypeChosen: Int = 0
@@ -251,6 +254,12 @@ struct AddDiaryItemView: View {
                     }
                     .padding()
                     .animation(.default)
+                    .sheet(isPresented: $searchSheet, onDismiss: {autofillFromPastItem()}) {
+                        DiaryItemSearchView(pastItemChosen: $pastItemChosen)
+                            .environmentObject(userData)
+                            .environment(\.managedObjectContext, self.managedObjectContext)
+                    }
+                
                     
                     Button(action: {
                         saveDiaryItem()
@@ -283,9 +292,50 @@ struct AddDiaryItemView: View {
                                         Image(systemName: "xmark")
                                             .padding()
                                             .foregroundColor(Color.accent)
-                                    } )
+                                    },
+                                trailing:
+                                    Button(action: {
+                                        searchSheet.toggle()
+                                    }) {
+                                        Image(systemName: "magnifyingglass")
+                                            .padding()
+                                            .foregroundColor(Color.accent)
+                                    })
         }
 
+    }
+    
+    func autofillFromPastItem() {
+        if pastItemChosen != nil {
+            print("gotHere")
+            
+            //fill in type
+            selectedChoice = typeChoices.firstIndex(of: pastItemChosen!.wrappedType)!
+            
+            // everything else
+            if pastItemChosen?.wrappedType == "Meal" {
+                name = pastItemChosen!.wrappedTitle
+                selectedMealType = mealChoices.firstIndex(of: pastItemChosen!.wrappedMealType)!
+                ingredients = pastItemChosen!.wrappedIngredients
+            }
+            
+            if pastItemChosen?.wrappedType == "Drink" {
+                name = pastItemChosen!.wrappedTitle
+                drinkIngredients = pastItemChosen!.wrappedIngredients
+            }
+            
+            if pastItemChosen?.wrappedType == "Symptom" {
+                symptomTypeChosen = userData.symptomOptions.firstIndex(of: pastItemChosen!.wrappedSymptomType)!
+            }
+            
+            if pastItemChosen?.wrappedType == "Medicine" {
+                medicineTypeChosen = userData.medicineOptions.firstIndex(of: pastItemChosen!.wrappedMedicineType)!
+            }
+            
+        } else {
+            return
+        }
+        pastItemChosen = nil
     }
     
     func saveDiaryItem() {
@@ -309,6 +359,7 @@ struct AddDiaryItemView: View {
         if item.wrappedType == "Symptom" {
             item.symptomType = userData.symptomOptions[symptomTypeChosen]
             item.symptomDescription = symptomDescription
+            item.title = item.symptomType
         }
         
         if item.wrappedType == "Medicine" {

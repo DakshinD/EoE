@@ -72,6 +72,7 @@ struct FoodDiaryView: View {
                 .sheet(isPresented: $showingAddItemView) {
                     AddDiaryItemView(chosenDate: currentDateChosen)
                         .environmentObject(userData)
+                        .environment(\.managedObjectContext, self.managedObjectContext)
                 })
         }
     }

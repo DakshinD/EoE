@@ -77,9 +77,73 @@ struct DiaryItemRow: View {
     }
 }
 
-struct DiaryItemRow_Previews: PreviewProvider {
-    static var previews: some View {
-        //DiaryItemRow()
-        EmptyView()
+struct PastDiaryItemRow: View {
+    
+    var item: DiaryItem
+        
+    var body: some View {
+        HStack(spacing: 15) {
+            Text(correctEmoji())
+            VStack(alignment: .leading) {
+                
+                if item.type != "Symptom" && item.type != "Medicine" {
+                    Text(item.wrappedTitle)
+                        .foregroundColor(Color.text)
+                        .font(.body)
+                }
+                
+                if item.type == "Meal"  {
+                    Text(item.wrappedMealType)
+                        .foregroundColor(.gray)
+                        .font(.caption)
+                }
+                
+                if item.type == "Symptom" {
+                    Text(item.wrappedSymptomType)
+                        .foregroundColor(Color.text)
+                        .font(.body)
+                }
+                
+                if item.type == "Medicine" {
+                    Text(item.wrappedMedicineType)
+                        .foregroundColor(Color.text)
+                        .font(.body)
+                }
+            }
+            Spacer()
+            Text(item.wrappedTime, style: .date)
+                .font(.system(size: 15, weight: .light, design: .rounded))
+                .foregroundColor(.gray)
+        }
+    }
+    
+    func correctEmoji() -> String {
+        switch item.type {
+        case "Meal":
+            return "🍽"
+        case "Drink":
+            return "🥤"
+        case "Symptom":
+            return "🤒"
+        case "Medicine":
+            return "💊"
+        default:
+            return ""
+        }
+    }
+    
+    func correctColor() -> Color {
+        switch item.type {
+        case "Meal":
+            return Color("darkPurple")
+        case "Drink":
+            return Color.blue
+        case "Symptom":
+            return Color.red
+        case "Medicine":
+            return Color.green
+        default:
+            return Color.orange
+        }
     }
 }
