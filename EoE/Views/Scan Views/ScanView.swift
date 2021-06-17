@@ -51,6 +51,9 @@ struct ScanView: View {
                                         .foregroundColor(Color.accent)
                                 }
                                 .sheet(isPresented: $scanningProcess.cameraShowing, onDismiss: checkImage, content: { ImagePicker() })
+                                .alert(isPresented: $scanningProcess.productNotFoundErrorShowing) {
+                                    Alert(title: Text("Error"), message: Text("The product you scanned doesn't exist in our database"), dismissButton: .default(Text("Ok")))
+                                }
 
                                 
                                 Button(action: {
@@ -69,6 +72,9 @@ struct ScanView: View {
                                 .sheet(isPresented: $scanningProcess.croppingShowing, content: {
                                     ImageCropper(image: $scanningProcess.imageTaken, visible: $scanningProcess.croppingShowing, done: processImage)
                                 })
+                                .alert(isPresented: $scanningProcess.missingInfoErrorShowing) {
+                                    Alert(title: Text("Error"), message: Text("Our database doesn't contain the required info on this product"), dismissButton: .default(Text("Ok")))
+                                }
                             }
                             
                         }
@@ -114,15 +120,6 @@ struct ScanView: View {
                 }
                 .navigationTitle("Scan")
                 NavigationLink(destination: ResultView().environmentObject(scanningProcess), isActive: $scanningProcess.resultViewShowing, label: {EmptyView()})
-            }
-            .alert(isPresented: $scanningProcess.productNotFoundErrorShowing) {
-                Alert(title: Text("Error"), message: Text("The product you scanned doesn't exist in our database"), dismissButton: .default(Text("Ok")))
-            }
-            .alert(isPresented: $scanningProcess.missingInfoErrorShowing) {
-                Alert(title: Text("Error"), message: Text("Our database doesn't contain the required info on this product"), dismissButton: .default(Text("Ok")))
-            }
-            .alert(isPresented: $scanningProcess.noDataErrorShowing) {
-                Alert(title: Text("Error"), message: Text("We are unable to access data for this specific product"), dismissButton: .default(Text("Ok")))
             }
             
         }

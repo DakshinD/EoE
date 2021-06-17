@@ -84,6 +84,7 @@ struct BarcodeScannerView: View {
                                         withAnimation {
                                             scanningProcess.scanningState = .failure
                                             withAnimation {
+                                                //print("got here \(scanningProcess.productNotFoundErrorShowing)")
                                                 scanningProcess.productNotFoundErrorShowing.toggle()
                                             }
                                         }

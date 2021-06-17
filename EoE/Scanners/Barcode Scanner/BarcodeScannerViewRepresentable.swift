@@ -68,7 +68,7 @@ struct BarcodeScannerViewRepresentable: UIViewRepresentable {
     }
 }
 
-protocol BarcodeScannerUIViewDelegate: class {
+protocol BarcodeScannerUIViewDelegate: AnyObject {
     func barcodeScanningDidFail()
     func barcodeScanningSucceededWithCode(_ barcode: String)
     func barcodeScanningDidStop()
