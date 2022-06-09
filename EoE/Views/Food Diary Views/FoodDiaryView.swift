@@ -29,7 +29,7 @@ struct FoodDiaryView: View {
                 VStack {
                     
                     Picker(selection: $modeChosen, label: Text("Diary Entries")) {
-                        ForEach(0..<modes.count) { index in
+                        ForEach(0..<modes.count, id:\.self) { index in
                             Text(modes[index]).tag(index)
                         }
                     }
@@ -47,14 +47,14 @@ struct FoodDiaryView: View {
                                 Spacer()
                                 DatePicker("", selection: $currentDateChosen, displayedComponents: .date)
                             }
-                            .animation(.default)
+                            //.animation(.default)
                         }
                         
                         getListView(mode: modeChosen)
                         
                     }
                     .listStyle(InsetGroupedListStyle())
-                    .animation(.default)
+                    //.animation(.default)
                 }
                 .padding(.top)
                 

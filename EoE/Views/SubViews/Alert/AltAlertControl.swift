@@ -65,7 +65,7 @@ struct AltAlertControlView: UIViewControllerRepresentable {
             
             // Most important, must be dispatched on Main thread,
             // Curious? then remove `DispatchQueue.main.async` & find out yourself, Dont be lazy
-            DispatchQueue.main.async { // must be async !!
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { // must be async !!
                 uiViewController.present(alert, animated: true, completion: {
                     self.showAlert = false  // hide holder after alert dismiss
                     context.coordinator.alert = nil

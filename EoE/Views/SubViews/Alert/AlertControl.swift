@@ -17,6 +17,8 @@ struct AlertControlView: UIViewControllerRepresentable {
     @Binding var ingredients: [String]
     @Binding var drinkIngredients: [String]
     
+    @FocusState private var isAlertFocused: Bool
+    
     var title: String
     var message: String
     var isDrink: Bool // differentiate between meal and drink when making diary entry
@@ -46,6 +48,7 @@ struct AlertControlView: UIViewControllerRepresentable {
                 textField.text = self.textString            // setting initial value
                 textField.delegate = context.coordinator    // using coordinator as delegate
             }
+            
             
             // As usual adding actions
             alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "") , style: .destructive) { _ in
@@ -84,7 +87,7 @@ struct AlertControlView: UIViewControllerRepresentable {
             
             // Most important, must be dispatched on Main thread,
             // Curious? then remove `DispatchQueue.main.async` & find out yourself, Dont be lazy
-            DispatchQueue.main.async { // must be async !!
+            DispatchQueue.main.asyncAfter(deadline: .now()+0.01) { // must be async !! SCUFF FIX - FIND ANOTHER SOLUTION
                 uiViewController.present(alert, animated: true, completion: {
                     self.showAlert = false  // hide holder after alert dismiss
                     context.coordinator.alert = nil

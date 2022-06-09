@@ -60,11 +60,14 @@ extension String {
         str = String(str.suffix(from: idx ?? str.startIndex))
         str.trim()
         var ingredients: [String] = str.components(separatedBy: CharacterSet(charactersIn: ",."))
-        for i in 0..<ingredients.count {
+        var i = 0
+        for _ in 0..<ingredients.count {
             ingredients[i].trim()
             ingredients[i].removeParens()
-            if ingredients[i].isEmpty {
+            i+=1
+            if i < ingredients.count && ingredients[i].isEmpty {
                 ingredients.remove(at: i)
+                i-=1
             }
         }
         return ingredients

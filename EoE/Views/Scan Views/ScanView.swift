@@ -42,7 +42,8 @@ struct ScanView: View {
                             HStack {
                                 Button(action: {
                                     // Open ingredients list scanner
-                                    scanningProcess.cameraShowing.toggle()
+                                    //scanningProcess.cameraShowing.toggle()
+                                    scannerChoiceSheetShowing.toggle()
                                 }) {
                                     Image(systemName: "doc.text.viewfinder")
                                         .resizable()
@@ -50,10 +51,23 @@ struct ScanView: View {
                                         .frame(width: 30, height: 30)
                                         .foregroundColor(Color.accent)
                                 }
-                                .sheet(isPresented: $scanningProcess.cameraShowing, onDismiss: checkImage, content: { ImagePicker() })
+                                .sheet(isPresented: $scanningProcess.cameraShowing, onDismiss: checkImage, content: { ImagePicker(sourceType: .camera) })
+                                .sheet(isPresented: $scanningProcess.photoLibraryShowing, onDismiss: checkImage, content: { ImagePicker(sourceType: .photoLibrary) })
                                 .alert(isPresented: $scanningProcess.productNotFoundErrorShowing) {
                                     Alert(title: Text("Error"), message: Text("The product you scanned doesn't exist in our database"), dismissButton: .default(Text("Ok")))
                                 }
+                                .confirmationDialog("Choose how you want to take a picture", isPresented: $scannerChoiceSheetShowing, titleVisibility: .visible) {
+                                    Button("Camera") {
+                                        print("reached")
+                                        scanningProcess.cameraShowing.toggle()
+                                    }
+                                    Button("Photo Library") {
+                                        scanningProcess.photoLibraryShowing.toggle()
+                                    }
+                                }
+                                
+                                
+
 
                                 
                                 Button(action: {
@@ -92,11 +106,14 @@ struct ScanView: View {
                             .listRowBackground(Color.secondary)
                         }
                         .listStyle(InsetGroupedListStyle())
-                        .animation(.default)
+                        //.animation(.default)
+                        
+                        
                         
                         Spacer()
                     }
                     .zIndex(1)
+                    
                     
                     if scanningProcess.barcodeScannerShowing {
                         VStack {
@@ -129,12 +146,15 @@ struct ScanView: View {
 
 extension ScanView {
     func checkImage() {
+        print("checkImage running")
         guard scanningProcess.imageTaken != nil else {
             return
         }
         // show cropping view
-        withAnimation {
-            scanningProcess.croppingShowing.toggle()
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.01) {
+            withAnimation {
+                scanningProcess.croppingShowing.toggle()
+            }
         }
     }
     

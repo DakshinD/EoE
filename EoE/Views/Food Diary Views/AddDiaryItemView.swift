@@ -17,6 +17,9 @@ struct AddDiaryItemView: View {
     
     var dateChosen: Date
     
+    //Hide keyboard
+    @FocusState private var isTextFocused: Bool
+    
     // Searching
     @State private var searchSheet: Bool = false
     @State private var pastItemChosen: DiaryItem? = nil
@@ -66,6 +69,7 @@ struct AddDiaryItemView: View {
                                 TextField("Name", text: $name)
                                     .foregroundColor(Color.text)
                                     .font(.body)
+                                    .focused($isTextFocused)
                             }
                             // Time
                             DatePicker("Time", selection: $timeChosen, displayedComponents: .hourAndMinute)
@@ -74,7 +78,7 @@ struct AddDiaryItemView: View {
                                 .font(.body)
                             // Type
                             Picker("Item Type", selection: $selectedChoice) {
-                                ForEach(0 ..< typeChoices.count) {
+                                ForEach(0 ..< typeChoices.count, id:\.self) {
                                     Text(typeChoices[$0])
                                         .font(.body)
                                 }
@@ -83,7 +87,7 @@ struct AddDiaryItemView: View {
                             
                             if typeChoices[selectedChoice] == "Meal" {
                                 Picker("Meal Type", selection: $selectedMealType) {
-                                    ForEach(0 ..< mealChoices.count) {
+                                    ForEach(0 ..< mealChoices.count, id:\.self) {
                                         Text(mealChoices[$0])
                                             .font(.body)
                                     }
@@ -101,6 +105,7 @@ struct AddDiaryItemView: View {
                                             Text("Ingredients")
                                             Spacer()
                                             Button(action: {
+                                                print("hit meal button")
                                                 ingredientText = ""
                                                 showAlert.toggle()
                                             }) {
@@ -181,11 +186,12 @@ struct AddDiaryItemView: View {
                             Section(header: Text("Symptom Details")) {
                                 // Symptom type
                                 Picker("Type", selection: $symptomTypeChosen) {
-                                    ForEach(0 ..< userData.symptomOptions.count) {
+                                    ForEach(0 ..< userData.symptomOptions.count, id:\.self) {
                                         Text(userData.symptomOptions[$0])
                                             .font(.body)
                                     }
                                 }
+                                .listRowBackground(Color.secondary)
                                 .foregroundColor(Color.text)
                                 
                                 // Description
@@ -231,7 +237,7 @@ struct AddDiaryItemView: View {
                             Section(header: Text("Medicine Details")) {
                                 // Medicine Types
                                 Picker("Type", selection: $medicineTypeChosen) {
-                                    ForEach(0 ..< userData.medicineOptions.count) {
+                                    ForEach(0 ..< userData.medicineOptions.count, id:\.self) {
                                         Text(userData.medicineOptions[$0])
                                             .font(.body)
                                     }
@@ -253,7 +259,7 @@ struct AddDiaryItemView: View {
                         
                     }
                     .padding()
-                    .animation(.default)
+                    //.animation(.default)
                     .sheet(isPresented: $searchSheet, onDismiss: {autofillFromPastItem()}) {
                         DiaryItemSearchView(pastItemChosen: $pastItemChosen)
                             .environmentObject(userData)

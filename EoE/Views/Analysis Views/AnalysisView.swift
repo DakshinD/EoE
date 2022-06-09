@@ -68,7 +68,7 @@ struct AnalysisView: View {
     }
     
     var mostFrequentSymptom: String {
-        var symptom: String = "a"
+        var symptom: String = "N/A"
         var count: Int = 0
         for (symp, cnt) in stats.numOfSymptom {
             if cnt > count {
