@@ -38,6 +38,9 @@ class Statistics: ObservableObject {
     @Published(key: "mealTriggers")
     var mealTriggers: [String : [String : Int]] = [String:[String:Int]]() // [Symptom : [Meal : Num of Occurences]]
     
+    @Published(key: "symptomsPerDay")
+    var symptomsPerDay: [String : Int] = [String : Int]()
+    
     func resetAllData() {
         // reset numOfSymptom
         for symptom in userData.symptomOptions {
@@ -54,6 +57,8 @@ class Statistics: ObservableObject {
         for symptom in userData.symptomOptions {
             mealTriggers.updateValue([String : Int](), forKey: symptom)
         }
+        // reset symptoms calculation for bar graph
+        symptomsPerDay = getSymptomsForWeek()
     }
     
     //----------------------------------
@@ -67,6 +72,8 @@ class Statistics: ObservableObject {
         getTriggers()
         
         countNumOfItems()
+        
+        
     }
     
     func getSymptomsForWeek() -> [String : Int] {

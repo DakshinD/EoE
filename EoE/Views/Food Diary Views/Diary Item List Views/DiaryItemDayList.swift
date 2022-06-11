@@ -10,6 +10,8 @@ import SwiftUI
 struct DiaryItemDayList: View {
     
     @Environment(\.managedObjectContext) var managedObjectContext
+    
+    @EnvironmentObject var stats: Statistics
         
     var fetchRequest: FetchRequest<DiaryItem>
     
@@ -58,6 +60,7 @@ struct DiaryItemDayList: View {
         } catch {
             print("Error: \(error.localizedDescription)")
         }
+        stats.generateStats()
     }
     
     init(chosenPredicate: NSPredicate) {

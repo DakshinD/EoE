@@ -27,7 +27,7 @@ struct AnalysisView: View {
                                                 
                         List {
                             
-                            BarChartView(symptomsPerDay: stats.getSymptomsForWeek())
+                            BarChartView(symptomsPerDay: $stats.symptomsPerDay)
                                 .frame(height: 230)
                             
                             Section(header: Text("Most Frequent Symptom")) {

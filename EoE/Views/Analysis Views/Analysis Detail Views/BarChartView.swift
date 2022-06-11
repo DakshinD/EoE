@@ -10,8 +10,10 @@ import Foundation
 
 struct BarChartView: View {
     
+    //@EnvironmentObject var stats: Statistics
+    @Binding var symptomsPerDay: [String : Int]
     //var test: [String : Int] = ["Sun":2, "Mon":4, "Tue":1, "Wed":2, "Thu":3, "Fri":2, "Sat":5]
-    var symptomsPerDay: [String : Int]
+    //var symptomsPerDay: [String : Int]
     
     // add selection option?
     

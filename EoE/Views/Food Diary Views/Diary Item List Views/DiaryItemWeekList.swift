@@ -11,6 +11,7 @@ struct DiaryItemWeekList: View {
     
     @Environment(\.managedObjectContext) var managedObjectContext
     
+    
     @EnvironmentObject var stats: Statistics
                 
     var dayToItems: [Date:[DiaryItem]]
