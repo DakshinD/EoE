@@ -33,6 +33,7 @@
 		BEE0DCF525367C370020BE63 /* ImageScanningLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE0DCF425367C370020BE63 /* ImageScanningLoadingView.swift */; };
 		BEE3138E2540EECA0041A11C /* MedicineOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE3138D2540EECA0041A11C /* MedicineOptionView.swift */; };
 		BEE313932540EED30041A11C /* SymptomOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE313922540EED30041A11C /* SymptomOptionView.swift */; };
+		BEF1C2D12853D64600BE9A46 /* UserAllergenAlertControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF1C2D02853D64600BE9A46 /* UserAllergenAlertControl.swift */; };
 		E329747A2526BA4600E451FA /* Allergen+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32974762526BA4600E451FA /* Allergen+CoreDataClass.swift */; };
 		E329747B2526BA4600E451FA /* Allergen+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32974772526BA4600E451FA /* Allergen+CoreDataProperties.swift */; };
 		E32974832526BA8100E451FA /* ScannedAllergen+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32974812526BA8100E451FA /* ScannedAllergen+CoreDataClass.swift */; };
@@ -134,6 +135,7 @@
 		BEE0DCF425367C370020BE63 /* ImageScanningLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScanningLoadingView.swift; sourceTree = "<group>"; };
 		BEE3138D2540EECA0041A11C /* MedicineOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineOptionView.swift; sourceTree = "<group>"; };
 		BEE313922540EED30041A11C /* SymptomOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomOptionView.swift; sourceTree = "<group>"; };
+		BEF1C2D02853D64600BE9A46 /* UserAllergenAlertControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAllergenAlertControl.swift; sourceTree = "<group>"; };
 		BF1C2CF4BF9D9F6B3BF7BC15 /* Pods-EoETests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EoETests.release.xcconfig"; path = "Target Support Files/Pods-EoETests/Pods-EoETests.release.xcconfig"; sourceTree = "<group>"; };
 		E32974762526BA4600E451FA /* Allergen+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Allergen+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E32974772526BA4600E451FA /* Allergen+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Allergen+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 			children = (
 				BE4E835E253A1194008D8D1E /* AlertControl.swift */,
 				BE6A981E2544F6310008A4A4 /* AltAlertControl.swift */,
+				BEF1C2D02853D64600BE9A46 /* UserAllergenAlertControl.swift */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
@@ -869,6 +872,7 @@
 				BE89518E253B801A001B74FD /* DiaryItem+CoreDataClass.swift in Sources */,
 				BE99790025956BED009B6EFE /* BarChartView.swift in Sources */,
 				BE1F724F253E562100858CA5 /* SymptomDetailView.swift in Sources */,
+				BEF1C2D12853D64600BE9A46 /* UserAllergenAlertControl.swift in Sources */,
 				E3AE7FBB252162900059F3E5 /* AppDelegate.swift in Sources */,
 				E3796B2F252E776A00C21101 /* Scan+CoreDataProperties.swift in Sources */,
 				E3796B24252E76C600C21101 /* Nutrient+CoreDataProperties.swift in Sources */,

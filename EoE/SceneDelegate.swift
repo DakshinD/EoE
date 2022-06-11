@@ -36,18 +36,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if !userData.isNotFirstLaunch {
             print("first launch")
             for aller in AllergenTypes.allCases {
-                
-                // Create a new allergen
-                let allergen = Allergen(context: context)
-                allergen.id = UUID()
-                allergen.name = aller.description
-                allergen.type = aller.rawValue
-                allergen.isSelected = false
-                                
-                do {
-                    try context.save()
-                } catch {
-                    print(error.localizedDescription)
+                if aller != AllergenTypes.userCreated { //create all allergen options except the type that is used for user created ones
+                    // Create a new allergen
+                    let allergen = Allergen(context: context)
+                    allergen.id = UUID()
+                    allergen.name = aller.description
+                    allergen.type = aller.rawValue
+                    allergen.isSelected = false
+                                    
+                    do {
+                        try context.save()
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 }
             }
             

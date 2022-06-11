@@ -55,18 +55,36 @@ struct AllergenDetection {
     func detectAllergensInIngredientsList(ingredients: String) -> [String] {
         var foundAllergens: [String] = [String]()
         allergens.forEach { allergen in
-            if allergen.isSelected {
+            if allergen.isSelected && AllergenTypes(rawValue: allergen.type!) != AllergenTypes.userCreated {
                 if checkForAllergen(allergen: allergen, ingredientsText: ingredients) {
-                    foundAllergens.append(allergen.type ?? "Unkown type") // Better way to handle this?
+                    foundAllergens.append(allergen.type ?? "Unkown Type")
                 }
             }
         }
         return foundAllergens
     }
     
+    func detectUserCreatedAllergensInIngredientsList(ingredients: String) -> [String] {
+        var foundUserCreatedAllergens: [String] = [String]()
+        allergens.forEach { allergen in
+            if allergen.isSelected && AllergenTypes(rawValue: allergen.type!) == AllergenTypes.userCreated {
+                if checkForAllergen(allergen: allergen, ingredientsText: ingredients) {
+                    foundUserCreatedAllergens.append(allergen.name!)
+                }
+            }
+        }
+        return foundUserCreatedAllergens
+    }
+    
     func checkForAllergen(allergen: Allergen, ingredientsText: String) -> Bool {
-        for allergenName in AllergenTypes(rawValue: allergen.type!)!.items {
-            if ingredientsText.contains(allergenName.uppercased()) {
+        if AllergenTypes(rawValue: allergen.type!) != AllergenTypes.userCreated {
+            for allergenName in AllergenTypes(rawValue: allergen.type!)!.items {
+                if ingredientsText.contains(allergenName.uppercased()) {
+                    return true
+                }
+            }
+        } else { // check for user created allergen
+            if ingredientsText.contains((allergen.name?.uppercased())!) { // forced optional - check
                 return true
             }
         }

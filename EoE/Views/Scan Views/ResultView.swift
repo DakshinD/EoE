@@ -36,6 +36,29 @@ struct ResultView: View {
                     }
                 }
                 .listRowBackground(Color.secondary)
+                
+                Section(header: Text("Found Extra Allergens")) {
+                    if scanningProcess.foundUserCreatedAllergens.isEmpty {
+                        HStack {
+                            Text("No Extra Allergens Found!")
+                                .foregroundColor(Color.text)
+                            Spacer()
+                            Text("😁")
+                        }
+                    } else {
+                        ForEach(scanningProcess.foundUserCreatedAllergens, id: \.self) { allergen in
+                            HStack {
+                                // Check how to handle this optional
+                                Text(allergen)
+                                    .foregroundColor(Color.text)
+                                Spacer()
+                                //Text(AllergenTypes(rawValue: allergen)!.emoji)
+                            }
+                        }
+
+                    }
+                }
+                .listRowBackground(Color.secondary)
 
             }
             .listStyle(InsetGroupedListStyle())

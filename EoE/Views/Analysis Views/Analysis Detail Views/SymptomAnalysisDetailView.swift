@@ -37,21 +37,29 @@ struct SymptomAnalysisDetailView: View {
                             }
                             
                             HStack {
-                                Text("Most likely Trigger")
+                                Text("Most likely Ingredient Trigger")
                                     .foregroundColor(.text)
                                 Spacer()
-                                Text((possibleTriggers.count == 0) ? "N/A" : possibleTriggers[0])
+                                Text((possibleIngredientTriggers.count == 0) ? "N/A" : possibleIngredientTriggers[0])
+                                    .foregroundColor(.gray)
+                            }
+                            
+                            HStack {
+                                Text("Most likely Meal Trigger")
+                                    .foregroundColor(.text)
+                                Spacer()
+                                Text((possibleMealTriggers.count == 0) ? "N/A" : possibleMealTriggers[0])
                                     .foregroundColor(.gray)
                             }
                         }
                         
-                        Section(header: Text("Possible Triggers")) {
-                            if possibleTriggers.count == 0 {
+                        Section(header: Text("Possible Ingredient Triggers")) {
+                            if possibleIngredientTriggers.count == 0 {
                                 Text("There doesn't seem to be any possible triggers for this symptom so far")
                                     .foregroundColor(.text)
                                     .padding()
                             } else {
-                                ForEach(possibleTriggers, id: \.self) { trigger in
+                                ForEach(possibleIngredientTriggers, id: \.self) { trigger in
                                     HStack {
                                         Text(trigger)
                                             .foregroundColor(.text)
@@ -59,6 +67,25 @@ struct SymptomAnalysisDetailView: View {
                                         Text("\(stats.triggers[symptomType]![trigger]!)") // check these optionals
                                             .foregroundColor(.gray)
                                         (stats.triggers[symptomType]![trigger]!==1) ? Text("time").foregroundColor(.gray) : Text("times").foregroundColor(.gray)
+                                    }
+                                }
+                            }
+                        }
+                        
+                        Section(header: Text("Possible Meal Triggers")) {
+                            if possibleMealTriggers.count == 0 {
+                                Text("There doesn't seem to be any possible triggers for this symptom so far")
+                                    .foregroundColor(.text)
+                                    .padding()
+                            } else {
+                                ForEach(possibleMealTriggers, id: \.self) { trigger in
+                                    HStack {
+                                        Text(trigger)
+                                            .foregroundColor(.text)
+                                        Spacer()
+                                        Text("\(stats.mealTriggers[symptomType]![trigger]!)") // check these optionals
+                                            .foregroundColor(.gray)
+                                        (stats.mealTriggers[symptomType]![trigger]!==1) ? Text("time").foregroundColor(.gray) : Text("times").foregroundColor(.gray)
                                     }
                                 }
                             }
@@ -75,7 +102,7 @@ struct SymptomAnalysisDetailView: View {
         }
     }
     
-    var possibleTriggers: [String] {
+    var possibleIngredientTriggers: [String] {
         var possTriggers: [String] = [String]()
         for (trigger, _) in stats.triggers[symptomType] ?? [String : Int]() { // check this optional
             possTriggers.append(trigger)
@@ -84,6 +111,14 @@ struct SymptomAnalysisDetailView: View {
         return possTriggers
     }
     
+    var possibleMealTriggers: [String] {
+        var possMealTriggers: [String] = [String]()
+        for (trigger, _) in stats.mealTriggers[symptomType] ?? [String : Int]() { // check this optional
+            possMealTriggers.append(trigger)
+        }
+        possMealTriggers.sort(by: { stats.mealTriggers[symptomType]![$0]! > stats.mealTriggers[symptomType]![$1]! }) // check these optionals
+        return possMealTriggers
+    }
     
 }
 

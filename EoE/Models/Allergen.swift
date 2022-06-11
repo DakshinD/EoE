@@ -25,6 +25,7 @@ enum AllergenTypes: String, CaseIterable {
     case wheat = "wheat"
     case soy = "soy"
     case shellfish = "shellfish"
+    case userCreated = ""
     
     var description: String {
         switch self {
@@ -44,6 +45,8 @@ enum AllergenTypes: String, CaseIterable {
             return NSLocalizedString("Soy", comment: "food allergen")
         case .shellfish:
             return NSLocalizedString("Shellfish", comment: "food allergen")
+        case .userCreated:
+            return NSLocalizedString("User Created", comment: "food allergen")
         }
     }
     
@@ -65,6 +68,8 @@ enum AllergenTypes: String, CaseIterable {
             return "🌱"
         case .shellfish:
             return "🦐"
+        case .userCreated:
+            return ""
         }
     }
     
@@ -86,6 +91,8 @@ enum AllergenTypes: String, CaseIterable {
             return "So"
         case .shellfish:
             return "Sh"
+        case .userCreated:
+            return "UC"
         }
     }
     
@@ -107,6 +114,8 @@ enum AllergenTypes: String, CaseIterable {
             return Color.pink
         case .shellfish:
             return Color.orange
+        case .userCreated:
+            return Color.teal
         }
     }
     
@@ -301,6 +310,8 @@ enum AllergenTypes: String, CaseIterable {
                     NSLocalizedString("Krill", comment: "shellfish allergen"),
                     NSLocalizedString("Lobster", comment: "shellfish allergen"),
             ]
+        case .userCreated:
+            return []
         }
     }
 }

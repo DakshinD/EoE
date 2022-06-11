@@ -33,6 +33,7 @@ class ScanningProcess: ObservableObject {
     // To show result view after scanning ingredients list
     @Published var resultViewShowing: Bool = false
     @Published var foundAllergens: [String] = [String]()
+    @Published var foundUserCreatedAllergens: [String] = [String]()
     @Published var imageTaken: UIImage? = nil
     
     // To show errors after scanning barcodes

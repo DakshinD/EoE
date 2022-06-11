@@ -32,6 +32,9 @@ class UserData: ObservableObject {
     @Published(key: "medicineOptions")
     var medicineOptions: [String] = ["Budesonide", "Flovent", "Nexium"]
     
+    @Published(key: "allergenOptions")
+    var allergenOptions: [String] = []
+    
     // Notification Settings
     
     @Published(key: "notificationsEnabled")

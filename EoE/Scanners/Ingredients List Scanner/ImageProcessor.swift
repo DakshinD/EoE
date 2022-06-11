@@ -18,6 +18,7 @@ struct ImageProcessor {
     
     @Binding var image: UIImage?
     @Binding var foundAllergens: [String]
+    @Binding var foundUserCreatedAllergens: [String]
     @Binding var resultViewShowing: Bool
     @Binding var progress: Float
     @Binding var loadingViewShowing: Bool
@@ -76,6 +77,8 @@ struct ImageProcessor {
             let allergenDetector = AllergenDetection(managedObjectContext)
             foundAllergens = [String]()
             foundAllergens = allergenDetector.detectAllergensInIngredientsList(ingredients: recognizedText)
+            foundUserCreatedAllergens = [String]()
+            foundUserCreatedAllergens = allergenDetector.detectUserCreatedAllergensInIngredientsList(ingredients: recognizedText)
             
         // 2. Manually push the detail view for the most recent scan to the users screen
             resultViewShowing.toggle()
