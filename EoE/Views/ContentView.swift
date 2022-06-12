@@ -19,6 +19,8 @@ struct ContentView: View {
     
     @State private var barcodeButtonShown: Bool = false
     @State private var ingredientsButtonShown: Bool = false
+    
+    @AppStorage("needsAppOnboarding") private var needsAppOnboarding: Bool = true
 
     
     
@@ -52,6 +54,12 @@ struct ContentView: View {
         }
         .accentColor(Color.accent)
         .preferredColorScheme(userData.darkMode ? .dark : .light)
+        .sheet(isPresented: $needsAppOnboarding) {
+            OnboardingView()
+                .onDisappear {
+                    needsAppOnboarding = false
+                }
+        }
         
     }
     

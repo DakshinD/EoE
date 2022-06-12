@@ -15,6 +15,10 @@
 		BE1F7265253E57CF00858CA5 /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F7264253E57CF00858CA5 /* MultilineTextField.swift */; };
 		BE4E83592539E58F008D8D1E /* AddDiaryItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4E83582539E58F008D8D1E /* AddDiaryItemView.swift */; };
 		BE4E835F253A1194008D8D1E /* AlertControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4E835E253A1194008D8D1E /* AlertControl.swift */; };
+		BE55786528551AD900E58A34 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE55786428551AD900E58A34 /* OnboardingView.swift */; };
+		BE55786828551E6800E58A34 /* FeaturesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE55786728551E6800E58A34 /* FeaturesView.swift */; };
+		BE55786A28568A8200E58A34 /* CreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE55786928568A8200E58A34 /* CreditsView.swift */; };
+		BE55786C28568C7200E58A34 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE55786B28568C7200E58A34 /* AboutView.swift */; };
 		BE587FF4253CBBAA002704CA /* MealDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE587FF3253CBBAA002704CA /* MealDetailView.swift */; };
 		BE6A981F2544F6310008A4A4 /* AltAlertControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6A981E2544F6310008A4A4 /* AltAlertControl.swift */; };
 		BE89518E253B801A001B74FD /* DiaryItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE89518C253B801A001B74FD /* DiaryItem+CoreDataClass.swift */; };
@@ -117,6 +121,10 @@
 		BE1F7264253E57CF00858CA5 /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
 		BE4E83582539E58F008D8D1E /* AddDiaryItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDiaryItemView.swift; sourceTree = "<group>"; };
 		BE4E835E253A1194008D8D1E /* AlertControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertControl.swift; sourceTree = "<group>"; };
+		BE55786428551AD900E58A34 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		BE55786728551E6800E58A34 /* FeaturesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturesView.swift; sourceTree = "<group>"; };
+		BE55786928568A8200E58A34 /* CreditsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsView.swift; sourceTree = "<group>"; };
+		BE55786B28568C7200E58A34 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		BE587FF3253CBBAA002704CA /* MealDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetailView.swift; sourceTree = "<group>"; };
 		BE6A981E2544F6310008A4A4 /* AltAlertControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AltAlertControl.swift; sourceTree = "<group>"; };
 		BE89518C253B801A001B74FD /* DiaryItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiaryItem+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -260,6 +268,15 @@
 				BEF1C2D02853D64600BE9A46 /* UserAllergenAlertControl.swift */,
 			);
 			path = Alert;
+			sourceTree = "<group>";
+		};
+		BE55786628551BB200E58A34 /* Onboarding Views */ = {
+			isa = PBXGroup;
+			children = (
+				BE55786428551AD900E58A34 /* OnboardingView.swift */,
+				BE55786728551E6800E58A34 /* FeaturesView.swift */,
+			);
+			path = "Onboarding Views";
 			sourceTree = "<group>";
 		};
 		BE587FEF253C96E0002704CA /* Diary Detail Views */ = {
@@ -425,6 +442,7 @@
 			isa = PBXGroup;
 			children = (
 				E3AE7FBE252162900059F3E5 /* ContentView.swift */,
+				BE55786628551BB200E58A34 /* Onboarding Views */,
 				E3AE807F252223CB0059F3E5 /* Food Diary Views */,
 				E3AE807E252223C50059F3E5 /* Scan Views */,
 				E3AE807D252223B90059F3E5 /* Analysis Views */,
@@ -572,6 +590,8 @@
 				BEE3138D2540EECA0041A11C /* MedicineOptionView.swift */,
 				BEE313922540EED30041A11C /* SymptomOptionView.swift */,
 				BE8D895025E441CC0022A107 /* NotificationsDetailView.swift */,
+				BE55786928568A8200E58A34 /* CreditsView.swift */,
+				BE55786B28568C7200E58A34 /* AboutView.swift */,
 			);
 			path = "Settings Views";
 			sourceTree = "<group>";
@@ -878,6 +898,7 @@
 				E3796B24252E76C600C21101 /* Nutrient+CoreDataProperties.swift in Sources */,
 				BE8D895625E447310022A107 /* DiaryItemSearchView.swift in Sources */,
 				BEE0DCF525367C370020BE63 /* ImageScanningLoadingView.swift in Sources */,
+				BE55786828551E6800E58A34 /* FeaturesView.swift in Sources */,
 				E3AE804D2521675F0059F3E5 /* CameraBottomBar.swift in Sources */,
 				BE4E835F253A1194008D8D1E /* AlertControl.swift in Sources */,
 				E3E56FC725241259005F8D32 /* BarcodeScanButton.swift in Sources */,
@@ -894,6 +915,7 @@
 				BE6A981F2544F6310008A4A4 /* AltAlertControl.swift in Sources */,
 				E3AE802E252165C30059F3E5 /* ImageProcessor.swift in Sources */,
 				E3AE8004252164220059F3E5 /* ProductResult.swift in Sources */,
+				BE55786528551AD900E58A34 /* OnboardingView.swift in Sources */,
 				BE9A98BA2596B61800C46DE1 /* DiaryItemWeekList.swift in Sources */,
 				E3796B3A2530D7FD00C21101 /* ResultView.swift in Sources */,
 				E3AE8009252164480059F3E5 /* NetworkManager.swift in Sources */,
@@ -903,7 +925,9 @@
 				BE99DCD5259A5A6500B2B0DA /* NotificationManager.swift in Sources */,
 				E3AE8039252166670059F3E5 /* CameraRepresentable.swift in Sources */,
 				BE4E83592539E58F008D8D1E /* AddDiaryItemView.swift in Sources */,
+				BE55786C28568C7200E58A34 /* AboutView.swift in Sources */,
 				E3AE807525216B510059F3E5 /* AnalysisView.swift in Sources */,
+				BE55786A28568A8200E58A34 /* CreditsView.swift in Sources */,
 				E3AE806525216B130059F3E5 /* FoodDiaryView.swift in Sources */,
 				BE1F7265253E57CF00858CA5 /* MultilineTextField.swift in Sources */,
 				E329747A2526BA4600E451FA /* Allergen+CoreDataClass.swift in Sources */,

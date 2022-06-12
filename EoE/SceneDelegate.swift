@@ -12,6 +12,8 @@ import CoreData
 let names: [String] = ["Popcorn", "Sausage", "Pasta", "Pizza", "Fried Rice"]
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+    
+    @AppStorage("needsAppOnboarding") var needsAppOnboarding: Bool = true
 
     var window: UIWindow?
 
@@ -33,8 +35,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let userData = UserData()
         //userData.isNotFirstLaunch = false
+        //needsAppOnboarding = true
         if !userData.isNotFirstLaunch {
             print("first launch")
+            needsAppOnboarding = true
             for aller in AllergenTypes.allCases {
                 if aller != AllergenTypes.userCreated { //create all allergen options except the type that is used for user created ones
                     // Create a new allergen

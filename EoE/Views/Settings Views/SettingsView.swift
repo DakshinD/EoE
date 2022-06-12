@@ -96,8 +96,32 @@ struct SettingsView: View {
                                     }
                         ) {
                             
+                            /*NavigationLink(destination: AboutView()) {
+                                HStack {
+                                    Image(systemName: "person")
+                                        .imageScale(.large)
+                                        .foregroundColor(Color.accent)
+                                        
+                                    Text("About")
+                                        .foregroundColor(Color.text)
+                                    Spacer()
+                                }
+                            }*/
+                            
+                            NavigationLink(destination: CreditsView()) {
+                                HStack {
+                                    Image(systemName: "books.vertical")
+                                        .imageScale(.large)
+                                        .foregroundColor(Color.accent)
+                                        
+                                    Text("Credits")
+                                        .foregroundColor(Color.text)
+                                    Spacer()
+                                }
+                            }
+                            
                             Button(action: {
-                                
+                                print("pressed rate app button")
                             }) {
                                 HStack {
                                     Image(systemName: "star")
@@ -105,8 +129,10 @@ struct SettingsView: View {
                                         .foregroundColor(Color.accent)
                                     Text("Rate the App")
                                         .foregroundColor(Color.text)
+                                    Spacer()
                                 }
                             }
+
                             
                         }
                         .listRowBackground(Color.secondary)

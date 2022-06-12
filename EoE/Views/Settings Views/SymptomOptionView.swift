@@ -11,6 +11,11 @@ struct SymptomOptionView: View {
     
     @EnvironmentObject var userData: UserData
     
+    @Environment(\.presentationMode) var presentationMode
+    
+    @AppStorage("needsAppOnboarding") var needsAppOnboarding: Bool = true
+    
+    
     @State private var showAlert: Bool = false
     @State private var symptomText: String = ""
     
@@ -21,6 +26,17 @@ struct SymptomOptionView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
+                
+                if needsAppOnboarding {
+                    HStack {
+                        Text("Symptom Selection")
+                            .foregroundColor(Color.text)
+                            .font(.largeTitle)
+                            .bold()
+                        Spacer()
+                    }
+                    .padding()
+                }
                 
                 Text("Add your common symptoms beforehand for more efficient usage of the Food Diary")
                     .foregroundColor(Color.text)
@@ -63,8 +79,22 @@ struct SymptomOptionView: View {
                 AltAlertControlView(textString: $symptomText, showAlert: $showAlert, title: "New Symptom", message: "Type in the name of your symptom", currentOptions: $userData.symptomOptions)
             }
             
+            if needsAppOnboarding {
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                }) {
+                    Text("Finished")
+                        .foregroundColor(.white)
+                        .font(.system(size: 20, weight: .semibold, design: .rounded))
+                }
+                .buttonStyle(CustomButton())
+                .frame(width: 300, height: 50)
+                .padding()
+            }
+            
         }
         .navigationTitle("Symptom Types")
+        .preferredColorScheme(userData.darkMode ? .dark : .light)
     }
     
     func deleteSymptom(at offsets: IndexSet) {

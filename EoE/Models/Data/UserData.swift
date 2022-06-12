@@ -13,7 +13,7 @@ import Combine
 class UserData: ObservableObject {
         
     @Published(key: "isNotFirstLaunch")
-    var isNotFirstLaunch: Bool = true
+    var isNotFirstLaunch: Bool = false
     
     @Published(key: "isOnboardingCompleted")
     var isOnboardingCompleted: Bool = false
