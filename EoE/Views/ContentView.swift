@@ -56,9 +56,9 @@ struct ContentView: View {
         .preferredColorScheme(userData.darkMode ? .dark : .light)
         .sheet(isPresented: $needsAppOnboarding) {
             OnboardingView()
-                .onDisappear {
+                /*.onDisappear {
                     needsAppOnboarding = false
-                }
+                }*/
         }
         
     }

@@ -29,7 +29,10 @@ struct UserAllergenAlertControl: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<UserAllergenAlertControl>) {
         
         // Make sure that Alert instance exist after View's body get re-rendered
-        guard context.coordinator.alert == nil else { return }
+        guard context.coordinator.alert == nil else {
+            //print("There is already an alert present")
+            return
+        }
         
         if self.showAlert {
             
@@ -49,6 +52,7 @@ struct UserAllergenAlertControl: UIViewControllerRepresentable {
                 
                 // On dismiss, SiwftUI view's two-way binding variable must be update (setting false) means, remove Alert's View from UI
                 alert.dismiss(animated: true) {
+                    self.textString = "" //needed?
                     self.showAlert = false
                 }
             })
@@ -74,13 +78,14 @@ struct UserAllergenAlertControl: UIViewControllerRepresentable {
                 //currentOptions.append(textString)
                                 
                 alert.dismiss(animated: true) {
+                    self.textString = "" //needed?
                     self.showAlert = false
                 }
             })
             
             // Most important, must be dispatched on Main thread,
             // Curious? then remove `DispatchQueue.main.async` & find out yourself, Dont be lazy
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { // must be async !!
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.10) { // must be async !!
                 uiViewController.present(alert, animated: true, completion: {
                     self.showAlert = false  // hide holder after alert dismiss
                     context.coordinator.alert = nil

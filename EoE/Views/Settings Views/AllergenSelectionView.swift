@@ -92,7 +92,7 @@ struct AllergenSelectionView: View {
                                             .foregroundColor(Color.accent)
                                     }
                                 }
-                            , footer: Text("Disclaimer: Only the name of the allergen you type will be searched for in ingredient lists. Alternative names of the allergen will not be searched for, therefore, - results may not be 100% accurate.")) { //AllergenTypes.peanuts below is placeholder for optional
+                            , footer: Text("Disclaimer: Only the exact name you type will be used to search for the allergen. Make sure to type the allergen's name correctly.")) { //AllergenTypes.peanuts below is placeholder for optional
                         if isThereUserCreatedAllergen() == true {
                             ForEach(allergens, id: \.self) { allergen in
                                 if AllergenTypes(rawValue: allergen.type!) ?? AllergenTypes.peanuts == AllergenTypes.userCreated {
@@ -121,6 +121,7 @@ struct AllergenSelectionView: View {
                                     }
                                 }
                             }
+                            .onDelete(perform: removeExtraAllergen)
                         } else {
                             // there is no user created allergen
                             HStack {
@@ -185,6 +186,19 @@ struct AllergenSelectionView: View {
             }
         }
         return false
+    }
+    
+    func removeExtraAllergen(at offsets: IndexSet) {
+        for index in offsets {
+            let allergen = allergens[index]
+            managedObjectContext.delete(allergen)
+        }
+        do {
+            try managedObjectContext.save()
+        } catch {
+            print(error.localizedDescription)
+            // handle the Core Data error
+        }
     }
     
 }

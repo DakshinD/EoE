@@ -30,8 +30,15 @@ struct ProductView: View {
                         .listRowBackground(Color.secondary)
                         
                         Section(header: Text("Date Scanned").bold()) {
-                            Text(scan.wrappedDate, style: .date)
-                                .foregroundColor(Color.text)
+                            HStack {
+                                Text(scan.wrappedDate, style: .date)
+                                    .foregroundColor(Color.text)
+                                
+                                Text(scan.wrappedDate, style: .time)
+                                    .foregroundColor(Color.text)
+
+                            }
+                            
                         }
                         .listRowBackground(Color.secondary)
                         

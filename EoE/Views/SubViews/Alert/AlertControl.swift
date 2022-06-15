@@ -55,6 +55,7 @@ struct AlertControlView: UIViewControllerRepresentable {
                 
                 // On dismiss, SiwftUI view's two-way binding variable must be update (setting false) means, remove Alert's View from UI
                 alert.dismiss(animated: true) {
+                    self.textString = "" //needed?
                     self.showAlert = false
                 }
             })
@@ -81,13 +82,14 @@ struct AlertControlView: UIViewControllerRepresentable {
                 }
                 
                 alert.dismiss(animated: true) {
+                    self.textString = "" //needed?
                     self.showAlert = false
                 }
             })
             
             // Most important, must be dispatched on Main thread,
             // Curious? then remove `DispatchQueue.main.async` & find out yourself, Dont be lazy
-            DispatchQueue.main.asyncAfter(deadline: .now()+0.01) { // must be async !! SCUFF FIX - FIND ANOTHER SOLUTION
+            DispatchQueue.main.asyncAfter(deadline: .now()+0.10) { // must be async !! SCUFF FIX - FIND ANOTHER SOLUTION
                 uiViewController.present(alert, animated: true, completion: {
                     self.showAlert = false  // hide holder after alert dismiss
                     context.coordinator.alert = nil

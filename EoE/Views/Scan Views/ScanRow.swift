@@ -17,10 +17,21 @@ struct ScanRow: View {
                     Text(scan.productName ?? "Unkown Product")
                         .foregroundColor(Color.text)
                         .bold()
-                    Text(scan.dateScanned ?? Date(), style: .date) // Fix the optional value for this
-                        .font(.caption)
-                        .foregroundColor(Color.gray) // previously gray1
-                        .bold()
+                    HStack {
+                        Text(scan.dateScanned ?? Date(), style: .date) // Fix the optional value for this
+                            .font(.caption)
+                            .foregroundColor(Color.gray) // previously gray1
+                            .bold()
+                        Text(" @ ")
+                            .font(.caption)
+                            .foregroundColor(Color.gray) // previously gray1
+                            .bold()
+                        Text(scan.dateScanned ?? Date(), style: .time) // Fix the optional value for this
+                            .font(.caption)
+                            .foregroundColor(Color.gray) // previously gray1
+                            .bold()
+                        
+                    }
                 }
                 Spacer()
                 HStack {

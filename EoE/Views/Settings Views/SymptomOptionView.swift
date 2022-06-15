@@ -73,24 +73,26 @@ struct SymptomOptionView: View {
                 }
                 .listStyle(InsetGroupedListStyle())
                 
+                if needsAppOnboarding {
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Text("Finished")
+                            .foregroundColor(.white)
+                            .font(.system(size: 20, weight: .semibold, design: .rounded))
+                    }
+                    .buttonStyle(CustomButton())
+                    .frame(width: 300, height: 50)
+                    .padding()
+                }
+                
             }
             
             if showAlert {
                 AltAlertControlView(textString: $symptomText, showAlert: $showAlert, title: "New Symptom", message: "Type in the name of your symptom", currentOptions: $userData.symptomOptions)
             }
             
-            if needsAppOnboarding {
-                Button(action: {
-                    presentationMode.wrappedValue.dismiss()
-                }) {
-                    Text("Finished")
-                        .foregroundColor(.white)
-                        .font(.system(size: 20, weight: .semibold, design: .rounded))
-                }
-                .buttonStyle(CustomButton())
-                .frame(width: 300, height: 50)
-                .padding()
-            }
+
             
         }
         .navigationTitle("Symptom Types")

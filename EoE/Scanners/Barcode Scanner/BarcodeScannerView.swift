@@ -75,6 +75,8 @@ struct BarcodeScannerView: View {
                                         
                                         
                                         // 4. Manually push the detail view for the most recent scan to the users screen
+                                        scanningProcess.mostRecentBarcodeScan = newScan
+                                        scanningProcess.showProductView = true
                                         
                                         //print(result.foods[0].description)
                                         scanningProcess.scanningState = .closing

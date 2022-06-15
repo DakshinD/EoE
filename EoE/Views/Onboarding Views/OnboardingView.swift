@@ -24,7 +24,7 @@ struct OnboardingView: View {
             
             VStack {
                 TabView(selection: $pageNum) {
-                    FeaturesView()
+                    FeaturesView(pageNum: $pageNum)
                         .tag(0)
                     SetupView()
                         .tag(1)

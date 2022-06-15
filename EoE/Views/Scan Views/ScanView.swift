@@ -97,10 +97,32 @@ struct ScanView: View {
                         List {
                             
                             Section {
-                                ForEach(pastScans.filter({ searchText.isEmpty ? true : $0.wrappedProductName.lowercased().contains(searchText.lowercased()) }).sorted { $0.wrappedDate > $1.wrappedDate}, id: \.id) { scan in
-                                    NavigationLink(destination: ProductView(scan: scan)) {
-                                        ScanRow(scan: scan)
+                                if !pastScans.isEmpty {
+                                    ForEach(pastScans.filter({ searchText.isEmpty ? true : $0.wrappedProductName.lowercased().contains(searchText.lowercased()) }).sorted { $0.wrappedDate > $1.wrappedDate}, id: \.id) { scan in
+                                        NavigationLink(destination: ProductView(scan: scan)) {
+                                            ScanRow(scan: scan)
+                                        }
                                     }
+                                    .sheet(isPresented: $scanningProcess.showProductView) {
+                                        ProductView(scan: scanningProcess.mostRecentBarcodeScan)
+                                            .onDisappear {
+                                                scanningProcess.showProductView = false
+                                            }
+                                    }
+                                } else {
+                                    HStack {
+                                        Text("Press ") + Text(Image(systemName: "barcode.viewfinder")) + Text( " to scan a product and see what allergens it has")
+                                            .foregroundColor(Color.text)
+                                            .font(.body)
+                                        Spacer()
+                                    }
+                                    HStack {
+                                        Text("Press ") + Text(Image(systemName: "doc.text.viewfinder")) + Text( " to scan an ingredients list for allergens")
+                                            .foregroundColor(Color.text)
+                                            .font(.body)
+                                        Spacer()
+                                    }
+                                        
                                 }
                             }
                             .listRowBackground(Color.secondary)

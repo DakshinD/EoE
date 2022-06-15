@@ -11,6 +11,8 @@ struct FeaturesView: View {
     
     @EnvironmentObject var userData : UserData
     
+    @Binding var pageNum: Int
+    
     @AppStorage("needsAppOnboarding") var needsAppOnboarding: Bool = true
 
     
@@ -36,6 +38,25 @@ struct FeaturesView: View {
                     NewDetail(image: "text.book.closed.fill", imageColor: .orange, title: "Log Your Diet", description: "A Food Diary for your meals and symptoms.")
                     NewDetail(image: "chart.bar.xaxis", imageColor: .pink, title: "Analyze Food-Symptom Relationships", description: "Possible triggers and allergens displayed based on your own symptoms.")
                 }
+                
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        withAnimation {
+                            pageNum+=1
+                        }
+                    }) {
+                        ZStack {
+                            Capsule()
+                                .frame(width: 125, height: 43)
+                                .foregroundColor(Color.accent)
+                            Image(systemName: "arrow.forward")
+                                .frame(width: 75)
+                                .foregroundColor(Color.text)
+                        }
+                    }
+                }
+                .padding()
 
                 Spacer()
             }

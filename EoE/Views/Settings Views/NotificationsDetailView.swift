@@ -18,57 +18,71 @@ struct NotificationsDetailView: View {
                     Color.background
                         .edgesIgnoringSafeArea(.all)
                     
-                    List {
+                    VStack {
                         
-                        Section {
-                            Toggle(isOn: $userData.notificationsEnabled) {
-                                HStack {
-                                    Image(systemName: "bell")
-                                        .imageScale(.large)
-                                        .foregroundColor(Color.accent)
-                                    Text("Notifications Enabled")
-                                        .foregroundColor(Color.text)
-                                }
-                            }
-                            .onChange(of: userData.notificationsEnabled) { (value) in
-                                if userData.notificationsEnabled == true {
-                                    NotificationManager.requestPermission()
-                                    NotificationManager.scheduleNotification(time: userData.breakfastNotification, meal: Meals.breakfast)
-                                    NotificationManager.scheduleNotification(time: userData.lunchNotification, meal: Meals.lunch)
-                                    NotificationManager.scheduleNotification(time: userData.dinnerNotification, meal: Meals.dinner)
-                                } else {
-                                    NotificationManager.removeNotifications()
-                                }
-                            }
-                        }
-                        .listRowBackground(Color.secondary)
+                      /*  Text("Choose what times you want Intake to remind you to add to your food diary")
+                            .foregroundColor(.text)
+                            .font(.body)
+                            .padding()
+                            .multilineTextAlignment(.center)*/
                         
-                        Section(footer: Text(userData.notificationsEnabled ? "Reminders at the times you choose to add what you ate into your food diary" : "").padding(.bottom)) {
-                            if userData.notificationsEnabled {
-                                DatePicker("Breakfast", selection: $userData.breakfastNotification, displayedComponents: .hourAndMinute)
-                                    .onChange(of: userData.breakfastNotification) { (value) in
-                                        NotificationManager.removeSpecificNotification(meal: Meals.breakfast)
+                        List {
+                            
+                            Section(footer: Text("Enable notifications to choose what times you want Intake to remind you to add food diary entries").padding(.bottom)) {
+                                Toggle(isOn: $userData.notificationsEnabled) {
+                                    HStack {
+                                        Image(systemName: "bell")
+                                            .imageScale(.large)
+                                            .foregroundColor(Color.accent)
+                                        Text("Notifications Enabled")
+                                            .foregroundColor(Color.text)
+                                    }
+                                }
+                                .onChange(of: userData.notificationsEnabled) { (value) in
+                                    if userData.notificationsEnabled == true {
+                                        NotificationManager.requestPermission()
                                         NotificationManager.scheduleNotification(time: userData.breakfastNotification, meal: Meals.breakfast)
-                                    }
-                                DatePicker("Lunch", selection: $userData.lunchNotification, displayedComponents: .hourAndMinute)
-                                    .onChange(of: userData.lunchNotification) { (value) in
-                                        NotificationManager.removeSpecificNotification(meal: Meals.lunch)
                                         NotificationManager.scheduleNotification(time: userData.lunchNotification, meal: Meals.lunch)
-                                    }
-                                DatePicker("Dinner", selection: $userData.dinnerNotification, displayedComponents: .hourAndMinute)
-                                    .onChange(of: userData.dinnerNotification) { (value) in
-                                        NotificationManager.removeSpecificNotification(meal: Meals.dinner)
                                         NotificationManager.scheduleNotification(time: userData.dinnerNotification, meal: Meals.dinner)
+                                    } else {
+                                        NotificationManager.removeNotifications()
                                     }
-                            } // Notification Times
+                                }
+                            }
+                            .listRowBackground(Color.secondary)
+                            
+                            //(footer: Text(userData.notificationsEnabled ? "Reminders at the times you choose to add what you ate into your food diary" : "").padding(.bottom))
+                            
+                            Section {
+                             //   if userData.notificationsEnabled {
+                                    DatePicker("Breakfast", selection: $userData.breakfastNotification, displayedComponents: .hourAndMinute)
+                                        .onChange(of: userData.breakfastNotification) { (value) in
+                                            NotificationManager.removeSpecificNotification(meal: Meals.breakfast)
+                                            NotificationManager.scheduleNotification(time: userData.breakfastNotification, meal: Meals.breakfast)
+                                        }
+                                        
+                                
+                                    DatePicker("Lunch", selection: $userData.lunchNotification, displayedComponents: .hourAndMinute)
+                                        .onChange(of: userData.lunchNotification) { (value) in
+                                            NotificationManager.removeSpecificNotification(meal: Meals.lunch)
+                                            NotificationManager.scheduleNotification(time: userData.lunchNotification, meal: Meals.lunch)
+                                        }
+                                    DatePicker("Dinner", selection: $userData.dinnerNotification, displayedComponents: .hourAndMinute)
+                                        .onChange(of: userData.dinnerNotification) { (value) in
+                                            NotificationManager.removeSpecificNotification(meal: Meals.dinner)
+                                            NotificationManager.scheduleNotification(time: userData.dinnerNotification, meal: Meals.dinner)
+                                        }
+                              //  } // Notification Times
+                                
+                            }
+                            .listRowBackground(Color.secondary)
+                            .disabled(!userData.notificationsEnabled)
                             
                         }
-                        .listRowBackground(Color.secondary)
-                        
-                    }
-                    .listStyle(InsetGroupedListStyle())
-                    .animation(.default)
+                        .listStyle(InsetGroupedListStyle())
+                        .animation(.default)
                     .padding(.top)
+                    }
       
                 }
         }

@@ -33,7 +33,8 @@ struct ImageScanningLoadingView: View {
                             .stroke(style: StrokeStyle(lineWidth: 15, lineCap: .round, lineJoin: .round))
                             .foregroundColor(Color.accent)
                             .rotationEffect(Angle(degrees: 270.0))
-                            .animation(.linear)
+                            //.animation(.linear)
+                            .animation(.linear, value: progress)
                             .frame(width: 130, height: 130)
                         
                         Text(String(format: "%.0f %%", min(self.progress, 1.0)*100.0))

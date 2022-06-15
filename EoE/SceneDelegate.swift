@@ -34,9 +34,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         
         let userData = UserData()
+        //for testing purposes ---- 
         //userData.isNotFirstLaunch = false
         //needsAppOnboarding = true
-        if !userData.isNotFirstLaunch {
+        if !userData.isNotFirstLaunch { // it is the first launch
             print("first launch")
             needsAppOnboarding = true
             for aller in AllergenTypes.allCases {
@@ -60,6 +61,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             // setup symptom options
             
+            // set initial color scheme
+            let currentSystemScheme = UITraitCollection.current.userInterfaceStyle
+            let scheme: ColorScheme = schemeTransform(userInterfaceStyle: currentSystemScheme)
+            userData.darkMode = (scheme == ColorScheme.dark)
             userData.isNotFirstLaunch = true
         }
         
@@ -111,6 +116,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Save changes in the application's managed object context when the application transitions to the background.
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+    }
+    
+    
+    
+    // color scheme func
+    func schemeTransform(userInterfaceStyle:UIUserInterfaceStyle) -> ColorScheme {
+        if userInterfaceStyle == .light {
+            return .light
+        }else if userInterfaceStyle == .dark {
+            return .dark
+        }
+        return .light
+        
     }
 
 
