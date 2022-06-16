@@ -45,13 +45,15 @@ struct ProductView: View {
                         Section(header: Text("Allergens Found").bold()) {
                             if !scan.foundAllergensArray.isEmpty {
                                 ForEach(scan.foundAllergensArray, id: \.self) { allergen in
-                                    HStack {
-                                        // Check if we need to handle this optional properly
-                                        Text(AllergenTypes(rawValue: allergen.wrappedType)!.description)
-                                        Spacer()
-                                        Text(AllergenTypes(rawValue: allergen.wrappedType)!.emoji)
+                                    if AllergenTypes(rawValue: allergen.type!) != AllergenTypes.userCreated {
+                                        HStack {
+                                            // Check if we need to handle this optional properly
+                                            Text(AllergenTypes(rawValue: allergen.wrappedType)!.description)
+                                            Spacer()
+                                            Text(AllergenTypes(rawValue: allergen.wrappedType)!.emoji)
+                                        }
+                                        .foregroundColor(Color.text)
                                     }
-                                    .foregroundColor(Color.text)
                                 }
                             } else {
                                 HStack {
@@ -60,6 +62,31 @@ struct ProductView: View {
                                     Spacer()
                                     Text("😁")
                                 }
+                            }
+                        }
+                        .listRowBackground(Color.secondary)
+                        
+                        Section(header: Text("Found Extra Allergens").bold()) {
+                            if scan.foundAllergensArray.isEmpty {
+                                HStack {
+                                    Text("No Extra Allergens Found!")
+                                        .foregroundColor(Color.text)
+                                    Spacer()
+                                    Text("😁")
+                                }
+                            } else {
+                                ForEach(scan.foundAllergensArray, id: \.self) { allergen in
+                                    if AllergenTypes(rawValue: allergen.type!) == AllergenTypes.userCreated {
+                                        HStack {
+                                            // Check how to handle this optional
+                                            Text(allergen.name!)
+                                                .foregroundColor(Color.text)
+                                            Spacer()
+                                            //Text(AllergenTypes(rawValue: allergen)!.emoji)
+                                        }
+                                    }
+                                }
+
                             }
                         }
                         .listRowBackground(Color.secondary)

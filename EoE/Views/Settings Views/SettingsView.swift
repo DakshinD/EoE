@@ -86,14 +86,14 @@ struct SettingsView: View {
                         }
                         .listRowBackground(Color.secondary)
                         
-                        Section(header: Text("App"), footer:
+                        Section(header: Text("App")/*, footer:
                                     HStack {
                                         Spacer()
                                         Text("EoE v1.0.0") //UIApplication.appVersion ??
                                             .foregroundColor(.gray)
                                             .font(.caption)
                                         Spacer()
-                                    }
+                                    }*/
                         ) {
                             
                             /*NavigationLink(destination: AboutView()) {
@@ -120,7 +120,7 @@ struct SettingsView: View {
                                 }
                             }
                             
-                            Button(action: {
+                            /*Button(action: {
                                 print("pressed rate app button")
                             }) {
                                 HStack {
@@ -131,7 +131,7 @@ struct SettingsView: View {
                                         .foregroundColor(Color.text)
                                     Spacer()
                                 }
-                            }
+                            }*/
 
                             
                         }
