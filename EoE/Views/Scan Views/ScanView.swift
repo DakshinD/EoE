@@ -94,6 +94,37 @@ struct ScanView: View {
                         }
                         .padding()
                         
+                        
+                        // instructions
+                        
+                        HStack {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(Color.secondary.opacity(0.6))
+                                    .frame(height: 150)
+                                (Text("Press ") + Text(Image(systemName: "barcode.viewfinder")) + Text( " to scan a product and see what allergens it has")).multilineTextAlignment(.center)
+                                    .foregroundColor(Color.text)
+                                    .font(.body)
+                                    .padding(.horizontal)
+                            }
+
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(Color.secondary.opacity(0.6))
+                                    .frame(height: 150)
+                                (Text("Press ") + Text(Image(systemName: "doc.text.viewfinder")) + Text( " to scan an ingredients list for allergens"))
+                                    .multilineTextAlignment(.center)
+                                    .foregroundColor(Color.text)
+                                    .font(.body)
+                                    .padding(.horizontal)
+                                    
+                            }
+                            
+                        }
+                        .padding()
+                        
+                        
+                        
                         List {
                             
                             Section {
@@ -110,7 +141,7 @@ struct ScanView: View {
                                             }
                                     }
                                 } else {
-                                    HStack {
+                                    /*HStack {
                                         Text("Press ") + Text(Image(systemName: "barcode.viewfinder")) + Text( " to scan a product and see what allergens it has")
                                             .foregroundColor(Color.text)
                                             .font(.body)
@@ -121,7 +152,7 @@ struct ScanView: View {
                                             .foregroundColor(Color.text)
                                             .font(.body)
                                         Spacer()
-                                    }
+                                    }*/
                                         
                                 }
                             }

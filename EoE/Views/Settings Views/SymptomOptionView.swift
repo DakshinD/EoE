@@ -44,6 +44,9 @@ struct SymptomOptionView: View {
                     .font(.system(size: 15, weight: .regular, design: .rounded))
                     .padding()
                 
+                
+
+                
                 List {
                     Section(header:
                                 HStack {
@@ -58,7 +61,10 @@ struct SymptomOptionView: View {
                                             .frame(width: 13, height: 13)
                                             .foregroundColor(Color.accent)
                                     }
-                                }
+                                },
+                            footer:
+                                Text("Swipe left to delete a symptom")
+                            
                     ) {
                         ForEach(userData.symptomOptions, id: \.self) { symptom in
                             HStack {

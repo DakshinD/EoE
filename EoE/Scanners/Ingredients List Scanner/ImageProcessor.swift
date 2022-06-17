@@ -62,11 +62,31 @@ struct ImageProcessor {
             // Return the string of the top VNRecognizedText instance.
             return observation.topCandidates(1).first?.string
         }
-        
+        print("Recognized String: \(recognizedStrings)")
+        if recognizedStrings.isEmpty { // if no words recognized
+            print("it was empty")
+            DispatchQueue.main.async {
+                withAnimation {
+                    loadingViewShowing.toggle()
+                }
+                progress = 0.0
+            }
+            return
+        }
         // Process the recognized strings.
         var recognizedText = ""
         for str in recognizedStrings {
             recognizedText += str.uppercased() + " "
+        }
+        
+        if recognizedText == "" {
+            DispatchQueue.main.async {
+                withAnimation {
+                    loadingViewShowing.toggle()
+                }
+                progress = 0.0
+            }
+            return
         }
         
         print(recognizedText.splitIntoIngredients())

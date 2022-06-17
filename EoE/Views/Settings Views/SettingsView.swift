@@ -12,12 +12,16 @@ struct SettingsView: View {
     @EnvironmentObject var userData: UserData
     
     var body: some View {
+        
         NavigationView {
+            
             GeometryReader { geometry in
+                
                 ZStack {
+                    
                     Color.background
                         .edgesIgnoringSafeArea(.all)
-                    
+
                     List {
                         
                         Section(header: Text("Allergens")) {
@@ -139,11 +143,11 @@ struct SettingsView: View {
                         
                     }
                     .listStyle(InsetGroupedListStyle())
-                    .animation(.default)
+                    //.animation(.default)
                     
                 }
+                .navigationTitle("Settings")
             }
-            .navigationTitle(Text("Settings"))
         }
     }
     

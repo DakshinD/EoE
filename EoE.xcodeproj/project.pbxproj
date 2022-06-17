@@ -1127,7 +1127,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"EoE/Preview Content\"";
-				DEVELOPMENT_TEAM = NQX94FAFJ8;
+				DEVELOPMENT_TEAM = AVT7P4879D;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = EoE/Supporting/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -1135,6 +1135,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dakshindevanand.EoE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1150,7 +1151,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"EoE/Preview Content\"";
-				DEVELOPMENT_TEAM = NQX94FAFJ8;
+				DEVELOPMENT_TEAM = AVT7P4879D;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = EoE/Supporting/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -1158,6 +1159,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dakshindevanand.EoE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
